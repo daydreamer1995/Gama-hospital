@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gama AI Assistant - Enterprise Concierge</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: #0b131f;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 10px;
+        }
+        .app-container {
+            width: 100%;
+            max-width: 450px;
+            height: 92vh;
+            background: #111d2e;
+            border-radius: 28px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(0, 180, 216, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+        /* Enterprise Header */
+        .header {
+            background: linear-gradient(135deg, #070e17 0%, #111d2e 100%);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #00b4d8;
+            z-index: 10;
+        }
+        .brand-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-img {
+            width: 42px;
+            height: 42px;
+            background: #ffffff;
+            border-radius: 50%;
+            padding: 4px;
+            object-fit: contain;
+            box-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
+        .brand-title h2 {
+            font-size: 1.05rem;
+            color: #00b4d8;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .brand-title p {
+            font-size: 0.72rem;
+            color: #90e0ef;
+        }
+
+        /* Talking Avatar Component */
+        .avatar-card {
+            background: radial-gradient(circle, #1a293d 0%, #0b131f 100%);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 10;
+        }
+        .avatar-frame {
+            width: 105px;
+            height: 105px;
+            border-radius: 50%;
+            border: 3px solid #00b4d8;
+            box-shadow: 0 0 20px rgba(0, 180, 216, 0.3);
+            overflow: hidden;
+            position: relative;
+            background: #070e17;
+            transition: all 0.3s ease;
+        }
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .avatar-frame.speaking {
+            animation: pulse-avatar 1s infinite alternate;
+        }
+        @keyframes pulse-avatar {
+            0% { border-color: #00b4d8; box-shadow: 0 0 15px rgba(0, 180, 216, 0.4); transform: scale(1); }
+            100% { border-color: #48cae4; box-shadow: 0 0 30px rgba(72, 202, 228, 0.8); transform: scale(1.03); }
+        }
+        .status-badge {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: #90e0ef;
+            background: rgba(0, 180, 216, 0.12);
+            padding: 3px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid rgba(0, 180, 216, 0.2);
+        }
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            background-color: #2ec4b6;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #2ec4b6;
+        }
+
+        /* Voice Bar Control */
+        .voice-control-bar {
+            background: #070e17;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            border-bottom: 1px solid rgba(0, 180, 216, 0.2);
+            z-index: 10;
+        }
+        .voice-btn {
+            background: #00b4d8;
+            color: #0b131f;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            width: 100%;
+            justify-content: center;
+        }
+        .voice-btn:hover {
+            background: #90e0ef;
+        }
+        .voice-btn.listening {
+            background: #e63946;
+            color: #ffffff;
+            animation: mic-pulse 1s infinite;
+        }
+        @keyframes mic-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* Embedded Live Webchat Frame */
+        .chat-frame-container {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            position: relative;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <!-- Header -->
+    <div class="header">
+        <div class="brand-info">
+            <img src="https://www.gamahospital.com/ar/assets/images/logo.png" alt="Gama Logo" class="logo-img">
+            <div class="brand-title">
+                <h2>Gama AI Assistant</h2>
+                <p>Gama Hospital Concierge</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Interactive Avatar -->
+    <div class="avatar-card">
+        <div class="avatar-frame" id="avatarFrame">
+            <img src="https://img.freepik.com/free-vector/doctor-character-background_1270-84.jpg" alt="AI Avatar" class="avatar-img">
+        </div>
+        <div class="status-badge">
+            <span class="pulse-dot"></span> <span id="statusText">Voice & Text Ready</span>
+        </div>
+    </div>
+
+    <!-- Voice Command Bar -->
+    <div class="voice-control-bar">
+        <button class="voice-btn" id="micBtn" onclick="startTamilVoice()">
+            <i class="fas fa-microphone"></i> <span>தமிழில் பேச கிளிக் செய்யவும்</span>
+        </button>
+    </div>
+
+    <!-- Direct Botpress Webchat Integration -->
+    <div class="chat-frame-container">
+        <iframe 
+            id="botpressFrame"
+            src="https://cdn.botpress.cloud/webchat/v2.2/shareable.html?configUrl=https://files.bpcontent.cloud/2026/04/09/12/20260409120000-EXAMPLE.json"
+            allow="microphone">
+        </iframe>
+    </div>
+</div>
+
+<script>
+    const avatarFrame = document.getElementById('avatarFrame');
+    const statusText = document.getElementById('statusText');
+    const micBtn = document.getElementById('micBtn');
+
+    let recognition;
+    let isListening = false;
+
+    // Web Speech Recognition Engine (Tamil)
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'ta-IN'; // Tamil Language Speech Recognition
+
+        recognition.onstart = () => {
+            isListening = true;
+            micBtn.classList.add('listening');
+            micBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>உங்கள் குரலைக் கேட்கிறது...</span>';
+            statusText.innerText = 'Listening (கேட்கிறது)...';
+            avatarFrame.classList.add('speaking');
+        };
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            statusText.innerText = 'Processing...';
+            
+            // Speak back verification in Tamil Voice
+            speakTamilText("நீங்கள் கேட்டது: " + transcript);
+        };
+
+        recognition.onerror = (e) => {
+            stopListening();
+        };
+
+        recognition.onend = () => {
+            stopListening();
+        };
+    }
+
+    function startTamilVoice() {
+        if (!recognition) {
+            alert('Browser voice support is disabled. Please use Chrome.');
+            return;
+        }
+        if (isListening) {
+            recognition.stop();
+        } else {
+            recognition.start();
+        }
+    }
+
+    function stopListening() {
+        isListening = false;
+        micBtn.classList.remove('listening');
+        micBtn.innerHTML = '<i class="fas fa-microphone"></i> <span>தமிழில் பேச கிளிக் செய்யவும்</span>';
+        statusText.innerText = 'Voice & Text Ready';
+        avatarFrame.classList.remove('speaking');
+    }
+
+    // High quality Speech Synthesis Engine (Tamil Text-to-Speech)
+    function speakTamilText(text) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'ta-IN';
+            utterance.rate = 0.95; // Clear natural speed
+            
+            utterance.onstart = () => {
+                avatarFrame.classList.add('speaking');
+                statusText.innerText = 'AI Assistant பேசுகிறது...';
+            };
+
+            utterance.onend = () => {
+                avatarFrame.classList.remove('speaking');
+                statusText.innerText = 'Voice & Text Ready';
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+</script>
+
+</body>
+</html>
