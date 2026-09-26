@@ -1,30 +1,192 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ta">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gama Hospital AI Assistant</title>
+    <title>Gama Hospital | AI Smart Concierge</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        body, html {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #f4f6f9;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background-color: #f0f4f8;
+            color: #333;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        /* Navigation Header */
+        header {
+            background: #004b87;
+            color: #ffffff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        header .logo {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        header nav a:hover {
+            color: #00c6ff;
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(135deg, #0056b3, #0088cc);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .hero h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+        .hero p {
+            font-size: 16px;
+            max-width: 700px;
+            margin: 0 auto 25px auto;
+            line-height: 1.6;
+        }
+        .badge {
+            display: inline-block;
+            background: #28a745;
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Hospital Quick Info Grid */
+        .features {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            border-top: 4px solid #0056b3;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card i {
+            font-size: 36px;
+            color: #0056b3;
+            margin-bottom: 15px;
+        }
+        .card h3 {
+            margin-bottom: 10px;
+            color: #222;
+        }
+        .card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            background: #1e293b;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+        footer a {
+            color: #38bdf8;
+            text-decoration: none;
         }
     </style>
+
+    <!-- Botpress Webchat Official Integration Scripts -->
+    <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2026/09/25/06/20260925063548-59ZOECAY.js"></script>
 </head>
 <body>
 
-    <!-- Botpress Webchat Official Embed Script -->
-    <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
-    <script src="https://files.bpcontent.cloud/2026/09/25/06/20260925063548-59ZOECAY.js"></script>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-hospital"></i> Gama Hospital
+        </div>
+        <nav>
+            <a href="https://www.gamahospital.com" target="_blank">Official Website</a>
+            <a href="https://www.gamahospital.com/en/doctors" target="_blank">Doctors</a>
+            <a href="https://www.gamahospital.com/en/contact-us" target="_blank">Contact Us</a>
+        </nav>
+    </header>
 
+    <!-- Hero Banner -->
+    <section class="hero">
+        <h1>Gama Hospital AI Assistant</h1>
+        <p>
+            Welcome to Gama Hospital (Dhahran, KSA). Ask our AI agent about doctors, appointments, emergency services, and treatments in <b>English, Arabic, or Tamil</b>.
+        </p>
+        <div class="badge">
+            <i class="fa-solid fa-headset"></i> 24/7 Voice & Chat Support Active
+        </div>
+    </section>
+
+    <!-- Info Cards -->
+    <section class="features">
+        <div class="card">
+            <i class="fa-solid fa-user-doctor"></i>
+            <h3>Doctors & Specialties</h3>
+            <p>Find specialized doctors, departments, and clinical expertise available at Gama Hospital.</p>
+        </div>
+        <div class="card">
+            <i class="fa-solid fa-truck-medical"></i>
+            <h3>Emergency Services</h3>
+            <p>24/7 Emergency care support, ambulance, and round-the-clock medical assistance.</p>
+        </div>
+        <div class="card">
+            <i class="fa-solid fa-language"></i>
+            <h3>Trilingual AI Agent</h3>
+            <p>Seamlessly handles queries in English, Arabic (العربية), and Tamil (தமிழ்) with voice capabilities.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Gama Hospital | Connected with Official Knowledge Base (<a href="https://www.gamahospital.com" target="_blank">gamahospital.com</a>)</p>
+    </footer>
+
+    <!-- Botpress Initialization & Auto-Open Script -->
     <script>
+        window.botpress.init({
+            "botId": "59ZOECAY",
+            "configurationUrl": "https://files.bpcontent.cloud/2026/09/25/06/20260925063548-59ZOECAY.json",
+            "botName": "Gama Hospital AI"
+        });
+
         window.botpress.on("webchat:ready", () => {
             window.botpress.open();
         });
