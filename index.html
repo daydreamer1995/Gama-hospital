@@ -4,455 +4,400 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GAMA Hospital AI Assistant</title>
+<title>Gama Hospital | Medical AI Concierge</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="description"
+content="Gama Hospital Medical AI Concierge - multilingual hospital information and appointment assistance.">
 
 <style>
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
 }
 
 :root{
-    --primary:#1769ff;
-    --primary2:#0b4dcc;
-    --dark:#07111f;
-    --text:#102033;
-    --muted:#64748b;
+    --primary:#0879d1;
+    --primary-dark:#075da0;
+    --secondary:#00a8a8;
+    --dark:#071525;
+    --text:#142235;
+    --muted:#718096;
     --white:#ffffff;
-    --green:#16a34a;
-    --border:#e5eaf2;
+    --light:#f5f9fc;
+    --border:#e3ebf2;
+    --success:#16a34a;
+    --danger:#dc2626;
+    --shadow:0 20px 60px rgba(0,45,85,.16);
 }
 
 body{
-    font-family:"Inter",Arial,sans-serif;
-    min-height:100vh;
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+    background:
+        radial-gradient(circle at top right,#dff5ff 0%,transparent 35%),
+        linear-gradient(135deg,#f7fbff,#edf7fb);
     color:var(--text);
+    min-height:100vh;
+}
 
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 20px;
+}
+
+.hero-card{
+    width:min(1100px,100%);
+    min-height:650px;
+    border-radius:32px;
     background:
         linear-gradient(
             135deg,
-            rgba(3,15,30,.90),
-            rgba(8,48,91,.72)
-        ),
-        url("https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=2000&q=90")
-        center/cover fixed no-repeat;
+            rgba(255,255,255,.96),
+            rgba(241,250,255,.90)
+        );
+    border:1px solid rgba(255,255,255,.8);
+    box-shadow:var(--shadow);
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
 }
 
-/* ---------------- HEADER ---------------- */
+.hero-content{
+    width:60%;
+    padding:70px;
+    position:relative;
+    z-index:2;
+}
 
-.header{
-    width:100%;
-    padding:22px 6%;
-    display:flex;
-    justify-content:space-between;
+.badge{
+    display:inline-flex;
     align-items:center;
+    gap:8px;
+    background:#e5f5ff;
+    color:var(--primary-dark);
+    border:1px solid #c9eaff;
+    border-radius:50px;
+    padding:9px 15px;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:22px;
+}
+
+.badge-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#19b56b;
+    box-shadow:0 0 0 5px rgba(25,181,107,.12);
+}
+
+.hero h1{
+    font-size:clamp(42px,6vw,76px);
+    line-height:1;
+    letter-spacing:-3px;
+    color:#08213c;
+    margin-bottom:24px;
+}
+
+.hero h1 span{
+    color:var(--primary);
+}
+
+.hero p{
+    max-width:620px;
+    font-size:18px;
+    line-height:1.8;
+    color:#617287;
+}
+
+.hero-info{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:32px;
+}
+
+.info-chip{
+    background:white;
+    border:1px solid var(--border);
+    padding:12px 16px;
+    border-radius:14px;
+    font-size:13px;
+    color:#44566c;
+    box-shadow:0 6px 20px rgba(0,50,90,.05);
+}
+
+.hero-art{
+    position:absolute;
+    right:-100px;
+    top:50%;
+    transform:translateY(-50%);
+    width:52%;
+    height:85%;
+    background:
+        radial-gradient(circle at 40% 40%,#c7f2ff,transparent 40%),
+        radial-gradient(circle at 70% 70%,#d8f7ed,transparent 40%);
+    border-radius:50%;
+}
+
+.cross{
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:45px;
+    background:rgba(255,255,255,.72);
+    box-shadow:0 30px 70px rgba(0,100,160,.12);
+    right:18%;
+    top:28%;
+    transform:rotate(15deg);
+}
+
+.cross::before,
+.cross::after{
+    content:"";
+    position:absolute;
+    background:var(--primary);
+    border-radius:15px;
+}
+
+.cross::before{
+    width:55px;
+    height:130px;
+    left:62px;
+    top:25px;
+}
+
+.cross::after{
+    width:130px;
+    height:55px;
+    left:25px;
+    top:62px;
+}
+
+/* =========================
+   FLOATING AI BUTTON
+========================= */
+
+.ai-button{
+    position:fixed;
+    right:28px;
+    bottom:28px;
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    border:none;
+    cursor:pointer;
+    z-index:1000;
+    background:
+        linear-gradient(135deg,var(--primary),#00a8d8);
+    box-shadow:
+        0 14px 35px rgba(0,112,190,.35),
+        0 0 0 8px rgba(8,121,209,.08);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.25s ease;
+}
+
+.ai-button:hover{
+    transform:translateY(-4px) scale(1.04);
+}
+
+.ai-face{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:white;
+    position:relative;
+}
+
+.ai-face::before{
+    content:"";
+    position:absolute;
+    width:7px;
+    height:7px;
+    background:var(--primary);
+    border-radius:50%;
+    left:11px;
+    top:13px;
+    box-shadow:14px 0 0 var(--primary);
+}
+
+.ai-face::after{
+    content:"";
+    position:absolute;
+    width:20px;
+    height:8px;
+    border-bottom:3px solid var(--primary);
+    border-radius:50%;
+    left:11px;
+    top:21px;
+}
+
+/* =========================
+   CHAT WINDOW
+========================= */
+
+.chat-window{
+    position:fixed;
+    right:28px;
+    bottom:112px;
+    width:min(430px,calc(100vw - 28px));
+    height:min(720px,calc(100vh - 135px));
+    min-height:540px;
+    background:white;
+    border-radius:28px;
+    overflow:hidden;
+    box-shadow:0 30px 90px rgba(0,30,70,.25);
+    border:1px solid rgba(220,230,240,.9);
+    z-index:999;
+    display:none;
+    flex-direction:column;
+    animation:chatOpen .25s ease;
+}
+
+.chat-window.active{
+    display:flex;
+}
+
+@keyframes chatOpen{
+    from{
+        opacity:0;
+        transform:translateY(15px) scale(.98);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+/* HEADER */
+
+.chat-header{
+    background:
+        linear-gradient(135deg,#086fca,#00a4b7);
     color:white;
+    padding:17px 18px 15px;
+}
+
+.chat-header-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
 .brand{
     display:flex;
     align-items:center;
-    gap:13px;
+    gap:11px;
 }
 
-.brand-logo{
-    width:48px;
-    height:48px;
-    border-radius:15px;
+.brand-icon{
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    background:white;
+    position:relative;
+}
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.brand-icon::before,
+.brand-icon::after{
+    content:"";
+    position:absolute;
+    background:var(--primary);
+    border-radius:3px;
+}
 
-    background:linear-gradient(135deg,#1d7cff,#00b7ff);
-    box-shadow:0 10px 30px rgba(0,130,255,.35);
+.brand-icon::before{
+    width:9px;
+    height:25px;
+    left:16px;
+    top:8px;
+}
 
-    font-size:23px;
+.brand-icon::after{
+    width:25px;
+    height:9px;
+    left:8px;
+    top:16px;
 }
 
 .brand-text strong{
     display:block;
-    font-size:19px;
-}
-
-.brand-text span{
-    display:block;
-    margin-top:3px;
-    font-size:11px;
-    color:#b9c8da;
-}
-
-.header-links{
-    display:flex;
-    gap:10px;
-}
-
-.header-links a{
-    color:white;
-    text-decoration:none;
-    padding:10px 15px;
-    border:1px solid rgba(255,255,255,.18);
-    border-radius:10px;
-    font-size:12px;
-    background:rgba(255,255,255,.07);
-    backdrop-filter:blur(10px);
-}
-
-.header-links a:hover{
-    background:rgba(255,255,255,.16);
-}
-
-/* ---------------- HERO ---------------- */
-
-.hero{
-    min-height:calc(100vh - 90px);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:30px 20px 120px;
-}
-
-.hero-content{
-    max-width:900px;
-    color:white;
-}
-
-.hero-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-
-    padding:9px 15px;
-    border-radius:50px;
-
-    background:rgba(255,255,255,.10);
-    border:1px solid rgba(255,255,255,.18);
-
-    font-size:12px;
-    margin-bottom:22px;
-
-    backdrop-filter:blur(10px);
-}
-
-.online-dot{
-    width:8px;
-    height:8px;
-    border-radius:50%;
-    background:#22c55e;
-    box-shadow:0 0 0 6px rgba(34,197,94,.12);
-}
-
-.hero h1{
-    font-size:clamp(36px,6vw,70px);
-    line-height:1.05;
-    letter-spacing:-2px;
-}
-
-.hero h1 span{
-    color:#72c7ff;
-}
-
-.hero p{
-    max-width:650px;
-    margin:22px auto;
-    line-height:1.8;
-    color:#cbd8e8;
     font-size:15px;
 }
 
-.hero-actions{
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    flex-wrap:wrap;
-    margin-top:25px;
-}
-
-.hero-btn{
-    border:none;
-    cursor:pointer;
-    padding:14px 22px;
-    border-radius:13px;
-    font-weight:700;
-    font-size:13px;
-}
-
-.primary-btn{
-    background:#fff;
-    color:#0755bf;
-}
-
-.secondary-btn{
-    background:rgba(255,255,255,.09);
-    color:white;
-    border:1px solid rgba(255,255,255,.2);
-}
-
-/* ---------------- AI AVATAR ---------------- */
-
-.ai-launcher{
-    position:fixed;
-    right:28px;
-    bottom:28px;
-
-    width:76px;
-    height:76px;
-
-    border-radius:50%;
-    border:none;
-    cursor:pointer;
-
-    z-index:1000;
-
-    background:linear-gradient(
-        135deg,
-        #1681ff,
-        #004bd1
-    );
-
-    box-shadow:
-        0 15px 40px rgba(0,72,200,.45),
-        0 0 0 8px rgba(23,105,255,.12);
-
-    transition:.3s;
-}
-
-.ai-launcher:hover{
-    transform:scale(1.08);
-}
-
-.avatar{
-    width:50px;
-    height:50px;
-    margin:auto;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(circle at 30% 25%,#fff,#c8e7ff 35%,#3d9dff 70%);
-
-    position:relative;
-}
-
-.avatar:before,
-.avatar:after{
-    content:"";
-    position:absolute;
-    top:20px;
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:#0a3e91;
-}
-
-.avatar:before{
-    left:14px;
-}
-
-.avatar:after{
-    right:14px;
-}
-
-.avatar-mouth{
-    position:absolute;
-    width:18px;
-    height:8px;
-    border-bottom:3px solid #0a3e91;
-    border-radius:50%;
-    left:16px;
-    top:29px;
-}
-
-.ai-label{
-    position:absolute;
-    right:2px;
-    top:-5px;
-
-    background:#22c55e;
-    color:white;
-
-    font-size:9px;
-    font-weight:800;
-
-    padding:4px 6px;
-    border-radius:20px;
-
-    border:2px solid white;
-}
-
-/* ---------------- CHAT ---------------- */
-
-.chat-window{
-    position:fixed;
-
-    right:28px;
-    bottom:118px;
-
-    width:390px;
-    max-width:calc(100vw - 28px);
-    height:620px;
-    max-height:calc(100vh - 145px);
-
-    background:#fff;
-
-    border-radius:24px;
-
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.35);
-
-    z-index:999;
-
-    overflow:hidden;
-
-    display:none;
-    flex-direction:column;
-
-    animation:chatIn .25s ease;
-}
-
-.chat-window.open{
-    display:flex;
-}
-
-@keyframes chatIn{
-    from{
-        opacity:0;
-        transform:translateY(15px) scale(.97);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
-    }
-}
-
-/* CHAT HEADER */
-
-.chat-header{
-    padding:17px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #075bd9,
-            #1184ff
-        );
-
-    color:white;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.chat-brand{
-    display:flex;
-    align-items:center;
-    gap:11px;
-}
-
-.chat-avatar{
-    width:42px;
-    height:42px;
-    border-radius:50%;
-
-    background:
-        radial-gradient(circle at 30% 25%,#fff,#bde5ff 40%,#2e91ff);
-
-    position:relative;
-}
-
-.chat-avatar:before,
-.chat-avatar:after{
-    content:"";
-    position:absolute;
-    top:17px;
-    width:5px;
-    height:5px;
-    background:#07458e;
-    border-radius:50%;
-}
-
-.chat-avatar:before{
-    left:12px;
-}
-
-.chat-avatar:after{
-    right:12px;
-}
-
-.chat-title strong{
-    display:block;
-    font-size:14px;
-}
-
-.chat-title small{
+.brand-text span{
     display:flex;
     align-items:center;
     gap:5px;
-    margin-top:4px;
-    color:#dbeeff;
-    font-size:10px;
+    font-size:11px;
+    opacity:.9;
+    margin-top:3px;
 }
 
-.header-online{
+.online{
     width:6px;
     height:6px;
+    background:#8cffbd;
     border-radius:50%;
-    background:#22c55e;
 }
 
 .close-chat{
-    width:32px;
-    height:32px;
-
     border:none;
-    border-radius:9px;
-
-    background:rgba(255,255,255,.13);
+    background:rgba(255,255,255,.15);
     color:white;
-
+    width:34px;
+    height:34px;
+    border-radius:10px;
     cursor:pointer;
-    font-size:18px;
+    font-size:19px;
 }
 
-/* LANGUAGE */
+/* LANGUAGE BAR */
 
 .language-bar{
-    padding:10px 12px;
     display:flex;
-    gap:7px;
-
-    background:#f7f9fc;
-    border-bottom:1px solid var(--border);
+    gap:6px;
+    overflow-x:auto;
+    margin-top:13px;
+    scrollbar-width:none;
 }
 
-.language-btn{
-    flex:1;
-    padding:8px 4px;
+.language-bar::-webkit-scrollbar{
+    display:none;
+}
 
-    border:1px solid #dfe6ef;
-    background:white;
-
+.lang-btn{
+    flex:0 0 auto;
+    border:1px solid rgba(255,255,255,.28);
+    background:rgba(255,255,255,.10);
+    color:white;
+    padding:7px 10px;
     border-radius:9px;
-
+    font-size:11px;
     cursor:pointer;
-
-    font-size:10px;
-    font-weight:700;
-
-    color:#475569;
+    transition:.2s;
 }
 
-.language-btn.active{
-    background:#e9f2ff;
-    color:#075bd9;
-    border-color:#9bc5ff;
+.lang-btn.active{
+    background:white;
+    color:var(--primary-dark);
+    font-weight:700;
 }
 
 /* MESSAGES */
@@ -460,141 +405,90 @@ body{
 .messages{
     flex:1;
     overflow-y:auto;
-    padding:16px;
-
+    padding:20px 15px 12px;
     background:
-        radial-gradient(
-            circle at top right,
-            rgba(23,105,255,.05),
-            transparent 35%
-        ),
-        #fbfcfe;
+        linear-gradient(
+            180deg,
+            #f7fbfe,
+            #ffffff
+        );
+    scroll-behavior:smooth;
 }
 
-.message{
+.message-row{
     display:flex;
-    margin-bottom:13px;
+    margin-bottom:14px;
 }
 
-.message.user{
+.message-row.user{
     justify-content:flex-end;
 }
 
-.bubble{
-    max-width:82%;
-    padding:11px 13px;
-
-    border-radius:15px;
-
-    font-size:12px;
-    line-height:1.65;
+.message{
+    max-width:86%;
+    padding:12px 14px;
+    border-radius:17px;
+    font-size:13px;
+    line-height:1.6;
+    white-space:pre-line;
+    word-break:break-word;
 }
 
-.bot .bubble{
+.message.bot{
     background:white;
-    color:#26364a;
-
-    border:1px solid #e8edf4;
-
-    border-top-left-radius:5px;
-
-    box-shadow:0 3px 10px rgba(15,23,42,.04);
+    border:1px solid #e4edf4;
+    color:#27384c;
+    border-bottom-left-radius:5px;
+    box-shadow:0 4px 14px rgba(0,30,60,.04);
 }
 
-.user .bubble{
-    background:#1268e8;
+.message.user{
+    background:linear-gradient(135deg,#0879d1,#049eb7);
     color:white;
-    border-top-right-radius:5px;
+    border-bottom-right-radius:5px;
 }
 
-/* QUICK ACTIONS */
-
-.quick-actions{
-    display:flex;
-    gap:7px;
-
-    overflow-x:auto;
-
-    padding:8px 13px;
-
-    border-top:1px solid #edf1f5;
+.message.emergency{
+    border:1px solid #fecaca;
+    background:#fff7f7;
+    color:#991b1b;
 }
 
-.quick-actions button{
-    flex-shrink:0;
-
-    padding:8px 11px;
-
-    border:1px solid #dbe4ef;
-    background:white;
-
-    border-radius:20px;
-
-    cursor:pointer;
-
-    color:#31506e;
-    font-size:10px;
-    font-weight:600;
+.message a{
+    color:var(--primary);
+    font-weight:700;
+    text-decoration:none;
 }
 
-/* INPUT */
-
-.input-area{
-    display:flex;
-    align-items:center;
-    gap:8px;
-
-    padding:11px;
-
-    border-top:1px solid var(--border);
-    background:white;
-}
-
-.chat-input{
-    flex:1;
-
-    border:1px solid #dce4ee;
-    outline:none;
-
-    padding:11px 13px;
-
-    border-radius:13px;
-
-    font-size:12px;
-}
-
-.chat-input:focus{
-    border-color:#4d99ff;
-    box-shadow:0 0 0 3px rgba(23,105,255,.08);
-}
-
-.send-btn{
-    width:40px;
-    height:40px;
-
-    border:none;
-    border-radius:12px;
-
-    background:#1268e8;
+.message.user a{
     color:white;
-
-    cursor:pointer;
+    text-decoration:underline;
 }
 
 /* TYPING */
 
 .typing{
+    display:none;
+    align-items:center;
+    gap:5px;
+    width:max-content;
+    background:white;
+    border:1px solid #e4edf4;
+    padding:10px 13px;
+    border-radius:15px;
+    margin-bottom:12px;
+}
+
+.typing.show{
     display:flex;
-    gap:4px;
-    padding:5px 0;
 }
 
 .typing span{
-    width:5px;
-    height:5px;
-    background:#9aa9ba;
+    width:6px;
+    height:6px;
     border-radius:50%;
-    animation:typing .8s infinite;
+    background:#8ba0b5;
+    animation:typing 1s infinite;
 }
 
 .typing span:nth-child(2){
@@ -606,47 +500,138 @@ body{
 }
 
 @keyframes typing{
-    0%,100%{
-        opacity:.3;
+    0%,60%,100%{
         transform:translateY(0);
     }
-    50%{
-        opacity:1;
-        transform:translateY(-3px);
+    30%{
+        transform:translateY(-4px);
     }
 }
 
-/* RESPONSIVE */
+/* INPUT */
 
-@media(max-width:600px){
+.input-area{
+    border-top:1px solid var(--border);
+    padding:11px;
+    background:white;
+}
 
-    .header{
+.input-row{
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+
+.input-row input{
+    flex:1;
+    min-width:0;
+    border:1px solid #dce6ee;
+    background:#f8fbfd;
+    border-radius:14px;
+    padding:12px 13px;
+    outline:none;
+    font-size:13px;
+    color:#24364b;
+}
+
+.input-row input:focus{
+    border-color:#83c8ed;
+    box-shadow:0 0 0 3px rgba(8,121,209,.07);
+}
+
+.send-btn{
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:13px;
+    background:var(--primary);
+    color:white;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.bottom-note{
+    text-align:center;
+    font-size:9px;
+    color:#98a7b5;
+    padding-top:7px;
+}
+
+/* RTL */
+
+.chat-window.rtl .message{
+    text-align:right;
+}
+
+.chat-window.rtl .input-row{
+    direction:rtl;
+}
+
+.chat-window.rtl .message-row.user{
+    justify-content:flex-start;
+}
+
+.chat-window.rtl .message-row.bot{
+    justify-content:flex-end;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:760px){
+
+    .hero{
         padding:15px;
     }
 
-    .header-links{
-        display:none;
+    .hero-card{
+        min-height:90vh;
+        align-items:flex-end;
     }
 
-    .hero{
-        padding-bottom:130px;
+    .hero-content{
+        width:100%;
+        padding:38px 25px 55px;
     }
 
     .hero h1{
-        font-size:42px;
+        font-size:48px;
+        letter-spacing:-2px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .hero-art{
+        width:100%;
+        height:45%;
+        right:-35%;
+        top:5%;
+        transform:none;
+    }
+
+    .cross{
+        transform:scale(.65) rotate(15deg);
+        right:15%;
+        top:10%;
+    }
+
+    .ai-button{
+        right:18px;
+        bottom:18px;
+        width:62px;
+        height:62px;
     }
 
     .chat-window{
         right:10px;
-        bottom:100px;
-
+        bottom:90px;
         width:calc(100vw - 20px);
-        height:calc(100vh - 125px);
-    }
-
-    .ai-launcher{
-        right:18px;
-        bottom:18px;
+        height:calc(100vh - 110px);
+        min-height:500px;
+        border-radius:24px;
     }
 }
 </style>
@@ -654,1239 +639,139 @@ body{
 
 <body>
 
-<!-- ================= HEADER ================= -->
+<!-- =========================
+     HOSPITAL LANDING PAGE
+========================= -->
 
-<header class="header">
+<main class="hero">
 
-    <div class="brand">
+    <section class="hero-card">
 
-        <div class="brand-logo">
-            ✚
-        </div>
+        <div class="hero-content">
 
-        <div class="brand-text">
-            <strong>GAMA Hospital</strong>
-            <span>Dhahran · Kingdom of Saudi Arabia</span>
-        </div>
+            <div class="badge">
+                <span class="badge-dot"></span>
+                Gama Hospital Medical AI Concierge
+            </div>
 
-    </div>
+            <h1>
+                Healthcare<br>
+                <span>with intelligence.</span>
+            </h1>
 
-    <div class="header-links">
+            <p>
+                A professional multilingual AI concierge designed to
+                assist Gama Hospital patients with hospital information,
+                doctors, departments, appointments, insurance and
+                emergency guidance.
+            </p>
 
-        <a
-            href="https://www.gamahospital.com/"
-            target="_blank"
-        >
-            Official Website
-        </a>
+            <div class="hero-info">
 
-        <a
-            href="https://www.gamahospital.com/en-us/P/doctors"
-            target="_blank"
-        >
-            Doctors
-        </a>
+                <div class="info-chip">
+                    📍 Dhahran, Saudi Arabia
+                </div>
 
-        <a
-            href="https://www.gamahospital.com/en-us/P/contact-us"
-            target="_blank"
-        >
-            Contact
-        </a>
+                <div class="info-chip">
+                    🏥 Emergency 24/7
+                </div>
 
-    </div>
+                <div class="info-chip">
+                    🕐 Clinics 8 AM – 8 PM
+                </div>
 
-</header>
+                <div class="info-chip">
+                    ☎ 920033175
+                </div>
 
-
-<!-- ================= HERO ================= -->
-
-<section class="hero">
-
-    <div class="hero-content">
-
-        <div class="hero-badge">
-
-            <span class="online-dot"></span>
-
-            GAMA AI ASSISTANT · ONLINE 24/7
+            </div>
 
         </div>
 
-
-        <h1>
-
-            Your Digital
-
-            <span>Hospital Assistant</span>
-
-        </h1>
-
-
-        <p>
-
-            Get help finding doctors, departments, hospital services,
-            emergency information and appointment guidance through
-            English, العربية and தமிழ்.
-
-        </p>
-
-
-        <div class="hero-actions">
-
-            <button
-                class="hero-btn primary-btn"
-                onclick="openAssistant()"
-            >
-                Talk to GAMA AI
-            </button>
-
-
-            <a
-                class="hero-btn secondary-btn"
-                href="https://www.gamahospital.com/"
-                target="_blank"
-                style="text-decoration:none;"
-            >
-                Visit Hospital Website
-            </a>
-
+        <div class="hero-art">
+            <div class="cross"></div>
         </div>
 
-    </div>
+    </section>
 
-</section>
+</main>
 
 
-<!-- ================= AI LAUNCHER ================= -->
+<!-- =========================
+     AI FLOATING BUTTON
+========================= -->
 
 <button
-    class="ai-launcher"
-    onclick="openAssistant()"
-    aria-label="Open GAMA AI Assistant"
->
+    class="ai-button"
+    id="aiButton"
+    aria-label="Open Gama Hospital AI Assistant"
+    title="Gama Hospital AI Assistant">
 
-    <div class="avatar">
-
-        <div class="avatar-mouth"></div>
-
-    </div>
-
-    <span class="ai-label">AI</span>
+    <div class="ai-face"></div>
 
 </button>
 
 
-<!-- ================= CHAT WINDOW ================= -->
+<!-- =========================
+     CHAT WINDOW
+========================= -->
 
-<div
+<section
     class="chat-window"
     id="chatWindow"
->
+    aria-label="Gama Hospital AI Assistant">
 
-    <!-- CHAT HEADER -->
+    <header class="chat-header">
 
-    <div class="chat-header">
+        <div class="chat-header-top">
 
-        <div class="chat-brand">
+            <div class="brand">
 
-            <div class="chat-avatar"></div>
+                <div class="brand-icon"></div>
 
-            <div class="chat-title">
+                <div class="brand-text">
+                    <strong>GAMA AI Assistant</strong>
 
-                <strong>GAMA AI Assistant</strong>
-
-                <small>
-                    <span class="header-online"></span>
-                    Online · Hospital Support
-                </small>
+                    <span>
+                        <i class="online"></i>
+                        Medical Concierge
+                    </span>
+                </div>
 
             </div>
+
+            <button
+                class="close-chat"
+                id="closeChat"
+                aria-label="Close chat">
+                ×
+            </button>
 
         </div>
 
 
-        <button
-            class="close-chat"
-            onclick="closeAssistant()"
-        >
-            ×
-        </button>
+        <!-- 8 LANGUAGES -->
 
-    </div>
+        <div class="language-bar">
 
+            <button class="lang-btn active" data-lang="en">
+                English
+            </button>
 
-    <!-- LANGUAGE -->
+            <button class="lang-btn" data-lang="ar">
+                العربية
+            </button>
 
-    <div class="language-bar">
+            <button class="lang-btn" data-lang="ta">
+                தமிழ்
+            </button>
 
-        <button
-            class="language-btn active"
-            id="enBtn"
-            onclick="setLanguage('en')"
-        >
-            English
-        </button>
+            <button class="lang-btn" data-lang="hi">
+                हिन्दी
+            </button>
 
-        <button
-            class="language-btn"
-            id="arBtn"
-            onclick="setLanguage('ar')"
-        >
-            العربية
-        </button>
+            <button class="lang-btn" data-lang="ml">
+                മലയാളം
+            </button>
 
-        <button
-            class="language-btn"
-            id="taBtn"
-            onclick="setLanguage('ta')"
-        >
-            தமிழ்
-        </button>
-
-    </div>
-
-
-    <!-- MESSAGES -->
-
-    <div
-        class="messages"
-        id="messages"
-    ></div>
-
-
-    <!-- QUICK QUESTIONS -->
-
-    <div class="quick-actions">
-
-        <button onclick="quickQuestion('doctors')">
-            👨‍⚕️ Doctors
-        </button>
-
-        <button onclick="quickQuestion('departments')">
-            🏥 Departments
-        </button>
-
-        <button onclick="quickQuestion('appointment')">
-            📅 Appointment
-        </button>
-
-        <button onclick="quickQuestion('emergency')">
-            🚑 Emergency
-        </button>
-
-        <button onclick="quickQuestion('contact')">
-            📞 Contact
-        </button>
-
-    </div>
-
-
-    <!-- INPUT -->
-
-    <div class="input-area">
-
-        <input
-            type="text"
-            id="chatInput"
-            class="chat-input"
-            placeholder="Ask GAMA AI..."
-            onkeydown="handleEnter(event)"
-        >
-
-        <button
-            class="send-btn"
-            onclick="sendMessage()"
-        >
-            ➤
-        </button>
-
-    </div>
-
-</div>
-
-
-<script>
-
-/* =========================================================
-   GAMA HOSPITAL AI ASSISTANT
-   ========================================================= */
-
-const hospital = {
-
-    name: "Gama Hospital",
-
-    location:
-        "Al Qashlah District, Dhahran, Eastern Province, Kingdom of Saudi Arabia",
-
-    phone: "920033175",
-
-    email: "info@gamahospital.com",
-
-    website:
-        "https://www.gamahospital.com/",
-
-    doctors:
-        "https://www.gamahospital.com/en-us/P/doctors",
-
-    contact:
-        "https://www.gamahospital.com/en-us/P/contact-us",
-
-    appointment:
-        "https://www.gamahospital.com/",
-
-    emergency:
-        "Emergency Department is open 24/7.",
-
-    outpatient:
-        "Outpatient Clinics: 8:00 AM – 8:00 PM.",
-
-    doctorCount: 53,
-
-    departments: [
-
-        "Obstetrics and Gynecology",
-        "General Surgery",
-        "Ophthalmology",
-        "Radiology and Imaging",
-        "Laboratory",
-        "Long Term Care",
-        "Home Care Services",
-        "Cardiology",
-        "Internal Medicine",
-        "Neurosurgery",
-        "Plastic Surgery",
-        "Oral and Dental Clinic",
-        "Pediatrics and Neonatology",
-        "Physical Therapy",
-        "Anesthesia",
-        "Dermatology & Laser",
-        "Nephrology",
-        "General Practice",
-        "Clinical Nutrition",
-        "Orthopedic Surgery",
-        "Urology",
-        "Ear, Nose and Throat ENT",
-        "Vascular Surgery",
-        "Intensive Care Unit ICU",
-        "Gastroenterology and Endoscopy",
-        "Rheumatology and Rehabilitation",
-        "Pulmonology",
-        "Endocrinology and Diabetes",
-        "Neurology",
-        "Interventional Radiology"
-
-    ],
-
-    doctorsList: [
-
-        ["Dr. Haitham Soliman Omar","General Surgery"],
-        ["Dr. Yasser Al Rifai","Internal Medicine"],
-        ["Dr. Khaled Ezzat El Wessemy","Oral and Dental Clinic"],
-        ["Dr. Samar Salah Eldin","Pediatrics and Neonatology"],
-        ["Dr. Mohamed Mahmoud Khalifa","Nephrology"],
-        ["Dr. Hala Hassan Taha","General Practice"],
-        ["Dr. Tamer Mohammed Dawod","Urology"],
-        ["Dr. Moustafa Ali Mohammad","ENT"],
-        ["Dr. Mahmoud Ibrahim Al Ali","Obstetrics and Gynecology"],
-        ["Dr. Doaa Sayed","Obstetrics and Gynecology"],
-        ["Dr. Tarek Saleh","Ophthalmology"],
-        ["Dr. Ahmed Hassan","Cardiology"],
-        ["Dr. Ali Abed Madanieh","Specialty available on official directory"],
-        ["Dr. Ali Hafiz Al-Hashim","Neurology"],
-        ["Dr. Ahmed Abduallah","Specialty available on official directory"],
-        ["Dr. Ez Eldeen Abushehadah","Specialty available on official directory"],
-        ["Dr. Salah Mohamed Said","Specialty available on official directory"],
-        ["Dr. Huda Salama","Specialty available on official directory"],
-        ["Dr. Abdulrahman Al-Anazi","Specialty available on official directory"],
-        ["Dr. Sameh El Wahsh","Pediatrics and Neonatology"],
-        ["Juman Alnahwi","Clinical Nutrition"],
-        ["Dr. Mohammed Elsayed Elzohry","Specialty available on official directory"],
-        ["Dr. Salma Al Alawi","Obstetrics and Gynecology"],
-        ["Dr. Hassan Nori Al Sayed","Specialty available on official directory"],
-        ["Dr. Khaled Al Omran","Pediatrics and Neonatology"],
-        ["Dr. Ehab Ramadan","Specialty available on official directory"],
-        ["Dr. Wafa Al-Dajani","Obstetrics and Gynecology"],
-        ["Dr. Hassan Al Masskin","Specialty available on official directory"],
-        ["Khaled Ahmed Ammoun","Endocrinology & Diabetes"],
-        ["Dr. Maha Khalid Almadi","Urology"],
-        ["Dr. Lilak Barode","Specialty available on official directory"],
-        ["Dr. Suzie Khogeer","Specialty available on official directory"],
-        ["Dr. Mustarhema Inam Rehman","Obstetrics and Gynecology"],
-        ["Dr. Ehab Shaheen","Specialty available on official directory"],
-        ["Dr. Ahmed Saeed","Specialty available on official directory"],
-        ["Dr. Hani Ismail","Specialty available on official directory"],
-        ["Dr. Wael Abdulkareem Ibrahim","Specialty available on official directory"],
-        ["Dr. Mahmoud Mohamed Salem","Specialty available on official directory"],
-        ["Dr. Nawal Mohammed Alrubia","Specialty available on official directory"],
-        ["Dr. Nora Ali Elsiss","Specialty available on official directory"],
-        ["Dr. Taha Bahgat","Specialty available on official directory"],
-        ["Dr. Husam Al Tamimi","Cardiology"],
-        ["Dr. Maysoon Habeeb","Obstetrics and Gynecology"],
-        ["Dr. Amr Ragab Shalaby","Specialty available on official directory"],
-        ["Dr. Mohamed ElMitwalli Mansour","Specialty available on official directory"],
-        ["Dr. Hadir ElSherbiny","Specialty available on official directory"],
-        ["Al-Sharbiny Ali Al-Sharbiny","Orthopedic Surgery"],
-        ["Dr. Suzan Maher Sadek","Pediatrics and Neonatology"],
-        ["Dr. Hamed Alghamdi","Cardiology"],
-        ["Dr. Samar Fakhreldeen","Cardiology"],
-        ["Mohammed Tawfiq Sammour","Urology"],
-        ["Dr. Fahad Al-Safran","Specialty available on official directory"],
-        ["Dr. Hassan Al-Tallaq","Specialty available on official directory"]
-
-    ]
-
-};
-
-
-/* =========================================================
-   LANGUAGE
-   ========================================================= */
-
-let language = "en";
-
-let firstWelcomeShown = false;
-
-
-/* =========================================================
-   OPEN / CLOSE
-   ========================================================= */
-
-function openAssistant(){
-
-    const chat =
-        document.getElementById("chatWindow");
-
-    chat.classList.add("open");
-
-    if(!firstWelcomeShown){
-
-        firstWelcomeShown = true;
-
-        startWelcomeSequence();
-
-    }
-
-}
-
-
-function closeAssistant(){
-
-    document
-        .getElementById("chatWindow")
-        .classList.remove("open");
-
-}
-
-
-/* =========================================================
-   FIRST WELCOME
-   ENGLISH → ARABIC → TAMIL
-   ========================================================= */
-
-function startWelcomeSequence(){
-
-    addBotMessage(
-        "Hello and welcome to GAMA Hospital. 👋<br><br>" +
-        "I am your GAMA AI Assistant. I can help you with doctors, departments, appointments, hospital services, emergency information and contact details."
-    );
-
-    setTimeout(()=>{
-
-        addBotMessage(
-            "مرحباً بكم في مستشفى جاما. 👋<br><br>" +
-            "أنا المساعد الذكي لمستشفى جاما. يمكنني مساعدتكم في معلومات الأطباء والأقسام والمواعيد والخدمات والطوارئ."
-        );
-
-    },1800);
-
-
-    setTimeout(()=>{
-
-        addBotMessage(
-            "வணக்கம்! GAMA Hospital-க்கு வரவேற்கிறோம். 👋<br><br>" +
-            "நான் GAMA Hospital AI Assistant. மருத்துவர்கள், துறைகள், appointment, hospital services, emergency மற்றும் contact தகவல்களில் உதவ முடியும்."
-        );
-
-    },3600);
-
-
-    setTimeout(()=>{
-
-        addBotMessage(
-            getLanguageWelcome()
-        );
-
-    },5400);
-
-}
-
-
-function getLanguageWelcome(){
-
-    if(language === "ar"){
-
-        return "كيف يمكنني مساعدتك اليوم؟ يمكنك اختيار أحد الخيارات بالأسفل أو كتابة سؤالك.";
-
-    }
-
-    if(language === "ta"){
-
-        return "இன்று நான் உங்களுக்கு எப்படி உதவ வேண்டும்? கீழே உள்ள options-ஐ தேர்வு செய்யலாம் அல்லது உங்கள் கேள்வியை type செய்யலாம்.";
-
-    }
-
-    return "How can I help you today? Choose an option below or type your question.";
-
-}
-
-
-/* =========================================================
-   LANGUAGE BUTTON
-   ========================================================= */
-
-function setLanguage(lang){
-
-    language = lang;
-
-    document
-        .querySelectorAll(".language-btn")
-        .forEach(btn =>
-            btn.classList.remove("active")
-        );
-
-    document
-        .getElementById(
-            lang === "en"
-                ? "enBtn"
-                : lang === "ar"
-                    ? "arBtn"
-                    : "taBtn"
-        )
-        .classList.add("active");
-
-
-    const input =
-        document.getElementById("chatInput");
-
-
-    if(lang === "ar"){
-
-        input.placeholder =
-            "اكتب سؤالك هنا...";
-
-    }else if(lang === "ta"){
-
-        input.placeholder =
-            "உங்கள் கேள்வியை இங்கே எழுதுங்கள்...";
-
-    }else{
-
-        input.placeholder =
-            "Ask GAMA AI...";
-
-    }
-
-
-    addBotMessage(getLanguageWelcome());
-
-}
-
-
-/* =========================================================
-   MESSAGE FUNCTIONS
-   ========================================================= */
-
-function addBotMessage(text){
-
-    const container =
-        document.getElementById("messages");
-
-    const message =
-        document.createElement("div");
-
-    message.className =
-        "message bot";
-
-    message.innerHTML =
-        `<div class="bubble">${text}</div>`;
-
-    container.appendChild(message);
-
-    scrollMessages();
-
-}
-
-
-function addUserMessage(text){
-
-    const container =
-        document.getElementById("messages");
-
-    const message =
-        document.createElement("div");
-
-    message.className =
-        "message user";
-
-    message.innerHTML =
-        `<div class="bubble">${escapeHTML(text)}</div>`;
-
-    container.appendChild(message);
-
-    scrollMessages();
-
-}
-
-
-function showTyping(){
-
-    const container =
-        document.getElementById("messages");
-
-    const message =
-        document.createElement("div");
-
-    message.className =
-        "message bot";
-
-    message.id = "typingMessage";
-
-    message.innerHTML = `
-        <div class="bubble">
-            <div class="typing">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    `;
-
-    container.appendChild(message);
-
-    scrollMessages();
-
-}
-
-
-function removeTyping(){
-
-    const typing =
-        document.getElementById("typingMessage");
-
-    if(typing){
-        typing.remove();
-    }
-
-}
-
-
-function scrollMessages(){
-
-    const container =
-        document.getElementById("messages");
-
-    container.scrollTop =
-        container.scrollHeight;
-
-}
-
-
-/* =========================================================
-   SEND MESSAGE
-   ========================================================= */
-
-function sendMessage(){
-
-    const input =
-        document.getElementById("chatInput");
-
-    const text =
-        input.value.trim();
-
-    if(!text) return;
-
-    addUserMessage(text);
-
-    input.value = "";
-
-    showTyping();
-
-    setTimeout(()=>{
-
-        removeTyping();
-
-        addBotMessage(
-            generateResponse(text)
-        );
-
-    },650);
-
-}
-
-
-function handleEnter(event){
-
-    if(event.key === "Enter"){
-
-        sendMessage();
-
-    }
-
-}
-
-
-/* =========================================================
-   QUICK QUESTIONS
-   ========================================================= */
-
-function quickQuestion(type){
-
-    const questions = {
-
-        en:{
-            doctors:"Show me the doctors available at GAMA Hospital.",
-            departments:"What departments are available?",
-            appointment:"How can I book an appointment?",
-            emergency:"What are the emergency services?",
-            contact:"How can I contact GAMA Hospital?"
-        },
-
-        ar:{
-            doctors:"أريد معلومات عن الأطباء.",
-            departments:"ما هي الأقسام المتوفرة؟",
-            appointment:"كيف يمكنني حجز موعد؟",
-            emergency:"ما هي خدمات الطوارئ؟",
-            contact:"كيف يمكنني التواصل مع المستشفى؟"
-        },
-
-        ta:{
-            doctors:"GAMA Hospital-ல் எந்தெந்த doctors இருக்கிறார்கள்?",
-            departments:"என்னென்ன departments இருக்கிறது?",
-            appointment:"Appointment எப்படி book செய்வது?",
-            emergency:"Emergency service பற்றி சொல்லுங்கள்.",
-            contact:"Hospital-ஐ எப்படி contact செய்வது?"
-        }
-
-    };
-
-
-    const question =
-        questions[language][type];
-
-    addUserMessage(question);
-
-    showTyping();
-
-    setTimeout(()=>{
-
-        removeTyping();
-
-        addBotMessage(
-            generateResponse(question)
-        );
-
-    },500);
-
-}
-
-
-/* =========================================================
-   AI RESPONSE ENGINE
-   ========================================================= */
-
-function generateResponse(question){
-
-    const q =
-        question
-            .toLowerCase()
-            .trim();
-
-
-    /* ---------------- EMERGENCY ---------------- */
-
-    if(
-        q.includes("emergency") ||
-        q.includes("ambulance") ||
-        q.includes("urgent") ||
-        q.includes("طوارئ") ||
-        q.includes("طوار") ||
-        q.includes("அவசர") ||
-        q.includes("எமர்ஜென்சி")
-    ){
-
-        if(language === "ar"){
-
-            return `
-                <strong>خدمات الطوارئ 🚑</strong><br><br>
-                قسم الطوارئ في مستشفى جاما مفتوح على مدار 24 ساعة طوال أيام الأسبوع.<br><br>
-                إذا كانت الحالة الطبية خطيرة أو مهددة للحياة، توجه إلى قسم الطوارئ فوراً أو اتصل بخدمات الطوارئ المحلية.
-            `;
-
-        }
-
-        if(language === "ta"){
-
-            return `
-                <strong>Emergency Services 🚑</strong><br><br>
-                GAMA Hospital Emergency Department 24 மணி நேரமும், வாரத்தில் 7 நாட்களும் திறந்திருக்கும்.<br><br>
-                நிலைமை மிகவும் அவசரமானதாக இருந்தால் உடனடியாக Emergency Department-ஐ அணுகவும் அல்லது உள்ளூர் emergency services-ஐ தொடர்பு கொள்ளவும்.
-            `;
-
-        }
-
-        return `
-            <strong>Emergency Services 🚑</strong><br><br>
-            GAMA Hospital Emergency Department is open 24/7.<br><br>
-            If the situation is serious or life-threatening, seek emergency medical care immediately or contact your local emergency service.
-        `;
-
-    }
-
-
-    /* ---------------- DOCTORS ---------------- */
-
-    if(
-        q.includes("doctor") ||
-        q.includes("doctors") ||
-        q.includes("physician") ||
-        q.includes("طبيب") ||
-        q.includes("أطباء") ||
-        q.includes("மருத்துவர்") ||
-        q.includes("டாக்டர்")
-    ){
-
-        const names =
-            hospital.doctorsList
-                .slice(0,12)
-                .map(
-                    d =>
-                    `<strong>${d[0]}</strong> — ${d[1]}`
-                )
-                .join("<br>");
-
-        if(language === "ar"){
-
-            return `
-                <strong>أطباء مستشفى جاما 👨‍⚕️</strong><br><br>
-                يضم دليل المستشفى حالياً ${hospital.doctorCount} طبيباً.<br><br>
-                بعض الأطباء:<br>
-                ${names}<br><br>
-                <a href="${hospital.doctors}" target="_blank">
-                عرض دليل الأطباء الكامل
-                </a>
-            `;
-
-        }
-
-        if(language === "ta"){
-
-            return `
-                <strong>GAMA Hospital Doctors 👨‍⚕️</strong><br><br>
-                Hospital doctor directory-ல் தற்போது ${hospital.doctorCount} doctors உள்ளனர்.<br><br>
-                சில doctors:<br>
-                ${names}<br><br>
-                <a href="${hospital.doctors}" target="_blank">
-                Full Doctor Directory பார்க்க
-                </a>
-            `;
-
-        }
-
-        return `
-            <strong>GAMA Hospital Doctors 👨‍⚕️</strong><br><br>
-            The hospital's official directory currently lists ${hospital.doctorCount} doctors.<br><br>
-            Some doctors include:<br>
-            ${names}<br><br>
-            <a href="${hospital.doctors}" target="_blank">
-            View the complete official doctor directory
-            </a>
-        `;
-
-    }
-
-
-    /* ---------------- DEPARTMENTS ---------------- */
-
-    if(
-        q.includes("department") ||
-        q.includes("specialit") ||
-        q.includes("section") ||
-        q.includes("قسم") ||
-        q.includes("تخصص") ||
-        q.includes("துறை") ||
-        q.includes("department")
-    ){
-
-        const list =
-            hospital.departments
-                .map(d => `• ${d}`)
-                .join("<br>");
-
-        if(language === "ar"){
-
-            return `
-                <strong>الأقسام الطبية 🏥</strong><br><br>
-                تشمل الأقسام والخدمات:<br><br>
-                ${list}
-            `;
-
-        }
-
-        if(language === "ta"){
-
-            return `
-                <strong>GAMA Hospital Departments 🏥</strong><br><br>
-                Hospital-ல் கிடைக்கும் முக்கிய departments:<br><br>
-                ${list}
-            `;
-
-        }
-
-        return `
-            <strong>GAMA Hospital Departments 🏥</strong><br><br>
-            Available departments include:<br><br>
-            ${list}
-        `;
-
-    }
-
-
-    /* ---------------- APPOINTMENT ---------------- */
-
-    if(
-        q.includes("appointment") ||
-        q.includes("book") ||
-        q.includes("booking") ||
-        q.includes("حجز") ||
-        q.includes("موعد") ||
-        q.includes("முன்பதிவு") ||
-        q.includes("appointment")
-    ){
-
-        if(language === "ar"){
-
-            return `
-                <strong>حجز موعد 📅</strong><br><br>
-                يمكنك طلب موعد من خلال الموقع الرسمي لمستشفى جاما واختيار القسم والطبيب والتاريخ المناسب.<br><br>
-                <a href="${hospital.website}" target="_blank">
-                طلب موعد
-                </a>
-            `;
-
-        }
-
-        if(language === "ta"){
-
-            return `
-                <strong>Appointment 📅</strong><br><br>
-                GAMA Hospital official website மூலம் department, doctor மற்றும் date தேர்வு செய்து appointment request செய்யலாம்.<br><br>
-                <a href="${hospital.website}" target="_blank">
-                Appointment Request
-                </a>
-            `;
-
-        }
-
-        return `
-            <strong>Appointment Booking 📅</strong><br><br>
-            You can request an appointment through the official GAMA Hospital website by selecting the department, doctor and preferred date.<br><br>
-            <a href="${hospital.website}" target="_blank">
-            Request an Appointment
-            </a>
-        `;
-
-    }
-
-
-    /* ---------------- CONTACT ---------------- */
-
-    if(
-        q.includes("contact") ||
-        q.includes("phone") ||
-        q.includes("number") ||
-        q.includes("email") ||
-        q.includes("location") ||
-        q.includes("address") ||
-        q.includes("تواصل") ||
-        q.includes("هاتف") ||
-        q.includes("عنوان") ||
-        q.includes("தொடர்பு") ||
-        q.includes("போன்") ||
-        q.includes("முகவரி")
-    ){
-
-        if(language === "ar"){
-
-            return `
-                <strong>بيانات التواصل 📞</strong><br><br>
-                📍 ${hospital.location}<br><br>
-                ☎️ ${hospital.phone}<br><br>
-                ✉️ ${hospital.email}<br><br>
-                <a href="${hospital.contact}" target="_blank">
-                صفحة التواصل الرسمية
-                </a>
-            `;
-
-        }
-
-        if(language === "ta"){
-
-            return `
-                <strong>Hospital Contact 📞</strong><br><br>
-                📍 ${hospital.location}<br><br>
-                ☎️ ${hospital.phone}<br><br>
-                ✉️ ${hospital.email}<br><br>
-                <a href="${hospital.contact}" target="_blank">
-                Official Contact Page
-                </a>
-            `;
-
-        }
-
-        return `
-            <strong>GAMA Hospital Contact 📞</strong><br><br>
-            📍 ${hospital.location}<br><br>
-            ☎️ ${hospital.phone}<br><br>
-            ✉️ ${hospital.email}<br><br>
-            <a href="${hospital.contact}" target="_blank">
-            Open Official Contact Page
-            </a>
-        `;
-
-    }
-
-
-    /* ---------------- WORKING HOURS ---------------- */
-
-    if(
-        q.includes("hour") ||
-        q.includes("timing") ||
-        q.includes("open") ||
-        q.includes("وقت") ||
-        q.includes("ساعات") ||
-        q.includes("நேரம்") ||
-        q.includes("டைமிங்")
-    ){
-
-        if(language === "ar"){
-
-            return `
-                <strong>ساعات العمل 🕐</strong><br><br>
-                قسم الطوارئ: مفتوح 24 ساعة طوال أيام الأسبوع.<br>
-                العيادات الخارجية: من 8:00 صباحاً إلى 8:00 مساءً.
-            `;
-
-        }
-
-        if(language === "ta"){
-
-            return `
-                <strong>Hospital Timing 🕐</strong><br><br>
-                Emergency Department: 24/7.<br>
-                Outpatient Clinics: காலை 8:00 மணி முதல் இரவு 8:00 மணி வரை.
-            `;
-
-        }
-
-        return `
-            <strong>Hospital Working Hours 🕐</strong><br><br>
-            Emergency Department: Open 24/7.<br>
-            Outpatient Clinics: 8:00 AM – 8:00 PM.
-        `;
-
-    }
-
-
-    /* ---------------- LOCATION ---------------- */
-
-    if(
-        q.includes("where") ||
-        q.includes("located") ||
-        q.includes("location") ||
-        q.includes("وين") ||
-        q.includes("أين") ||
-        q.includes("எங்கே") ||
-        q.includes("இடம்")
-    ){
-
-        if(language === "ar"){
-
-            return `
-                <strong>موقع المستشفى 📍</strong><br><br>
-                ${hospital.location}
-            `;
-
-        }
-
-        if(language === "ta"){
-
-            return `
-                <strong>Hospital Location 📍</strong><br><br>
-                ${hospital.location}
-            `;
-
-        }
-
-        return `
-            <strong>Hospital Location 📍</strong><br><br>
-            ${hospital.location}
-        `;
-
-    }
-
-
-    /* ---------------- GAMA / ABOUT ---------------- */
-
-    if(
-        q.includes("gama") ||
-        q.includes("hospital") ||
-        q.includes("about") ||
-        q.includes("jama") ||
-        q.includes("جاما") ||
-        q.includes("மருத்துவமனை")
-    ){
-
-        if(language === "ar"){
-
-            return `
-                <strong>عن مستشفى جاما 🏥</strong><br><br>
-                مستشفى جاما في المنطقة الشرقية من المملكة العربية السعودية يقدم مجموعة واسعة من الخدمات والتخصصات الطبية، مع قسم طوارئ يعمل على مدار الساعة.
-            `;
-
-        }
-
-        if(language === "ta"){
-
-            return `
-                <strong>GAMA Hospital பற்றி 🏥</strong><br><br>
-                GAMA Hospital, Saudi Arabia-வின் Eastern Province பகுதியில் அமைந்துள்ள மருத்துவமனை. பல்வேறு medical departments மற்றும் services வழங்கப்படுகிறது. Emergency Department 24/7 செயல்படுகிறது.
-            `;
-
-        }
-
-        return `
-            <strong>About GAMA Hospital 🏥</strong><br><br>
-            GAMA Hospital is located in the Eastern Province of Saudi Arabia and provides a wide range of medical departments and healthcare services, with a 24/7 Emergency Department.
-        `;
-
-    }
-
-
-    /* ---------------- MEDICAL QUESTION SAFETY ---------------- */
-
-    const medicalWords = [
-
-        "symptom",
-        "symptoms",
-        "pain",
-        "disease",
-        "diagnose",
-        "diagnosis",
-        "medicine",
-        "medication",
-        "tablet",
-        "treatment",
-        "pregnant",
-        "pregnancy",
-        "fever",
-        "blood pressure",
-        "diabetes",
-        "مرض",
-        "دواء",
-        "علاج",
-        "تشخيص",
-        "ألم",
-        "நோய்",
-        "வலி",
-        "மருந்து",
-        "சிகிச்சை",
-        "கர்ப்பம்",
-        "காய்ச்சல்"
-    ];
-
-
-    const isMedical =
-        medicalWords.some(word =>
-            q.includes(word)
-        );
-
-
-    if(isMedical){
-
-        if(language === "ar"){
-
-            return `
-                أفهم سؤالك الطبي، لكنني لا أستطيع تشخيص الحالة أو وصف علاج من خلال الدردشة.<br><br>
-                يمكنني مساعدتك في العثور على القسم أو الطبيب المناسب في مستشفى جاما.<br><br>
-                إذا كانت الحالة طارئة، يرجى التوجه إلى قسم الطوارئ فوراً.
-            `;
-
-        }
-
-        if(language === "ta"){
-
-            return `
-                உங்கள் medical question புரிகிறது. ஆனால் இந்த chatbot மூலம் diagnosis அல்லது medicine/treatment prescription கொடுக்க முடியாது.<br><br>
-                உங்களுக்கு பொருத்தமான GAMA Hospital department அல்லது doctor-ஐ கண்டுபிடிக்க உதவ முடியும்.<br><br>
-                நிலைமை அவசரமாக இருந்தால் உடனடியாக Emergency Department-ஐ அணுகவும்.
-            `;
-
-        }
-
-        return `
-            I understand your medical question. However, this assistant should not diagnose a condition or prescribe medicines through chat.<br><br>
-            I can help you find the appropriate GAMA Hospital department or doctor.<br><br>
-            If it is an emergency, please seek emergency medical care immediately.
-        `;
-
-    }
-
-
-    /* ---------------- FALLBACK ---------------- */
-
-    if(language === "ar"){
-
-        return `
-            أستطيع مساعدتك في معلومات مستشفى جاما، الأطباء، الأقسام، المواعيد، الطوارئ، ساعات العمل وبيانات الاتصال.<br><br>
-            يرجى إعادة صياغة السؤال أو اختيار أحد الخيارات أدناه.
-        `;
-
-    }
-
-    if(language === "ta"){
-
-        return `
-            GAMA Hospital-ன் doctors, departments, appointment, emergency, timing மற்றும் contact தகவல்களில் நான் உதவ முடியும்.<br><br>
-            உங்கள் கேள்வியை இன்னும் தெளிவாக type செய்யுங்கள் அல்லது கீழே உள்ள options-ஐ தேர்வு செய்யுங்கள்.
-        `;
-
-    }
-
-    return `
-        I can help with GAMA Hospital information, doctors, departments, appointments, emergency services, working hours and contact details.<br><br>
-        Please rephrase your question or choose one of the options below.
-    `;
-
-}
-
-
-/* =========================================================
-   SECURITY
-   ========================================================= */
-
-function escapeHTML(text){
-
-    return text
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
-
-</script>
-
-</body>
-</html>
+            <button class="lang-btn"
