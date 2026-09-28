@@ -1,951 +1,2023 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GAMA HOSPITAL | AI Healthcare Concierge</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Gama Hospital | AI Healthcare Concierge</title>
+
+<meta name="description"
+content="Gama Hospital Medical AI Concierge - multilingual hospital information and appointment assistance.">
+
+<!-- =========================================================
+     BOTPRESS — YOUR EXACT DEPLOY CODE
+========================================================= -->
 <script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js"></script>
 <script src="https://files.bpcontent.cloud/2026/09/28/05/20260928052853-VL0MMBEJ.js" defer></script>
 
 <style>
-:root{--navy:#063d69;--blue:#168fe3;--ink:#123b62;--muted:#6b8296;--red:#e92632}
-*{box-sizing:border-box}
-html,body{margin:0;background:#edf6fb;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
-button,input{font:inherit}
-.top{height:82px;background:#fff;border-bottom:1px solid #dbe7ef;display:flex;align-items:center;padding:8px 26px;gap:20px;position:sticky;top:0;z-index:20}
-.logo{width:245px;height:62px;object-fit:contain;object-position:left center}
-.topRight{margin-left:auto;display:flex;align-items:center;gap:24px}
-.topItem{font-size:12px;color:#627b90}
-.topItem b{display:block;font-size:14px;color:var(--ink);margin-bottom:2px}
-.emg{background:var(--red);color:#fff;border:0;border-radius:11px;padding:12px 16px;font-weight:800;cursor:pointer}
-.page{padding:18px}
-.grid{max-width:1500px;margin:auto;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(390px,.8fr);gap:18px}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --blue:#0879d1;
+    --blue-dark:#075da0;
+    --cyan:#00a8b8;
+    --dark:#08213c;
+    --text:#172b40;
+    --muted:#66788c;
+    --white:#fff;
+    --light:#f5faff;
+    --border:#dfeaf2;
+    --danger:#dc2626;
+    --shadow:0 25px 80px rgba(0,45,85,.18);
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background:#f4f9fc;
+    color:var(--text);
+}
+
+/* =========================================================
+   HIDE DEFAULT BOTPRESS UI
+   We use Botpress only as the AI/backend.
+========================================================= */
+
+.bpFab,
+.bpWebchat,
+#bp-web-widget-container,
+[id*="bp-web-widget"],
+[class*="bpWebchat"],
+[class*="bpFab"],
+bp-webchat,
+bp-fab,
+iframe[src*="botpress"]{
+    visibility:hidden !important;
+    opacity:0 !important;
+    pointer-events:none !important;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.top-header{
+    height:78px;
+    width:100%;
+    background:#fff;
+    border-bottom:1px solid #e6edf3;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 42px;
+    position:relative;
+    z-index:20;
+}
+
+.header-logo{
+    height:55px;
+    width:auto;
+    object-fit:contain;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:28px;
+}
+
+.support{
+    display:flex;
+    flex-direction:column;
+    text-align:right;
+}
+
+.support strong{
+    font-size:14px;
+    color:#152a3e;
+}
+
+.support span{
+    font-size:12px;
+    color:#728396;
+    margin-top:3px;
+}
+
+.location{
+    font-size:13px;
+    color:#52667b;
+    white-space:nowrap;
+}
+
+.emergency{
+    border:0;
+    background:var(--danger);
+    color:#fff;
+    padding:12px 18px;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
 
 .hero{
-height:790px;position:relative;overflow:hidden;border-radius:24px;
-background-image:
-linear-gradient(90deg,rgba(3,43,75,.90),rgba(3,43,75,.48) 52%,rgba(3,43,75,.12)),
-url("assets/gama-hospital.png");
-background-size:cover;background-position:center
+    min-height:calc(100vh - 78px);
+    position:relative;
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.98) 0%,
+            rgba(255,255,255,.92) 40%,
+            rgba(255,255,255,.38) 72%,
+            rgba(255,255,255,.05) 100%
+        ),
+        url("assets/gama-hospital.png");
+
+    background-size:cover;
+    background-position:center;
 }
-.heroText{position:absolute;top:36px;left:38px;max-width:680px;color:#fff}
-.heroText .small{font-size:27px}
-.heroText h1{font-size:58px;line-height:.98;margin:4px 0 10px}
-.heroText h1 span{color:#23a8e9}
-.heroText h2{font-size:28px;margin:0 0 10px}
-.heroText p{font-size:17px;line-height:1.5;margin:0}
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.12)
+        );
+    pointer-events:none;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    width:min(650px,90%);
+    padding:100px 0 100px 7%;
+}
+
+.status{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:9px 15px;
+    background:#e8f6ff;
+    border:1px solid #cceaff;
+    color:var(--blue-dark);
+    border-radius:30px;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:22px;
+}
+
+.status-dot{
+    width:8px;
+    height:8px;
+    background:#18b86a;
+    border-radius:50%;
+    box-shadow:0 0 0 5px rgba(24,184,106,.12);
+}
+
+.hero h1{
+    color:var(--dark);
+    font-size:clamp(42px,6vw,72px);
+    line-height:1.02;
+    letter-spacing:-3px;
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:var(--blue);
+}
+
+.hero-subtitle{
+    font-size:21px;
+    font-weight:700;
+    color:#29445e;
+    margin-bottom:16px;
+}
+
+.hero-description{
+    max-width:570px;
+    font-size:16px;
+    line-height:1.8;
+    color:#65788b;
+}
+
+.info-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:28px;
+}
+
+.info-chip{
+    background:rgba(255,255,255,.92);
+    border:1px solid #dce8ef;
+    padding:11px 14px;
+    border-radius:12px;
+    color:#43586d;
+    font-size:12px;
+    font-weight:600;
+    box-shadow:0 8px 25px rgba(0,50,90,.07);
+}
+
+/* =========================================================
+   SERVICES
+========================================================= */
 
 .services{
-position:absolute;left:24px;right:24px;bottom:90px;
-display:grid;grid-template-columns:repeat(3,1fr);gap:12px
-}
-.service{
-background:#fff;border:0;border-radius:16px;min-height:106px;padding:15px;
-text-align:left;color:var(--ink);cursor:pointer;
-box-shadow:0 12px 26px #001d3a2b
-}
-.service:hover{transform:translateY(-2px)}
-.ico{font-size:27px}
-.service b{display:block;margin-top:5px;font-size:16px}
-.service small{color:var(--muted)}
-
-.features{
-position:absolute;left:24px;right:24px;bottom:16px;
-background:#123f63;color:#fff;border-radius:18px;padding:15px;
-display:grid;grid-template-columns:repeat(4,1fr);
-text-align:center;font-size:12px
-}
-.features b{display:block;font-size:13px;margin-top:4px}
-
-.ai{
-height:790px;background:#fff;border-radius:24px;overflow:hidden;
-box-shadow:0 12px 32px #00345825;position:relative;
-display:flex;flex-direction:column
-}
-.aiHead{
-height:80px;flex:none;background:linear-gradient(135deg,#063d69,#075b91);
-color:#fff;display:flex;align-items:center;padding:10px 16px;gap:11px
-}
-.aiLogo{
-width:55px;height:55px;border-radius:50%;background:#fff;
-padding:6px;object-fit:contain
-}
-.aiTitle b{display:block;font-size:18px}
-.aiTitle span{font-size:12px;opacity:.9}
-.online{margin-left:auto;font-size:11px;background:#ffffff1d;padding:7px 10px;border-radius:20px}
-.dot{display:inline-block;width:7px;height:7px;background:#35dc98;border-radius:50%;margin-right:4px}
-
-.chat{
-flex:1;min-height:0;padding:18px 16px 8px;overflow:auto;
-background:linear-gradient(#fbfdff,#fff)
-}
-.welcome{display:flex;gap:10px;align-items:flex-start}
-.avatar{
-width:42px;height:42px;border-radius:50%;background:#eef7ff;
-padding:6px;object-fit:contain;flex:none
-}
-.bubble{
-background:#eef5fb;border:1px solid #dce9f2;border-radius:16px;
-padding:13px 15px;max-width:92%;line-height:1.5;font-size:15px
-}
-.bubble p{margin:0 0 8px}
-.bubble p:last-child{margin:0}
-.time{font-size:10px;color:#8092a2;margin:5px 0 12px 52px}
-
-.msg{display:flex;gap:9px;margin:10px 0}
-.msg.user{justify-content:flex-end}
-.msg.user .bubble{background:#dff1ff}
-.msg.bot .bubble{background:#f1f6fa}
-.msg .avatar{width:34px;height:34px}
-
-.typing{display:none;color:#8092a2;font-size:12px;margin:8px 0}
-
-.quick{
-display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 12px
-}
-.quick button{
-border:1px solid #cfe0ec;background:#fff;border-radius:18px;
-padding:9px 5px;color:var(--ink);cursor:pointer;font-size:12px
-}
-.quick button:hover{background:#eef8ff}
-
-.composer{
-border-top:1px solid #dce8ef;padding:10px 12px;background:#fff;
-display:flex;gap:8px;align-items:center
-}
-.mic,.send{
-width:46px;height:46px;border:0;border-radius:50%;
-color:#fff;cursor:pointer;font-size:19px;background:#0c82df
-}
-.mic.listening{background:#e92632;animation:pulse 1s infinite}
-@keyframes pulse{50%{transform:scale(1.08)}}
-.input{
-flex:1;border:1px solid #d7e4ec;border-radius:24px;
-padding:12px 15px;outline:0;font-size:14px
-}
-.input:focus{border-color:#7ab8e5}
-.voiceStatus{
-font-size:10px;color:#71889b;text-align:center;
-padding:0 10px 8px;background:#fff
-}
-.hidden-bp{
-position:fixed;width:1px;height:1px;left:-10000px;top:-10000px;
-opacity:0;pointer-events:none
+    position:relative;
+    z-index:3;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    width:min(900px,90%);
+    margin:-35px auto 50px;
 }
 
-@media(max-width:1100px){
-.grid{grid-template-columns:1fr}
-.ai{height:720px}
-.hero{height:720px}
-.topRight{display:none}
+.service-card{
+    background:rgba(255,255,255,.96);
+    border:1px solid #e1ebf2;
+    border-radius:16px;
+    padding:18px;
+    cursor:pointer;
+    box-shadow:0 12px 35px rgba(0,45,85,.09);
+    transition:.2s ease;
 }
 
-@media(max-width:700px){
-.top{height:68px;padding:6px 12px}
-.logo{width:190px;height:54px}
-.page{padding:8px}
-.hero{height:650px;border-radius:16px}
-.heroText{left:20px;top:22px}
-.heroText h1{font-size:40px}
-.heroText h2{font-size:21px}
-.heroText .small{font-size:21px}
-.services{
-left:12px;right:12px;bottom:76px;
-grid-template-columns:1fr 1fr;gap:9px
+.service-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 18px 45px rgba(0,45,85,.14);
 }
-.service{min-height:94px;padding:11px}
-.features{display:none}
-.ai{height:680px;border-radius:16px}
+
+.service-icon{
+    font-size:23px;
+    margin-bottom:9px;
+}
+
+.service-card strong{
+    display:block;
+    color:#17324c;
+    font-size:14px;
+}
+
+.service-card span{
+    display:block;
+    margin-top:5px;
+    color:#7a8b9c;
+    font-size:11px;
+}
+
+/* =========================================================
+   CUSTOM GAMA AI BUTTON
+========================================================= */
+
+.ai-button{
+    position:fixed;
+    right:28px;
+    bottom:28px;
+
+    width:72px;
+    height:72px;
+
+    border:4px solid #fff;
+    border-radius:50%;
+
+    background:#fff;
+    padding:0;
+
+    cursor:pointer;
+
+    z-index:100000;
+
+    box-shadow:
+        0 15px 40px rgba(0,90,150,.30),
+        0 0 0 7px rgba(8,121,209,.10);
+
+    overflow:hidden;
+    transition:.25s ease;
+}
+
+.ai-button:hover{
+    transform:translateY(-4px) scale(1.04);
+}
+
+.ai-button img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    padding:7px;
+}
+
+/* =========================================================
+   CUSTOM CHAT WINDOW
+========================================================= */
+
+.chat-window{
+    position:fixed;
+
+    right:28px;
+    bottom:115px;
+
+    width:430px;
+    height:min(690px,calc(100vh - 145px));
+
+    min-height:520px;
+
+    background:#fff;
+
+    border-radius:25px;
+    overflow:hidden;
+
+    border:1px solid #dce7ef;
+
+    box-shadow:
+        0 30px 90px rgba(0,30,70,.25);
+
+    z-index:99999;
+
+    display:none;
+    flex-direction:column;
+
+    animation:chatOpen .22s ease;
+}
+
+.chat-window.active{
+    display:flex;
+}
+
+@keyframes chatOpen{
+    from{
+        opacity:0;
+        transform:translateY(15px) scale(.98);
+    }
+
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+/* =========================================================
+   CHAT HEADER
+========================================================= */
+
+.chat-header{
+    background:
+        linear-gradient(
+            135deg,
+            #086fca,
+            #00a4b7
+        );
+
+    color:#fff;
+    padding:15px 17px;
+}
+
+.chat-header-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.chat-brand{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.chat-logo{
+    width:43px;
+    height:43px;
+    background:#fff;
+    border-radius:12px;
+    padding:5px;
+    object-fit:contain;
+}
+
+.chat-brand-text strong{
+    display:block;
+    font-size:15px;
+}
+
+.chat-brand-text span{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:11px;
+    opacity:.92;
+    margin-top:3px;
+}
+
+.online-dot{
+    width:7px;
+    height:7px;
+    background:#8cffbd;
+    border-radius:50%;
+}
+
+.close-chat{
+    width:35px;
+    height:35px;
+    border:0;
+    border-radius:10px;
+    background:rgba(255,255,255,.16);
+    color:#fff;
+    font-size:21px;
+    cursor:pointer;
+}
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+.messages{
+    flex:1;
+    overflow-y:auto;
+    padding:20px 15px 12px;
+    background:
+        linear-gradient(
+            180deg,
+            #f7fbfe,
+            #fff
+        );
+}
+
+.message-row{
+    display:flex;
+    margin-bottom:13px;
+}
+
+.message-row.user{
+    justify-content:flex-end;
+}
+
+.message{
+    max-width:87%;
+    padding:12px 14px;
+    border-radius:17px;
+    font-size:13px;
+    line-height:1.65;
+    white-space:pre-line;
+    word-break:break-word;
+}
+
+.message.bot{
+    background:#fff;
+    border:1px solid #e1ebf2;
+    color:#26394d;
+    border-bottom-left-radius:5px;
+    box-shadow:0 4px 15px rgba(0,30,60,.04);
+}
+
+.message.user{
+    background:
+        linear-gradient(
+            135deg,
+            #0879d1,
+            #049eb7
+        );
+    color:#fff;
+    border-bottom-right-radius:5px;
+}
+
+.message a{
+    color:#0879d1;
+    font-weight:700;
+}
+
+.message.user a{
+    color:#fff;
+}
+
+/* =========================================================
+   TYPING
+========================================================= */
+
+.typing{
+    display:none;
+    width:max-content;
+    align-items:center;
+    gap:5px;
+    background:#fff;
+    border:1px solid #e1ebf2;
+    border-radius:15px;
+    padding:10px 13px;
+    margin-bottom:12px;
+}
+
+.typing.show{
+    display:flex;
+}
+
+.typing i{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#8ca0b3;
+    animation:typeDot 1s infinite;
+}
+
+.typing i:nth-child(2){
+    animation-delay:.15s;
+}
+
+.typing i:nth-child(3){
+    animation-delay:.3s;
+}
+
+@keyframes typeDot{
+    0%,60%,100%{
+        transform:translateY(0);
+    }
+
+    30%{
+        transform:translateY(-4px);
+    }
+}
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.input-area{
+    border-top:1px solid #e2ebf1;
+    background:#fff;
+    padding:11px;
+}
+
+.input-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.chat-input{
+    flex:1;
+    min-width:0;
+
+    border:1px solid #dce6ee;
+    background:#f8fbfd;
+
+    border-radius:14px;
+
+    padding:12px 13px;
+
+    outline:none;
+
+    font-size:13px;
+    color:#24364b;
+}
+
+.chat-input:focus{
+    border-color:#82c7ed;
+    box-shadow:0 0 0 3px rgba(8,121,209,.07);
+}
+
+.voice-btn,
+.send-btn{
+    width:45px;
+    height:45px;
+    border:0;
+    border-radius:13px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+}
+
+.voice-btn{
+    background:#eaf6ff;
+    color:#0879d1;
+}
+
+.voice-btn.listening{
+    background:#dc2626;
+    color:#fff;
+}
+
+.send-btn{
+    background:#0879d1;
+    color:#fff;
+}
+
+.bottom-note{
+    text-align:center;
+    color:#9aa8b5;
+    font-size:9px;
+    padding-top:7px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:900px){
+
+    .top-header{
+        padding:0 20px;
+    }
+
+    .header-right{
+        gap:12px;
+    }
+
+    .support,
+    .location{
+        display:none;
+    }
+
+    .hero-content{
+        padding:75px 25px;
+        width:100%;
+    }
+
+    .hero{
+        background-position:60% center;
+    }
+
+    .services{
+        grid-template-columns:repeat(2,1fr);
+        margin-top:-20px;
+    }
+}
+
+@media(max-width:600px){
+
+    .top-header{
+        height:68px;
+    }
+
+    .header-logo{
+        height:45px;
+    }
+
+    .hero{
+        min-height:calc(100vh - 68px);
+        background-position:center;
+    }
+
+    .hero-content{
+        padding:55px 20px 90px;
+    }
+
+    .hero h1{
+        font-size:46px;
+        letter-spacing:-2px;
+    }
+
+    .hero-subtitle{
+        font-size:17px;
+    }
+
+    .hero-description{
+        font-size:14px;
+    }
+
+    .services{
+        grid-template-columns:1fr;
+        width:calc(100% - 30px);
+        margin-top:-10px;
+    }
+
+    .chat-window{
+        right:10px;
+        bottom:88px;
+        width:calc(100vw - 20px);
+        height:calc(100vh - 105px);
+        min-height:480px;
+        border-radius:22px;
+    }
+
+    .ai-button{
+        width:62px;
+        height:62px;
+        right:18px;
+        bottom:18px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<header class="top">
-<img class="logo" src="assets/gama-logo.png" alt="Gama Hospital">
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
-<div class="topRight">
-<div class="topItem">
-<b>24/7 Patient Support</b>
-AI Healthcare Concierge
-</div>
+<header class="top-header">
 
-<div class="topItem">
-<b>Dhahran</b>
-Saudi Arabia
-</div>
+    <img
+        src="assets/gama-logo.png"
+        class="header-logo"
+        alt="Gama Hospital">
 
-<button class="emg" onclick="location.href='tel:920033175'">
-🚨 EMERGENCY
-</button>
-</div>
+    <div class="header-right">
+
+        <div class="support">
+            <strong>24/7 Patient Support</strong>
+            <span>Gama Hospital AI Concierge</span>
+        </div>
+
+        <div class="location">
+            📍 Dhahran, Saudi Arabia
+        </div>
+
+        <button
+            class="emergency"
+            onclick="sendQuickMessage('I need emergency assistance.')">
+            Emergency
+        </button>
+
+    </div>
+
 </header>
 
-<main class="page">
 
-<div class="grid">
+<!-- =========================================================
+     HERO
+========================================================= -->
 
-<section class="hero">
+<main class="hero">
 
-<div class="heroText">
-<div class="small">Welcome to</div>
+    <div class="hero-overlay"></div>
 
-<h1>
-GAMA <span>HOSPITAL</span>
-</h1>
+    <div class="hero-content">
 
-<h2>AI Healthcare Concierge</h2>
+        <div class="status">
+            <span class="status-dot"></span>
+            Gama Hospital Medical AI Concierge
+        </div>
 
-<p>
-<b>Your 24/7 Digital Health Assistant</b><br>
-Get instant support for appointments, doctors, departments,
-insurance, location and more.
-</p>
-</div>
+        <h1>
+            Welcome to<br>
+            <span>GAMA HOSPITAL</span>
+        </h1>
 
-<div class="services">
+        <div class="hero-subtitle">
+            Your 24/7 Digital Health Assistant
+        </div>
 
-<button class="service" onclick="quick('I want to request an appointment.')">
-<span class="ico">📅</span>
-<b>Book Appointment</b>
-<small>Schedule with your preferred doctor</small>
-</button>
+        <p class="hero-description">
+            Get assistance with hospital information,
+            doctors, departments, appointments,
+            insurance and billing, hospital location,
+            and emergency guidance.
+        </p>
 
-<button class="service" onclick="quick('I want to find a doctor.')">
-<span class="ico">👨‍⚕️</span>
-<b>Find a Doctor</b>
-<small>Search by specialty</small>
-</button>
+        <div class="info-row">
 
-<button class="service" onclick="quick('Please show me the hospital departments.')">
-<span class="ico">🏥</span>
-<b>Departments</b>
-<small>Explore medical services</small>
-</button>
+            <div class="info-chip">
+                📍 Dhahran, Saudi Arabia
+            </div>
 
-<button class="service" onclick="quick('I need information about insurance and billing.')">
-<span class="ico">🛡️</span>
-<b>Insurance & Billing</b>
-<small>Get insurance guidance</small>
-</button>
+            <div class="info-chip">
+                🏥 Emergency 24/7
+            </div>
 
-<button class="service" onclick="quick('Where is Gama Hospital located?')">
-<span class="ico">📍</span>
-<b>Hospital Location</b>
-<small>Location and directions</small>
-</button>
+            <div class="info-chip">
+                🕐 Clinics 8 AM – 8 PM
+            </div>
 
-<button class="service" onclick="quick('I need emergency assistance.')">
-<span class="ico">🚨</span>
-<b>Emergency Assistance</b>
-<small>Immediate help</small>
-</button>
+            <div class="info-chip">
+                ☎ 920033175
+            </div>
 
-</div>
+        </div>
 
-<div class="features">
-<div>👥<b>World-class Medical Care</b></div>
-<div>🩺<b>Experienced Specialists</b></div>
-<div>⚙️<b>Advanced Technology</b></div>
-<div>♡<b>Patient-Centric Approach</b></div>
-</div>
-
-</section>
-
-
-<section class="ai">
-
-<div class="aiHead">
-
-<img
-class="aiLogo"
-src="assets/gama-logo.png"
-alt="Gama Hospital AI"
->
-
-<div class="aiTitle">
-<b>GAMA HOSPITAL</b>
-<span>AI Healthcare Concierge</span>
-</div>
-
-<div class="online">
-<span class="dot"></span>
-Online
-</div>
-
-</div>
-
-
-<div id="chat" class="chat">
-
-<div class="welcome">
-
-<img
-class="avatar"
-src="assets/gama-logo.png"
-alt="Gama"
->
-
-<div class="bubble">
-
-<p dir="rtl">
-مرحباً بكم في مستشفى جاما!
-</p>
-
-<p>
-Welcome to Gama Hospital!
-</p>
-
-<p>
-வணக்கம்! காமா மருத்துவமனைக்கு வரவேற்கிறோம்!
-</p>
-
-<p>
-<b>I'm your AI Healthcare Concierge.</b><br>
-How may I assist you today?
-</p>
-
-</div>
-
-</div>
-
-<div class="time" id="welcomeTime"></div>
-
-<div class="quick">
-
-<button onclick="quick('I want to request an appointment.')">
-📅 Appointment
-</button>
-
-<button onclick="quick('I want to find a doctor.')">
-👨‍⚕️ Doctor
-</button>
-
-<button onclick="quick('Show hospital departments.')">
-🏥 Departments
-</button>
-
-<button onclick="quick('Insurance and billing information.')">
-🛡️ Insurance
-</button>
-
-<button onclick="quick('Where is Gama Hospital located?')">
-📍 Location
-</button>
-
-<button onclick="quick('I need emergency assistance.')">
-🚨 Emergency
-</button>
-
-</div>
-
-<div class="typing" id="typing">
-Gama AI is responding…
-</div>
-
-</div>
-
-
-<div class="composer">
-
-<button
-class="mic"
-id="mic"
-title="Speak"
->
-🎙️
-</button>
-
-<input
-id="input"
-class="input"
-placeholder="Type your message or speak…"
-autocomplete="off"
->
-
-<button
-class="send"
-id="send"
-title="Send"
->
-➤
-</button>
-
-</div>
-
-<div class="voiceStatus" id="voiceStatus">
-Voice is ready. Tap 🎙️ and speak.
-</div>
-
-</section>
-
-</div>
+    </div>
 
 </main>
 
 
-<div class="hidden-bp" id="bp-chat"></div>
+<!-- =========================================================
+     SERVICE CARDS
+========================================================= -->
+
+<section class="services">
+
+    <div
+        class="service-card"
+        onclick="sendQuickMessage('I want to book an appointment.')">
+
+        <div class="service-icon">📅</div>
+
+        <strong>Book Appointment</strong>
+
+        <span>Get appointment assistance</span>
+
+    </div>
+
+
+    <div
+        class="service-card"
+        onclick="sendQuickMessage('I want to find a doctor.')">
+
+        <div class="service-icon">👨‍⚕️</div>
+
+        <strong>Find a Doctor</strong>
+
+        <span>Doctor information</span>
+
+    </div>
+
+
+    <div
+        class="service-card"
+        onclick="sendQuickMessage('Please tell me about the departments.')">
+
+        <div class="service-icon">🏥</div>
+
+        <strong>Departments</strong>
+
+        <span>Hospital departments</span>
+
+    </div>
+
+
+    <div
+        class="service-card"
+        onclick="sendQuickMessage('I need insurance and billing information.')">
+
+        <div class="service-icon">💳</div>
+
+        <strong>Insurance & Billing</strong>
+
+        <span>Insurance assistance</span>
+
+    </div>
+
+
+    <div
+        class="service-card"
+        onclick="sendQuickMessage('Please give me the hospital location.')">
+
+        <div class="service-icon">📍</div>
+
+        <strong>Hospital Location</strong>
+
+        <span>Location information</span>
+
+    </div>
+
+
+    <div
+        class="service-card"
+        onclick="sendQuickMessage('I need emergency assistance.')">
+
+        <div class="service-icon">🚨</div>
+
+        <strong>Emergency Assistance</strong>
+
+        <span>Emergency guidance</span>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CUSTOM GAMA ROUND BUTTON
+========================================================= -->
+
+<button
+    class="ai-button"
+    id="aiButton"
+    aria-label="Open Gama Hospital AI Concierge"
+    title="Gama Hospital AI Concierge">
+
+    <img
+        src="assets/gama-logo.png"
+        alt="Gama AI">
+
+</button>
+
+
+<!-- =========================================================
+     CUSTOM CHAT
+========================================================= -->
+
+<section
+    class="chat-window"
+    id="chatWindow"
+    aria-label="Gama Hospital AI Concierge">
+
+    <header class="chat-header">
+
+        <div class="chat-header-top">
+
+            <div class="chat-brand">
+
+                <img
+                    src="assets/gama-logo.png"
+                    class="chat-logo"
+                    alt="Gama Hospital">
+
+                <div class="chat-brand-text">
+
+                    <strong>GAMA AI Concierge</strong>
+
+                    <span>
+                        <i class="online-dot"></i>
+                        Medical Concierge
+                    </span>
+
+                </div>
+
+            </div>
+
+            <button
+                class="close-chat"
+                id="closeChat"
+                aria-label="Close chat">
+                ×
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <div
+        class="messages"
+        id="messages">
+
+        <div class="message-row bot">
+
+            <div class="message bot">
+                Welcome to Gama Hospital.
+                <br><br>
+                I am your AI Healthcare Concierge.
+                How may I assist you today?
+            </div>
+
+        </div>
+
+        <div
+            class="typing"
+            id="typing">
+
+            <i></i>
+            <i></i>
+            <i></i>
+
+        </div>
+
+    </div>
+
+
+    <div class="input-area">
+
+        <div class="input-row">
+
+            <button
+                class="voice-btn"
+                id="voiceButton"
+                title="Speak">
+                🎙
+            </button>
+
+            <input
+                id="chatInput"
+                class="chat-input"
+                type="text"
+                autocomplete="off"
+                placeholder="Type your message or speak...">
+
+            <button
+                class="send-btn"
+                id="sendButton"
+                title="Send">
+                ➤
+            </button>
+
+        </div>
+
+        <div class="bottom-note">
+            Gama Hospital AI Healthcare Concierge
+        </div>
+
+    </div>
+
+</section>
 
 
 <script>
+/* =========================================================
+   GAMA HOSPITAL + BOTPRESS CONNECTION
+========================================================= */
 
-const chat=document.getElementById('chat');
-const input=document.getElementById('input');
-const typing=document.getElementById('typing');
-const voiceStatus=document.getElementById('voiceStatus');
-const mic=document.getElementById('mic');
+const chatWindow = document.getElementById("chatWindow");
+const aiButton = document.getElementById("aiButton");
+const closeChat = document.getElementById("closeChat");
 
-let botpressReady=false;
-let lastSpoken='';
-let speechRecognitionLocale='en-IN';
+const messages = document.getElementById("messages");
+const input = document.getElementById("chatInput");
+const sendButton = document.getElementById("sendButton");
 
-document.getElementById('welcomeTime').textContent =
-new Date().toLocaleTimeString([],{
-hour:'2-digit',
-minute:'2-digit'
-});
+const voiceButton = document.getElementById("voiceButton");
+const typing = document.getElementById("typing");
 
+let botpressReady = false;
+let botpressInitialized = false;
 
-function cleanText(value){
+let pendingMessages = [];
 
-if(typeof value!=='string') return '';
+let lastUserMessage = "";
+let lastBotMessage = "";
+let lastBotMessageTime = 0;
 
-let t=value
-.replace(/\r/g,'')
-.trim();
 
-t=t
-.replace(/```[\s\S]*?```/g,' ')
-.replace(/\[([^\]]+)\]\([^\)]+\)/g,'$1')
-.replace(/[*_`#>]/g,'')
-.replace(/\s{2,}/g,' ')
-.trim();
+/* =========================================================
+   OPEN CUSTOM CHAT
+========================================================= */
 
-if(/^[-+]?\d+(?:\.\d+)?$/.test(t))
-return '';
+aiButton.addEventListener("click", () => {
 
-if(t.length<2)
-return '';
+    chatWindow.classList.add("active");
 
-return t;
-}
+    input.focus();
 
+    /*
+      Botpress must be opened before sendMessage becomes ready.
+      Official Botpress API:
+      window.botpress.open()
+    */
 
-function addMessage(text,who='bot',speakIt=false){
-
-const t=cleanText(text);
-
-if(!t)return;
-
-const row=document.createElement('div');
-row.className='msg '+who;
-
-if(who==='bot'){
-
-const img=document.createElement('img');
-
-img.className='avatar';
-img.src='assets/gama-logo.png';
-img.alt='Gama AI';
-
-row.appendChild(img);
-
-}
-
-const b=document.createElement('div');
-
-b.className='bubble';
-b.textContent=t;
-
-row.appendChild(b);
-
-chat.appendChild(row);
-
-chat.scrollTop=chat.scrollHeight;
-
-if(who==='bot' && speakIt)
-speakReply(t);
-}
-
-
-function quick(text){
-
-input.value=text;
-
-send();
-
-}
-
-
-async function send(){
-
-const text=cleanText(input.value);
-
-if(!text)
-return;
-
-addMessage(text,'user',false);
-
-input.value='';
-
-typing.style.display='block';
-
-voiceStatus.textContent='Sending to Gama AI…';
-
-chat.scrollTop=chat.scrollHeight;
-
-
-if(!window.botpress){
-
-typing.style.display='none';
-
-addMessage(
-'Gama AI is connecting. Please try again in a moment.',
-'bot',
-true
-);
-
-return;
-}
-
-
-try{
-
-if(typeof window.botpress.open==='function')
-window.botpress.open();
-
-if(typeof window.botpress.sendMessage==='function'){
-
-await window.botpress.sendMessage(text);
-
-}else{
-
-throw new Error('Botpress sendMessage unavailable');
-
-}
-
-}catch(e){
-
-typing.style.display='none';
-
-addMessage(
-'Gama AI is still connecting. Please try again.',
-'bot',
-true
-);
-
-voiceStatus.textContent='Please try again.';
-
-}
-
-}
-
-
-document.getElementById('send').onclick=send;
-
-
-input.addEventListener('keydown',e=>{
-
-if(e.key==='Enter')
-send();
+    if (
+        window.botpress &&
+        typeof window.botpress.open === "function"
+    ){
+        try{
+            window.botpress.open();
+        }catch(error){
+            console.warn("Botpress open error:", error);
+        }
+    }
 
 });
 
 
-const SR=
-window.SpeechRecognition||
-window.webkitSpeechRecognition;
+/* =========================================================
+   CLOSE CUSTOM CHAT
+========================================================= */
+
+closeChat.addEventListener("click", () => {
+
+    chatWindow.classList.remove("active");
+
+    if(
+        window.botpress &&
+        typeof window.botpress.close === "function"
+    ){
+        try{
+            window.botpress.close();
+        }catch(error){}
+    }
+
+});
 
 
-if(SR){
+/* =========================================================
+   BOTPRESS INITIALIZED
+========================================================= */
 
-const recognition=new SR();
+function registerBotpressEvents(){
 
-recognition.continuous=false;
-recognition.interimResults=false;
-recognition.lang=speechRecognitionLocale;
+    if(
+        !window.botpress ||
+        typeof window.botpress.on !== "function"
+    ){
+        return false;
+    }
 
+    if(botpressInitialized){
+        return true;
+    }
 
-mic.onclick=()=>{
-
-recognition.lang=speechRecognitionLocale;
-
-try{
-
-recognition.start();
-
-mic.classList.add('listening');
-
-voiceStatus.textContent=
-'Listening… speak now';
-
-}catch(e){}
-
-};
+    botpressInitialized = true;
 
 
-recognition.onresult=e=>{
+    /*
+      Webchat initialized
+    */
 
-const spoken=
-cleanText(
-e.results?.[0]?.[0]?.transcript||''
+    window.botpress.on(
+        "webchat:initialized",
+        () => {
+
+            console.log(
+                "Gama Hospital Botpress initialized"
+            );
+
+        }
+    );
+
+
+    /*
+      Webchat ready
+    */
+
+    window.botpress.on(
+        "webchat:ready",
+        () => {
+
+            botpressReady = true;
+
+            console.log(
+                "Gama Hospital Botpress ready"
+            );
+
+            flushPendingMessages();
+
+        }
+    );
+
+
+    /*
+      Botpress messages
+    */
+
+    window.botpress.on(
+        "message",
+        (event) => {
+
+            handleBotpressMessage(event);
+
+        }
+    );
+
+
+    /*
+      Error
+    */
+
+    window.botpress.on(
+        "error",
+        (error) => {
+
+            console.error(
+                "Botpress error:",
+                error
+            );
+
+            hideTyping();
+
+        }
+    );
+
+    return true;
+}
+
+
+/* =========================================================
+   WAIT FOR BOTPRESS
+========================================================= */
+
+const botpressWait = setInterval(() => {
+
+    if(registerBotpressEvents()){
+
+        clearInterval(botpressWait);
+
+    }
+
+},300);
+
+
+/* =========================================================
+   OPEN CHAT + SEND MESSAGE
+========================================================= */
+
+async function sendToBot(text){
+
+    text = String(text || "").trim();
+
+    if(!text){
+        return;
+    }
+
+
+    /*
+      Open our custom UI
+    */
+
+    chatWindow.classList.add("active");
+
+
+    /*
+      Show user message
+    */
+
+    addMessage(text,"user");
+
+    input.value = "";
+
+    lastUserMessage = text;
+
+
+    /*
+      Show typing
+    */
+
+    showTyping();
+
+
+    /*
+      Botpress may not be ready yet.
+      Keep message pending.
+    */
+
+    if(
+        !window.botpress ||
+        typeof window.botpress.sendMessage !== "function"
+    ){
+
+        pendingMessages.push(text);
+
+        waitForBotpress();
+
+        return;
+    }
+
+
+    if(!botpressReady){
+
+        pendingMessages.push(text);
+
+        /*
+          Open Botpress first.
+        */
+
+        if(
+            typeof window.botpress.open === "function"
+        ){
+
+            try{
+                window.botpress.open();
+            }catch(error){}
+        }
+
+        waitForBotpress();
+
+        return;
+    }
+
+
+    try{
+
+        await window.botpress.sendMessage(text);
+
+    }catch(error){
+
+        console.error(
+            "Botpress sendMessage error:",
+            error
+        );
+
+        hideTyping();
+
+        addMessage(
+            "I’m sorry, I could not connect to the hospital AI service right now. Please try again.",
+            "bot"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   WAIT UNTIL BOTPRESS READY
+========================================================= */
+
+function waitForBotpress(){
+
+    let attempts = 0;
+
+    const timer = setInterval(() => {
+
+        attempts++;
+
+        registerBotpressEvents();
+
+        if(
+            botpressReady &&
+            window.botpress &&
+            typeof window.botpress.sendMessage === "function"
+        ){
+
+            clearInterval(timer);
+
+            flushPendingMessages();
+
+        }
+
+        if(attempts > 100){
+
+            clearInterval(timer);
+
+            hideTyping();
+
+            if(pendingMessages.length){
+
+                pendingMessages = [];
+
+                addMessage(
+                    "The AI service is taking longer than expected to connect. Please try again.",
+                    "bot"
+                );
+
+            }
+
+        }
+
+    },300);
+
+}
+
+
+/* =========================================================
+   FLUSH QUEUED MESSAGE
+========================================================= */
+
+async function flushPendingMessages(){
+
+    if(!botpressReady){
+        return;
+    }
+
+    if(
+        !window.botpress ||
+        typeof window.botpress.sendMessage !== "function"
+    ){
+        return;
+    }
+
+    while(pendingMessages.length){
+
+        const text = pendingMessages.shift();
+
+        try{
+
+            await window.botpress.sendMessage(text);
+
+        }catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   READ BOTPRESS RESPONSE
+========================================================= */
+
+function extractMessageText(event){
+
+    if(!event){
+        return "";
+    }
+
+
+    const candidates = [
+
+        event.text,
+
+        event.markdown,
+
+        event.payload?.text,
+
+        event.payload?.markdown,
+
+        event.payload?.content?.text,
+
+        event.payload?.content?.markdown,
+
+        event.content?.text,
+
+        event.content?.markdown,
+
+        event.message?.text,
+
+        event.message?.markdown
+
+    ];
+
+
+    for(const value of candidates){
+
+        if(
+            typeof value === "string" &&
+            value.trim()
+        ){
+
+            return value.trim();
+
+        }
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =========================================================
+   BOTPRESS MESSAGE HANDLER
+========================================================= */
+
+function handleBotpressMessage(event){
+
+    const text = extractMessageText(event);
+
+    if(!text){
+        return;
+    }
+
+
+    /*
+      Do not display our own user message again.
+    */
+
+    if(
+        text.trim() ===
+        lastUserMessage.trim()
+    ){
+
+        return;
+    }
+
+
+    /*
+      Prevent duplicate bot messages.
+    */
+
+    const now = Date.now();
+
+    if(
+        text === lastBotMessage &&
+        now - lastBotMessageTime < 2000
+    ){
+
+        return;
+    }
+
+
+    lastBotMessage = text;
+    lastBotMessageTime = now;
+
+
+    hideTyping();
+
+    addMessage(
+        text,
+        "bot"
+    );
+
+
+    /*
+      Speak Botpress response.
+    */
+
+    speakResponse(text);
+
+}
+
+
+/* =========================================================
+   ADD MESSAGE
+========================================================= */
+
+function addMessage(text,type){
+
+    const row = document.createElement("div");
+
+    row.className =
+        "message-row " +
+        (type === "user" ? "user" : "bot");
+
+
+    const bubble = document.createElement("div");
+
+    bubble.className =
+        "message " +
+        (type === "user" ? "user" : "bot");
+
+
+    bubble.textContent = text;
+
+
+    row.appendChild(bubble);
+
+    /*
+      Keep typing indicator at bottom.
+    */
+
+    messages.insertBefore(
+        row,
+        typing
+    );
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+}
+
+
+/* =========================================================
+   TYPING
+========================================================= */
+
+function showTyping(){
+
+    typing.classList.add("show");
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+}
+
+function hideTyping(){
+
+    typing.classList.remove("show");
+
+}
+
+
+/* =========================================================
+   SEND BUTTON
+========================================================= */
+
+sendButton.addEventListener(
+    "click",
+    () => {
+
+        sendToBot(
+            input.value
+        );
+
+    }
 );
 
-mic.classList.remove('listening');
 
+/* =========================================================
+   ENTER KEY
+========================================================= */
 
-if(!spoken){
+input.addEventListener(
+    "keydown",
+    (event) => {
 
-voiceStatus.textContent=
-'I could not hear a clear sentence.';
+        if(event.key === "Enter"){
 
-return;
+            event.preventDefault();
 
-}
+            sendToBot(
+                input.value
+            );
 
-input.value=spoken;
+        }
 
-voiceStatus.textContent=
-'Speech captured. Sending to Gama AI…';
-
-send();
-
-};
-
-
-recognition.onerror=()=>{
-
-mic.classList.remove('listening');
-
-voiceStatus.textContent=
-'Voice input had a problem. You can type instead.';
-
-};
-
-
-recognition.onend=()=>{
-
-mic.classList.remove('listening');
-
-};
-
-}else{
-
-mic.disabled=true;
-
-voiceStatus.textContent=
-'Voice input is not supported in this browser.';
-
-}
-
-
-function extractMessageText(m){
-
-if(!m || typeof m!=='object')
-return '';
-
-const candidates=[];
-
-
-if(typeof m.payload?.text==='string')
-candidates.push(m.payload.text);
-
-
-if(typeof m.payload?.markdown==='string')
-candidates.push(m.payload.markdown);
-
-
-if(typeof m.content?.text==='string')
-candidates.push(m.content.text);
-
-
-if(typeof m.text==='string')
-candidates.push(m.text);
-
-
-if(typeof m.markdown==='string')
-candidates.push(m.markdown);
-
-
-const items=
-m.payload?.items||
-m.content?.items||
-m.items;
-
-
-if(Array.isArray(items)){
-
-for(const item of items){
-
-if(typeof item?.payload?.text==='string')
-candidates.push(item.payload.text);
-
-if(typeof item?.payload?.markdown==='string')
-candidates.push(item.payload.markdown);
-
-if(typeof item?.text==='string')
-candidates.push(item.text);
-
-}
-
-}
-
-
-return cleanText(
-candidates.join('\n')
+    }
 );
 
-}
 
+/* =========================================================
+   QUICK SERVICE BUTTON
+========================================================= */
 
-function isIncomingBotMessage(m){
+function sendQuickMessage(text){
 
-if(m?.direction==='incoming')
-return true;
+    chatWindow.classList.add("active");
 
-if(m?.direction==='outgoing')
-return false;
+    setTimeout(() => {
 
-if(m?.payload?.direction==='incoming')
-return true;
+        sendToBot(text);
 
-if(m?.payload?.direction==='outgoing')
-return false;
-
-
-return !!(
-m?.payload?.text ||
-m?.payload?.markdown ||
-m?.content?.text
-) &&
-(
-m?.type==='text' ||
-m?.type==='markdown' ||
-!m?.type
-);
+    },200);
 
 }
 
 
-function detectVoiceLanguage(text){
+/* =========================================================
+   SPEECH RECOGNITION
+========================================================= */
 
-if(/[\u0600-\u06ff]/.test(text))
-return 'ar-SA';
-
-if(/[\u0b80-\u0bff]/.test(text))
-return 'ta-IN';
-
-if(/[\u0900-\u097f]/.test(text))
-return 'hi-IN';
-
-if(/[\u0d00-\u0d7f]/.test(text))
-return 'ml-IN';
-
-if(/[\u0c00-\u0c7f]/.test(text))
-return 'te-IN';
-
-if(/[\u0c80-\u0cff]/.test(text))
-return 'kn-IN';
-
-if(/[\u0980-\u09ff]/.test(text))
-return 'bn-IN';
-
-return 'en-US';
-
-}
-
-
-function chooseVoice(lang){
-
-const voices=
-speechSynthesis.getVoices?
-speechSynthesis.getVoices():[];
-
-if(!voices.length)
-return null;
-
-const base=
-lang.split('-')[0].toLowerCase();
-
-
-const exact=
-voices.find(
-v=>v.lang.toLowerCase()===lang.toLowerCase()
-);
-
-if(exact)
-return exact;
-
-
-const same=
-voices.find(
-v=>v.lang.toLowerCase().startsWith(base+'-')
-);
-
-if(same)
-return same;
-
-
-return voices.find(
-v=>v.lang.toLowerCase().startsWith('en-')
-)||voices[0];
-
-}
-
-
-function speakReply(text){
-
-const t=cleanText(text);
+let recognition = null;
+let isListening = false;
 
 if(
-!t ||
-!('speechSynthesis' in window)
-)
-return;
+    "SpeechRecognition" in window ||
+    "webkitSpeechRecognition" in window
+){
+
+    const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+    recognition =
+        new SpeechRecognition();
+
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    /*
+      English/Indian English is used as the
+      browser recognition base.
+      Botpress receives the resulting text and
+      handles the patient's language.
+    */
+
+    recognition.lang = "en-IN";
 
 
-if(t===lastSpoken)
-return;
+    recognition.onstart = () => {
 
-lastSpoken=t;
+        isListening = true;
 
-speechSynthesis.cancel();
+        voiceButton.classList.add(
+            "listening"
+        );
+
+    };
 
 
-const lang=
-detectVoiceLanguage(t);
+    recognition.onend = () => {
+
+        isListening = false;
+
+        voiceButton.classList.remove(
+            "listening"
+        );
+
+    };
 
 
-const u=
-new SpeechSynthesisUtterance(
-t.slice(0,1500)
+    recognition.onerror = () => {
+
+        isListening = false;
+
+        voiceButton.classList.remove(
+            "listening"
+        );
+
+    };
+
+
+    recognition.onresult = (event) => {
+
+        const transcript =
+            event.results[
+                event.results.length - 1
+            ][0].transcript;
+
+        input.value = transcript;
+
+        sendToBot(transcript);
+
+    };
+
+}
+
+
+voiceButton.addEventListener(
+    "click",
+    () => {
+
+        if(!recognition){
+
+            alert(
+                "Voice input is not supported by this browser."
+            );
+
+            return;
+        }
+
+
+        if(isListening){
+
+            recognition.stop();
+
+        }else{
+
+            recognition.start();
+
+        }
+
+    }
 );
 
 
-u.lang=lang;
-u.rate=.90;
-u.pitch=1;
-u.volume=1;
+/* =========================================================
+   LANGUAGE DETECTION FOR VOICE RESPONSE
+========================================================= */
+
+function detectLanguage(text){
+
+    if(!text){
+        return "en-US";
+    }
 
 
-const voice=
-chooseVoice(lang);
+    /*
+      Arabic
+    */
+
+    if(/[\u0600-\u06FF]/.test(text)){
+        return "ar-SA";
+    }
 
 
-if(voice)
-u.voice=voice;
+    /*
+      Tamil
+    */
+
+    if(/[\u0B80-\u0BFF]/.test(text)){
+        return "ta-IN";
+    }
 
 
-u.onstart=()=>{
+    /*
+      Hindi
+    */
 
-voiceStatus.textContent=
-'🔊 Gama AI is speaking…';
-
-};
-
-
-u.onend=()=>{
-
-voiceStatus.textContent=
-'Gama AI replied. Voice playback complete.';
-
-};
+    if(/[\u0900-\u097F]/.test(text)){
+        return "hi-IN";
+    }
 
 
-u.onerror=()=>{
+    /*
+      Malayalam
+    */
 
-voiceStatus.textContent=
-'Text reply received. Voice playback is unavailable in this browser.';
+    if(/[\u0D00-\u0D7F]/.test(text)){
+        return "ml-IN";
+    }
 
-};
+
+    /*
+      Telugu
+    */
+
+    if(/[\u0C00-\u0C7F]/.test(text)){
+        return "te-IN";
+    }
 
 
-speechSynthesis.speak(u);
+    /*
+      Kannada
+    */
+
+    if(/[\u0C80-\u0CFF]/.test(text)){
+        return "kn-IN";
+    }
+
+
+    return "en-IN";
 
 }
 
 
-if('speechSynthesis' in window){
+/* =========================================================
+   TEXT TO SPEECH
+========================================================= */
 
-speechSynthesis.getVoices();
+function speakResponse(text){
 
-speechSynthesis.onvoiceschanged=
-()=>speechSynthesis.getVoices();
+    if(
+        !("speechSynthesis" in window)
+    ){
+        return;
+    }
+
+
+    if(!text){
+        return;
+    }
+
+
+    window.speechSynthesis.cancel();
+
+
+    const utterance =
+        new SpeechSynthesisUtterance(text);
+
+
+    const language =
+        detectLanguage(text);
+
+
+    utterance.lang = language;
+
+    utterance.rate = .92;
+    utterance.pitch = 1;
+    utterance.volume = 1;
+
+
+    /*
+      Try to select the matching installed
+      browser voice.
+    */
+
+    const voices =
+        window.speechSynthesis.getVoices();
+
+
+    const voice =
+        voices.find(
+            v =>
+                v.lang &&
+                v.lang
+                    .toLowerCase()
+                    .startsWith(
+                        language
+                            .split("-")[0]
+                            .toLowerCase()
+                    )
+        );
+
+
+    if(voice){
+
+        utterance.voice = voice;
+
+    }
+
+
+    window.speechSynthesis.speak(
+        utterance
+    );
 
 }
 
 
-function connectBotpress(){
+/* =========================================================
+   STOP SPEECH WHEN CHAT CLOSES
+========================================================= */
 
-if(!window.botpress?.on){
+closeChat.addEventListener(
+    "click",
+    () => {
 
-setTimeout(
-connectBotpress,
-300
+        if(
+            "speechSynthesis" in window
+        ){
+
+            window.speechSynthesis.cancel();
+
+        }
+
+    }
 );
 
-return;
+
+/* =========================================================
+   EXTRA BOTPRESS UI PROTECTION
+========================================================= */
+
+function hideBotpressElements(){
+
+    const selectors = [
+
+        ".bpFab",
+        ".bpWebchat",
+        "#bp-web-widget-container",
+        "[id*='bp-web-widget']",
+        "[class*='bpWebchat']",
+        "[class*='bpFab']",
+        "bp-webchat",
+        "bp-fab",
+        "iframe[src*='botpress']"
+
+    ];
+
+
+    document
+        .querySelectorAll(
+            selectors.join(",")
+        )
+        .forEach(element => {
+
+            /*
+              Do not touch our Gama custom chat.
+            */
+
+            if(
+                !element.closest("#chatWindow")
+            ){
+
+                element.style.setProperty(
+                    "visibility",
+                    "hidden",
+                    "important"
+                );
+
+                element.style.setProperty(
+                    "opacity",
+                    "0",
+                    "important"
+                );
+
+                element.style.setProperty(
+                    "pointer-events",
+                    "none",
+                    "important"
+                );
+
+            }
+
+        });
 
 }
 
 
-if(botpressReady)
-return;
+/*
+  Botpress can inject its elements after
+  the page loads, so watch the DOM.
+*/
 
-botpressReady=true;
+const botpressObserver =
+    new MutationObserver(
+        () => {
+
+            hideBotpressElements();
+
+        }
+    );
 
 
-window.botpress.on(
-'webchat:ready',
-()=>{
-
-voiceStatus.textContent=
-'Gama AI is ready. You can type or speak.';
-
-});
-
-
-window.botpress.on(
-'message',
-m=>{
-
-if(!isIncomingBotMessage(m))
-return;
-
-const text=
-extractMessageText(m);
-
-if(!text)
-return;
-
-typing.style.display='none';
-
-addMessage(
-text,
-'bot',
-true
+botpressObserver.observe(
+    document.documentElement,
+    {
+        childList:true,
+        subtree:true
+    }
 );
 
-});
+
+hideBotpressElements();
 
 
-window.botpress.on(
-'error',
-()=>{
+/* =========================================================
+   PREVENT CHAT FROM CLOSING WHEN CLICKING INSIDE
+========================================================= */
 
-typing.style.display='none';
+chatWindow.addEventListener(
+    "click",
+    event => {
 
-voiceStatus.textContent=
-'Gama AI connection needs attention.';
+        event.stopPropagation();
 
-});
-
-}
+    }
+);
 
 
-connectBotpress();
+/* =========================================================
+   INITIAL FOCUS
+========================================================= */
+
+window.addEventListener(
+    "load",
+    () => {
+
+        registerBotpressEvents();
+
+        hideBotpressElements();
+
+    }
+);
 
 </script>
 
