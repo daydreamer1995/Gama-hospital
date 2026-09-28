@@ -1,450 +1,794 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Gama Hospital | AI Healthcare Concierge</title>
+<meta charset="UTF-8">
 
-  <!-- ================= BOTpress ================= -->
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-  <script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js"></script>
-
-  <script
-    src="https://files.bpcontent.cloud/2026/09/28/05/20260928052853-VL0MMBEJ.js"
-    defer>
-  </script>
+<title>Gama Hospital | AI Healthcare Concierge</title>
 
 
-  <style>
+<!-- =====================================================
+     BOTPRESS AI
+     ===================================================== -->
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js"></script>
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #eef7fc;
-      color: #12365a;
-    }
+<script
+src="https://files.bpcontent.cloud/2026/09/28/05/20260928052853-VL0MMBEJ.js"
+defer>
+</script>
 
 
-    /* ================= HEADER ================= */
+<style>
 
-    .header {
-      height: 98px;
-      background: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 4%;
-      box-shadow: 0 2px 12px rgba(0,0,0,.08);
-      position: relative;
-      z-index: 10;
-    }
+/* =====================================================
+   GLOBAL
+   ===================================================== */
 
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    .logo {
-      width: 70px;
-      height: 70px;
-      object-fit: contain;
-    }
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
 
-    .hospital-name {
-      font-size: 30px;
-      font-weight: 800;
-      color: #ed202b;
-    }
+body {
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
-    .hospital-name span {
-      color: #1269b5;
-    }
+    background: #edf7fc;
 
-    .tagline {
-      color: #64748b;
-      font-size: 15px;
-      margin-top: 3px;
-    }
+    color: #12365a;
+}
 
 
-    /* ================= HEADER INFO ================= */
+/* =====================================================
+   HEADER
+   ===================================================== */
 
-    .header-info {
-      display: flex;
-      align-items: center;
-      gap: 25px;
-    }
+.header {
 
-    .info {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      border-right: 1px solid #d6dee8;
-      padding-right: 22px;
-    }
+    height: 96px;
 
-    .info-icon {
-      font-size: 27px;
-    }
+    width: 100%;
 
-    .info-title {
-      font-weight: 700;
-      font-size: 14px;
-    }
+    background: #ffffff;
 
-    .info-sub {
-      color: #64748b;
-      font-size: 12px;
-    }
+    display: flex;
 
-    .emergency {
-      background: #ed202b;
-      color: white;
-      padding: 13px 22px;
-      border-radius: 14px;
-      text-align: center;
-      font-weight: 700;
-    }
+    align-items: center;
 
-    .emergency small {
-      display: block;
-      margin-top: 4px;
-    }
+    justify-content: space-between;
+
+    padding: 10px 3.5%;
+
+    box-shadow:
+        0 2px 12px rgba(0,0,0,.08);
+
+    position: relative;
+
+    z-index: 20;
+}
 
 
-    /* ================= MAIN ================= */
+/* LOGO */
 
-    .main {
-      display: grid;
-      grid-template-columns: 60% 40%;
-      min-height: calc(100vh - 98px);
-    }
+.logo-area {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.logo {
+
+    width: 78px;
+
+    height: 72px;
+
+    object-fit: contain;
+}
 
 
-    /* ================= LEFT ================= */
+/* BRAND */
 
-    .left {
-      min-height: calc(100vh - 98px);
+.brand-name {
 
-      background:
+    font-size: 30px;
+
+    font-weight: 800;
+
+    color: #ed202b;
+
+    line-height: 1;
+}
+
+.brand-name span {
+
+    color: #1269b5;
+}
+
+.tagline {
+
+    color: #647789;
+
+    font-size: 15px;
+
+    margin-top: 5px;
+}
+
+
+/* =====================================================
+   HEADER DETAILS
+   ===================================================== */
+
+.header-details {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+.header-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding-right: 20px;
+
+    border-right:
+        1px solid #d6dee7;
+}
+
+
+.header-icon {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    background: #eef7ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 20px;
+}
+
+
+.header-title {
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #173b60;
+}
+
+
+.header-subtitle {
+
+    font-size: 12px;
+
+    color: #6c7d8f;
+
+    margin-top: 2px;
+}
+
+
+/* EMERGENCY */
+
+.emergency {
+
+    background: #ed202b;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 14px;
+
+    padding: 12px 20px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 16px rgba(237,32,43,.20);
+}
+
+.emergency small {
+
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+.main {
+
+    min-height:
+        calc(100vh - 96px);
+
+    display: grid;
+
+    grid-template-columns:
+        60% 40%;
+}
+
+
+/* =====================================================
+   LEFT HOSPITAL SECTION
+   ===================================================== */
+
+.hospital {
+
+    min-height:
+        calc(100vh - 96px);
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 48px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    background-image:
+
         linear-gradient(
-          rgba(0,42,77,.38),
-          rgba(0,42,77,.72)
+            180deg,
+            rgba(0,40,70,.12),
+            rgba(0,40,70,.80)
         ),
-        url("assets/gama-hospital.jpg")
-        center / cover no-repeat;
 
-      padding: 55px;
+        url("assets/gama-hospital.jpg");
 
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+    background-position:
+        center center;
+
+    background-size:
+        cover;
+
+    background-repeat:
+        no-repeat;
+}
+
+
+/* =====================================================
+   HERO CONTENT
+   ===================================================== */
+
+.hero {
+
+    position: relative;
+
+    z-index: 2;
+
+    color: white;
+
+    max-width: 750px;
+}
+
+
+.welcome {
+
+    font-size: 33px;
+
+    font-weight: 500;
+
+    margin-bottom: 5px;
+}
+
+
+.hero-title {
+
+    font-size: 55px;
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    letter-spacing: -1px;
+}
+
+
+.hero-title span {
+
+    color: #20a9e4;
+}
+
+
+.hero-subtitle {
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+    margin-top: 13px;
+}
+
+
+.hero-description {
+
+    font-size: 18px;
+
+    line-height: 1.5;
+
+    margin-top: 10px;
+}
+
+
+/* =====================================================
+   SERVICE CARDS
+   ===================================================== */
+
+.services {
+
+    position: relative;
+
+    z-index: 5;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin-top: 24px;
+}
+
+
+.service {
+
+    min-height: 112px;
+
+    background:
+        rgba(255,255,255,.97);
+
+    border-radius: 14px;
+
+    padding: 17px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    cursor: pointer;
+
+    transition:
+        .2s ease;
+
+    box-shadow:
+        0 7px 20px rgba(0,0,0,.13);
+}
+
+
+.service:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 11px 26px rgba(0,0,0,.18);
+}
+
+
+.service-icon {
+
+    width: 53px;
+
+    height: 53px;
+
+    flex-shrink: 0;
+
+    border-radius: 12px;
+
+    background: #e8f5ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 26px;
+}
+
+
+.service-content {
+
+    min-width: 0;
+}
+
+
+.service-title {
+
+    color: #14395e;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    line-height: 1.2;
+}
+
+
+.service-description {
+
+    color: #65798c;
+
+    font-size: 12px;
+
+    line-height: 1.35;
+
+    margin-top: 5px;
+}
+
+
+.arrow {
+
+    margin-left: auto;
+
+    color: #1475c5;
+
+    font-size: 24px;
+}
+
+
+/* =====================================================
+   BOTTOM FEATURE BAR
+   ===================================================== */
+
+.features {
+
+    position: relative;
+
+    z-index: 5;
+
+    margin-top: 27px;
+
+    background:
+        rgba(5,48,81,.92);
+
+    border-radius: 50px;
+
+    padding: 17px 20px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap: 12px;
+}
+
+
+.feature {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color: white;
+
+    font-size: 13px;
+
+    line-height: 1.25;
+}
+
+
+.feature-icon {
+
+    width: 43px;
+
+    height: 43px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.15);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 19px;
+}
+
+
+/* =====================================================
+   RIGHT AI SECTION
+   ===================================================== */
+
+.ai-section {
+
+    padding:
+        7px
+        15px
+        15px
+        0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #edf8ff,
+            #ffffff
+        );
+
+    min-width: 0;
+}
+
+
+/* =====================================================
+   BOTPRESS CONTAINER
+   ===================================================== */
+
+#gama-ai {
+
+    width: 100%;
+
+    height:
+        calc(100vh - 108px);
+
+    min-height: 700px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 23px;
+
+    background: white;
+
+    box-shadow:
+        0 8px 35px rgba(0,0,0,.16);
+}
+
+
+/*
+   Botpress Embedded Webchat
+*/
+
+#gama-ai .bpWebchat {
+
+    position: absolute !important;
+
+    top: 0 !important;
+
+    left: 0 !important;
+
+    right: 0 !important;
+
+    bottom: 0 !important;
+
+    width: 100% !important;
+
+    height: 100% !important;
+
+    max-height: 100% !important;
+
+    border-radius: 23px !important;
+}
+
+
+/* Hide floating button */
+
+#gama-ai .bpFab,
+#gama-ai .bpFabWrapper {
+
+    display: none !important;
+}
+
+
+/* =====================================================
+   MOBILE / TABLET
+   ===================================================== */
+
+@media (max-width: 1200px) {
+
+    .header-details {
+
+        gap: 10px;
     }
 
+    .header-item {
 
-    .welcome {
-      color: white;
-      font-size: 34px;
-      margin-bottom: 5px;
+        padding-right: 10px;
     }
 
     .hero-title {
-      color: white;
-      font-size: 54px;
-      font-weight: 900;
-      line-height: 1;
-    }
 
-    .hero-title span {
-      color: #19a9e4;
+        font-size: 45px;
     }
 
     .hero-subtitle {
-      color: white;
-      font-size: 29px;
-      font-weight: 700;
-      margin-top: 14px;
+
+        font-size: 24px;
+    }
+}
+
+
+@media (max-width: 1000px) {
+
+    .header {
+
+        height: auto;
+
+        padding: 12px 18px;
     }
 
-    .hero-description {
-      color: white;
-      font-size: 18px;
-      line-height: 1.5;
-      margin-top: 10px;
-      max-width: 650px;
+    .header-details {
+
+        display: none;
     }
 
+    .main {
 
-    /* ================= SERVICES ================= */
-
-    .services {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 13px;
-      margin-top: 25px;
+        grid-template-columns:
+            1fr;
     }
 
-    .service {
-      background: rgba(255,255,255,.97);
-      border-radius: 14px;
-      min-height: 112px;
-      padding: 18px;
+    .hospital {
 
-      display: flex;
-      align-items: center;
-      gap: 13px;
+        min-height: auto;
 
-      cursor: pointer;
-
-      transition: .2s;
-
-      box-shadow:
-        0 5px 18px rgba(0,0,0,.12);
+        padding: 38px 20px;
     }
 
-    .service:hover {
-      transform: translateY(-3px);
+    .ai-section {
+
+        padding: 12px;
+
+        min-height: 700px;
     }
-
-    .service-icon {
-      width: 54px;
-      height: 54px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: #e9f6ff;
-      border-radius: 12px;
-
-      font-size: 27px;
-      flex-shrink: 0;
-    }
-
-    .service-title {
-      font-weight: 800;
-      font-size: 16px;
-    }
-
-    .service-text {
-      color: #64748b;
-      font-size: 12px;
-      margin-top: 5px;
-      line-height: 1.3;
-    }
-
-    .arrow {
-      margin-left: auto;
-      color: #1475c5;
-      font-size: 23px;
-    }
-
-
-    /* ================= FEATURES ================= */
-
-    .features {
-      margin-top: 28px;
-
-      background: rgba(7,48,79,.9);
-
-      border-radius: 50px;
-
-      padding: 18px 22px;
-
-      display: grid;
-      grid-template-columns: repeat(4,1fr);
-
-      gap: 15px;
-    }
-
-    .feature {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      color: white;
-      font-size: 13px;
-    }
-
-    .feature-icon {
-      width: 43px;
-      height: 43px;
-
-      border-radius: 50%;
-
-      background: rgba(255,255,255,.15);
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 20px;
-    }
-
-
-    /* ================= RIGHT ================= */
-
-    .right {
-      padding: 7px 15px 15px 0;
-
-      background:
-        linear-gradient(
-          135deg,
-          #eef8ff,
-          #ffffff
-        );
-
-      display: flex;
-    }
-
-
-    /* ================= BOT CONTAINER ================= */
 
     #gama-ai {
 
-      width: 100%;
-      height: calc(100vh - 108px);
-
-      min-height: 700px;
-
-      position: relative;
-
-      overflow: hidden;
-
-      border-radius: 23px;
-
-      background: white;
-
-      box-shadow:
-        0 8px 35px rgba(0,0,0,.16);
-    }
-
-
-    /*
-      Botpress embedded Webchat
-    */
-
-    #gama-ai .bpWebchat {
-
-      position: absolute !important;
-
-      inset: 0 !important;
-
-      width: 100% !important;
-
-      height: 100% !important;
-
-      max-height: 100% !important;
-
-      border-radius: 23px !important;
-    }
-
-
-    /*
-      Hide floating Botpress button
-      because chat is embedded directly.
-    */
-
-    .bpFab {
-      display: none !important;
-    }
-
-
-    /* ================= MOBILE ================= */
-
-    @media (max-width: 1000px) {
-
-      .header-info {
-        display: none;
-      }
-
-      .main {
-        grid-template-columns: 1fr;
-      }
-
-      .left {
-        min-height: auto;
-        padding: 35px 20px;
-      }
-
-      .right {
-        padding: 15px;
-        min-height: 700px;
-      }
-
-      #gama-ai {
         height: 700px;
-      }
 
-      .services {
-        grid-template-columns: repeat(2,1fr);
-      }
+        min-height: 700px;
     }
 
+    .services {
 
-    @media (max-width: 600px) {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+}
 
-      .header {
-        height: 75px;
-        padding: 8px 15px;
-      }
 
-      .logo {
-        width: 50px;
-        height: 50px;
-      }
+@media (max-width: 600px) {
 
-      .hospital-name {
-        font-size: 20px;
-      }
+    .header {
 
-      .tagline {
-        font-size: 10px;
-      }
+        min-height: 74px;
+    }
 
-      .welcome {
-        font-size: 25px;
-      }
+    .logo {
 
-      .hero-title {
-        font-size: 38px;
-      }
+        width: 55px;
 
-      .hero-subtitle {
+        height: 52px;
+    }
+
+    .brand-name {
+
         font-size: 21px;
-      }
-
-      .hero-description {
-        font-size: 15px;
-      }
-
-      .services {
-        grid-template-columns: 1fr;
-      }
-
-      .features {
-        grid-template-columns: 1fr 1fr;
-        border-radius: 20px;
-      }
-
-      .right {
-        padding: 10px;
-      }
-
-      #gama-ai {
-        min-height: 650px;
-        height: 650px;
-      }
     }
 
-  </style>
+    .tagline {
+
+        font-size: 10px;
+    }
+
+    .hospital {
+
+        padding:
+            30px 15px;
+    }
+
+    .welcome {
+
+        font-size: 25px;
+    }
+
+    .hero-title {
+
+        font-size: 37px;
+    }
+
+    .hero-subtitle {
+
+        font-size: 20px;
+    }
+
+    .hero-description {
+
+        font-size: 15px;
+    }
+
+    .services {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .features {
+
+        grid-template-columns:
+            1fr 1fr;
+
+        border-radius: 20px;
+
+        padding: 15px;
+    }
+
+    .feature {
+
+        font-size: 12px;
+    }
+
+    .ai-section {
+
+        padding: 9px;
+    }
+
+    #gama-ai {
+
+        height: 650px;
+
+        min-height: 650px;
+
+        border-radius: 18px;
+    }
+}
+
+</style>
 
 </head>
 
@@ -452,442 +796,547 @@
 <body>
 
 
-  <!-- ================= HEADER ================= -->
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
 
-  <header class="header">
+<header class="header">
+
 
     <div class="logo-area">
 
-      <img
-        src="assets/gama-logo.png"
-        class="logo"
-        alt="Gama Hospital Logo"
-      >
+        <img
+            src="assets/gama-logo.png"
+            class="logo"
+            alt="Gama Hospital Logo"
+        >
 
-      <div>
+        <div>
 
-        <div class="hospital-name">
-          GAMA <span>HOSPITAL</span>
+            <div class="brand-name">
+                GAMA <span>HOSPITAL</span>
+            </div>
+
+            <div class="tagline">
+                Care Today · Healthier Tomorrow
+            </div>
+
         </div>
-
-        <div class="tagline">
-          Care Today · Healthier Tomorrow
-        </div>
-
-      </div>
 
     </div>
 
 
-    <div class="header-info">
+    <div class="header-details">
 
-      <div class="info">
 
-        <div class="info-icon">◷</div>
+        <div class="header-item">
 
-        <div>
-          <div class="info-title">24/7</div>
-          <div class="info-sub">Patient Support</div>
+            <div class="header-icon">
+                🕐
+            </div>
+
+            <div>
+
+                <div class="header-title">
+                    24/7
+                </div>
+
+                <div class="header-subtitle">
+                    Patient Support
+                </div>
+
+            </div>
+
         </div>
 
-      </div>
 
+        <div class="header-item">
 
-      <div class="info">
+            <div class="header-icon">
+                ☎
+            </div>
 
-        <div class="info-icon">☎</div>
+            <div>
 
-        <div>
-          <div class="info-title">
-            +966 13 123 4567
-          </div>
+                <div class="header-title">
+                    Patient Support
+                </div>
 
-          <div class="info-sub">
-            Call Us
-          </div>
+                <div class="header-subtitle">
+                    Contact Gama Hospital
+                </div>
+
+            </div>
+
         </div>
 
-      </div>
 
+        <div class="header-item">
 
-      <div class="info">
+            <div class="header-icon">
+                📍
+            </div>
 
-        <div class="info-icon">⌖</div>
+            <div>
 
-        <div>
-          <div class="info-title">
-            Dhahran, Saudi Arabia
-          </div>
+                <div class="header-title">
+                    Dhahran, Saudi Arabia
+                </div>
 
-          <div class="info-sub">
-            Our Location
-          </div>
+                <div class="header-subtitle">
+                    Our Location
+                </div>
+
+            </div>
+
         </div>
 
-      </div>
 
+        <button
+            class="emergency"
+            onclick="emergencyCall()"
+        >
 
-      <div class="emergency">
+            🚑 EMERGENCY
 
-        🚑 EMERGENCY
+            <small>
+                920033175
+            </small>
 
-        <small>
-          +966 13 123 9999
-        </small>
+        </button>
 
-      </div>
 
     </div>
 
-  </header>
+</header>
 
 
-  <!-- ================= MAIN ================= -->
+<!-- =====================================================
+     MAIN
+     ===================================================== -->
 
-  <main class="main">
-
-
-    <!-- ================= LEFT ================= -->
-
-    <section class="left">
+<main class="main">
 
 
-      <div>
+    <!-- =================================================
+         LEFT SIDE
+         ================================================= -->
 
-        <div class="welcome">
-          Welcome to
-        </div>
-
-        <div class="hero-title">
-          GAMA <span>HOSPITAL</span>
-        </div>
-
-        <div class="hero-subtitle">
-          AI Healthcare Concierge
-        </div>
-
-        <div class="hero-description">
-
-          Your 24/7 Digital Health Assistant
-          <br>
-
-          Get instant support for appointments,
-          doctors, departments, insurance,
-          location and more.
-
-        </div>
-
-      </div>
+    <section class="hospital">
 
 
-      <!-- SERVICES -->
-
-      <div class="services">
+        <div class="hero">
 
 
-        <div
-          class="service"
-          onclick="askAI('I want to book an appointment')"
-        >
-
-          <div class="service-icon">
-            📅
-          </div>
-
-          <div>
-
-            <div class="service-title">
-              Book Appointment
+            <div class="welcome">
+                Welcome to
             </div>
 
-            <div class="service-text">
-              Schedule with your preferred doctor
+
+            <div class="hero-title">
+                GAMA <span>HOSPITAL</span>
             </div>
 
-          </div>
 
-          <div class="arrow">
-            →
-          </div>
+            <div class="hero-subtitle">
+                AI Healthcare Concierge
+            </div>
+
+
+            <div class="hero-description">
+
+                <strong>
+                    Your 24/7 Digital Health Assistant
+                </strong>
+
+                <br>
+
+                Get instant support for appointments,
+                doctors, departments, insurance,
+                location and more.
+
+            </div>
 
         </div>
 
 
-        <div
-          class="service"
-          onclick="askAI('I want to find a doctor')"
-        >
+        <!-- =============================================
+             SERVICE BUTTONS
+             ============================================= -->
 
-          <div class="service-icon">
-            👨‍⚕️
-          </div>
+        <div class="services">
 
-          <div>
 
-            <div class="service-title">
-              Find a Doctor
+            <!-- BOOK APPOINTMENT -->
+
+            <div
+                class="service"
+                onclick="askGamaAI(
+                    'I want to book an appointment'
+                )"
+            >
+
+                <div class="service-icon">
+                    📅
+                </div>
+
+                <div class="service-content">
+
+                    <div class="service-title">
+                        Book Appointment
+                    </div>
+
+                    <div class="service-description">
+                        Schedule with your preferred doctor
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
             </div>
 
-            <div class="service-text">
-              Search by specialty
+
+            <!-- FIND DOCTOR -->
+
+            <div
+                class="service"
+                onclick="askGamaAI(
+                    'I want to find a doctor'
+                )"
+            >
+
+                <div class="service-icon">
+                    👨‍⚕️
+                </div>
+
+                <div class="service-content">
+
+                    <div class="service-title">
+                        Find a Doctor
+                    </div>
+
+                    <div class="service-description">
+                        Search by specialty
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
             </div>
 
-          </div>
 
-          <div class="arrow">
-            →
-          </div>
+            <!-- DEPARTMENTS -->
+
+            <div
+                class="service"
+                onclick="askGamaAI(
+                    'Show me the departments available at Gama Hospital'
+                )"
+            >
+
+                <div class="service-icon">
+                    🏥
+                </div>
+
+                <div class="service-content">
+
+                    <div class="service-title">
+                        Departments
+                    </div>
+
+                    <div class="service-description">
+                        Explore our medical services
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </div>
+
+
+            <!-- INSURANCE -->
+
+            <div
+                class="service"
+                onclick="askGamaAI(
+                    'I need insurance and billing information'
+                )"
+            >
+
+                <div class="service-icon">
+                    🛡️
+                </div>
+
+                <div class="service-content">
+
+                    <div class="service-title">
+                        Insurance & Billing
+                    </div>
+
+                    <div class="service-description">
+                        Get insurance and billing guidance
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </div>
+
+
+            <!-- LOCATION -->
+
+            <div
+                class="service"
+                onclick="askGamaAI(
+                    'Where is Gama Hospital located?'
+                )"
+            >
+
+                <div class="service-icon">
+                    📍
+                </div>
+
+                <div class="service-content">
+
+                    <div class="service-title">
+                        Hospital Location
+                    </div>
+
+                    <div class="service-description">
+                        Directions and visiting information
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </div>
+
+
+            <!-- EMERGENCY -->
+
+            <div
+                class="service"
+                onclick="askGamaAI(
+                    'I need emergency assistance'
+                )"
+            >
+
+                <div class="service-icon">
+                    🚨
+                </div>
+
+                <div class="service-content">
+
+                    <div class="service-title">
+                        Emergency Assistance
+                    </div>
+
+                    <div class="service-description">
+                        Immediate help and emergency information
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </div>
+
 
         </div>
 
 
-        <div
-          class="service"
-          onclick="askAI('Show me the departments available at Gama Hospital')"
-        >
+        <!-- =============================================
+             FEATURES
+             ============================================= -->
 
-          <div class="service-icon">
-            🏥
-          </div>
+        <div class="features">
 
-          <div>
 
-            <div class="service-title">
-              Departments
+            <div class="feature">
+
+                <div class="feature-icon">
+                    👥
+                </div>
+
+                <div>
+                    World-class<br>
+                    Medical Care
+                </div>
+
             </div>
 
-            <div class="service-text">
-              Explore our medical services
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    👨‍⚕️
+                </div>
+
+                <div>
+                    Experienced<br>
+                    Specialists
+                </div>
+
             </div>
 
-          </div>
 
-          <div class="arrow">
-            →
-          </div>
+            <div class="feature">
 
-        </div>
+                <div class="feature-icon">
+                    ⚙️
+                </div>
 
+                <div>
+                    Advanced<br>
+                    Technology
+                </div>
 
-        <div
-          class="service"
-          onclick="askAI('I need insurance and billing information')"
-        >
-
-          <div class="service-icon">
-            🛡️
-          </div>
-
-          <div>
-
-            <div class="service-title">
-              Insurance & Billing
             </div>
 
-            <div class="service-text">
-              Get insurance and billing guidance
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    ❤️
+                </div>
+
+                <div>
+                    Patient-Centric<br>
+                    Approach
+                </div>
+
             </div>
 
-          </div>
-
-          <div class="arrow">
-            →
-          </div>
 
         </div>
-
-
-        <div
-          class="service"
-          onclick="askAI('Where is Gama Hospital located?')"
-        >
-
-          <div class="service-icon">
-            📍
-          </div>
-
-          <div>
-
-            <div class="service-title">
-              Hospital Location
-            </div>
-
-            <div class="service-text">
-              Directions and visiting information
-            </div>
-
-          </div>
-
-          <div class="arrow">
-            →
-          </div>
-
-        </div>
-
-
-        <div
-          class="service"
-          onclick="askAI('I need emergency assistance')"
-        >
-
-          <div class="service-icon">
-            🚨
-          </div>
-
-          <div>
-
-            <div class="service-title">
-              Emergency Assistance
-            </div>
-
-            <div class="service-text">
-              Immediate help and emergency information
-            </div>
-
-          </div>
-
-          <div class="arrow">
-            →
-          </div>
-
-        </div>
-
-
-      </div>
-
-
-      <!-- FEATURES -->
-
-      <div class="features">
-
-        <div class="feature">
-          <div class="feature-icon">👥</div>
-          <div>
-            World-class<br>
-            Medical Care
-          </div>
-        </div>
-
-
-        <div class="feature">
-          <div class="feature-icon">♙</div>
-          <div>
-            Experienced<br>
-            Specialists
-          </div>
-        </div>
-
-
-        <div class="feature">
-          <div class="feature-icon">⚙</div>
-          <div>
-            Advanced<br>
-            Technology
-          </div>
-        </div>
-
-
-        <div class="feature">
-          <div class="feature-icon">♡</div>
-          <div>
-            Patient-Centric<br>
-            Approach
-          </div>
-        </div>
-
-      </div>
 
 
     </section>
 
 
-    <!-- ================= AI ================= -->
+    <!-- =================================================
+         RIGHT SIDE - GAMA AI
+         ================================================= -->
 
-    <section class="right">
+    <section class="ai-section">
 
-      <div id="gama-ai"></div>
+        <!-- IMPORTANT:
+             Botpress Deploy Settings-ல்
+             Chat Interface = Embedded
+             Element ID = gama-ai
+        -->
+
+        <div id="gama-ai"></div>
 
     </section>
 
 
-  </main>
+</main>
 
 
-  <!-- ================= BOTPRESS CONTROL ================= -->
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
 
-  <script>
-
-    /*
-      Wait until Botpress is ready.
-    */
-
-    window.botpress?.on(
-      'webchat:initialized',
-      () => {
-
-        console.log(
-          'Gama AI Concierge initialized'
-        );
-
-      }
-    );
+<script>
 
 
-    /*
-      Send quick-action messages
-      directly to the real Botpress AI.
-    */
+/* =====================================================
+   EMERGENCY
+   ===================================================== */
 
-    function askAI(message) {
+function emergencyCall() {
 
-      if (!window.botpress) {
+    window.location.href =
+        "tel:920033175";
 
-        console.log(
-          'Botpress is still loading...'
+}
+
+
+/* =====================================================
+   QUICK SERVICE → BOTPRESS AI
+   ===================================================== */
+
+function askGamaAI(message) {
+
+
+    if (!window.botpress) {
+
+        alert(
+            "Gama AI is loading. Please wait a moment."
         );
 
         return;
-      }
+    }
 
 
-      /*
-        Open the AI first.
-      */
+    /* Open AI */
 
-      window.botpress.open();
+    if (
+        typeof window.botpress.open ===
+        "function"
+    ) {
 
-
-      /*
-        Wait until Webchat is ready,
-        then send the selected request.
-      */
-
-      window.botpress.on(
-        'webchat:ready',
-        async () => {
-
-          try {
-
-            await window.botpress.sendMessage(
-              message
-            );
-
-          } catch (error) {
-
-            console.error(
-              'Unable to send message:',
-              error
-            );
-
-          }
-
-        }
-      );
+        window.botpress.open();
 
     }
 
-  </script>
+
+    /* Send message */
+
+    if (
+        typeof window.botpress.sendMessage ===
+        "function"
+    ) {
+
+        window.botpress.sendMessage(
+            message
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   BOTPRESS STATUS
+   ===================================================== */
+
+if (window.botpress) {
+
+    window.botpress.on(
+        "webchat:initialized",
+        function() {
+
+            console.log(
+                "Gama Hospital AI Concierge is ready."
+            );
+
+        }
+    );
+
+}
+
+</script>
 
 
 </body>
+
 </html>
