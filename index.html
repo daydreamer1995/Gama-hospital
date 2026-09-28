@@ -1,777 +1,893 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Gama Hospital | Medical AI Concierge</title>
+  <title>Gama Hospital | AI Healthcare Concierge</title>
 
-<meta name="description"
-content="Gama Hospital Medical AI Concierge - multilingual hospital information and appointment assistance.">
+  <!-- ================= BOTpress ================= -->
 
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+  <script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js"></script>
 
-:root{
-    --primary:#0879d1;
-    --primary-dark:#075da0;
-    --secondary:#00a8a8;
-    --dark:#071525;
-    --text:#142235;
-    --muted:#718096;
-    --white:#ffffff;
-    --light:#f5f9fc;
-    --border:#e3ebf2;
-    --success:#16a34a;
-    --danger:#dc2626;
-    --shadow:0 20px 60px rgba(0,45,85,.16);
-}
+  <script
+    src="https://files.bpcontent.cloud/2026/09/28/05/20260928052853-VL0MMBEJ.js"
+    defer>
+  </script>
 
-body{
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        sans-serif;
-    background:
-        radial-gradient(circle at top right,#dff5ff 0%,transparent 35%),
-        linear-gradient(135deg,#f7fbff,#edf7fb);
-    color:var(--text);
-    min-height:100vh;
-}
 
-/* =========================
-   HERO
-========================= */
+  <style>
 
-.hero{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:40px 20px;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-.hero-card{
-    width:min(1100px,100%);
-    min-height:650px;
-    border-radius:32px;
-    background:
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #eef7fc;
+      color: #12365a;
+    }
+
+
+    /* ================= HEADER ================= */
+
+    .header {
+      height: 98px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 4%;
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+      position: relative;
+      z-index: 10;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+    }
+
+    .hospital-name {
+      font-size: 30px;
+      font-weight: 800;
+      color: #ed202b;
+    }
+
+    .hospital-name span {
+      color: #1269b5;
+    }
+
+    .tagline {
+      color: #64748b;
+      font-size: 15px;
+      margin-top: 3px;
+    }
+
+
+    /* ================= HEADER INFO ================= */
+
+    .header-info {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .info {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      border-right: 1px solid #d6dee8;
+      padding-right: 22px;
+    }
+
+    .info-icon {
+      font-size: 27px;
+    }
+
+    .info-title {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .info-sub {
+      color: #64748b;
+      font-size: 12px;
+    }
+
+    .emergency {
+      background: #ed202b;
+      color: white;
+      padding: 13px 22px;
+      border-radius: 14px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .emergency small {
+      display: block;
+      margin-top: 4px;
+    }
+
+
+    /* ================= MAIN ================= */
+
+    .main {
+      display: grid;
+      grid-template-columns: 60% 40%;
+      min-height: calc(100vh - 98px);
+    }
+
+
+    /* ================= LEFT ================= */
+
+    .left {
+      min-height: calc(100vh - 98px);
+
+      background:
         linear-gradient(
-            135deg,
-            rgba(255,255,255,.96),
-            rgba(241,250,255,.90)
-        );
-    border:1px solid rgba(255,255,255,.8);
-    box-shadow:var(--shadow);
-    position:relative;
-    overflow:hidden;
-    display:flex;
-    align-items:center;
-}
+          rgba(0,42,77,.38),
+          rgba(0,42,77,.72)
+        ),
+        url("assets/gama-hospital.jpg")
+        center / cover no-repeat;
 
-.hero-content{
-    width:60%;
-    padding:70px;
-    position:relative;
-    z-index:2;
-}
+      padding: 55px;
 
-.badge{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    background:#e5f5ff;
-    color:var(--primary-dark);
-    border:1px solid #c9eaff;
-    border-radius:50px;
-    padding:9px 15px;
-    font-size:13px;
-    font-weight:700;
-    margin-bottom:22px;
-}
-
-.badge-dot{
-    width:8px;
-    height:8px;
-    border-radius:50%;
-    background:#19b56b;
-    box-shadow:0 0 0 5px rgba(25,181,107,.12);
-}
-
-.hero h1{
-    font-size:clamp(42px,6vw,76px);
-    line-height:1;
-    letter-spacing:-3px;
-    color:#08213c;
-    margin-bottom:24px;
-}
-
-.hero h1 span{
-    color:var(--primary);
-}
-
-.hero p{
-    max-width:620px;
-    font-size:18px;
-    line-height:1.8;
-    color:#617287;
-}
-
-.hero-info{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    margin-top:32px;
-}
-
-.info-chip{
-    background:white;
-    border:1px solid var(--border);
-    padding:12px 16px;
-    border-radius:14px;
-    font-size:13px;
-    color:#44566c;
-    box-shadow:0 6px 20px rgba(0,50,90,.05);
-}
-
-.hero-art{
-    position:absolute;
-    right:-100px;
-    top:50%;
-    transform:translateY(-50%);
-    width:52%;
-    height:85%;
-    background:
-        radial-gradient(circle at 40% 40%,#c7f2ff,transparent 40%),
-        radial-gradient(circle at 70% 70%,#d8f7ed,transparent 40%);
-    border-radius:50%;
-}
-
-.cross{
-    position:absolute;
-    width:180px;
-    height:180px;
-    border-radius:45px;
-    background:rgba(255,255,255,.72);
-    box-shadow:0 30px 70px rgba(0,100,160,.12);
-    right:18%;
-    top:28%;
-    transform:rotate(15deg);
-}
-
-.cross::before,
-.cross::after{
-    content:"";
-    position:absolute;
-    background:var(--primary);
-    border-radius:15px;
-}
-
-.cross::before{
-    width:55px;
-    height:130px;
-    left:62px;
-    top:25px;
-}
-
-.cross::after{
-    width:130px;
-    height:55px;
-    left:25px;
-    top:62px;
-}
-
-/* =========================
-   FLOATING AI BUTTON
-========================= */
-
-.ai-button{
-    position:fixed;
-    right:28px;
-    bottom:28px;
-    width:70px;
-    height:70px;
-    border-radius:50%;
-    border:none;
-    cursor:pointer;
-    z-index:1000;
-    background:
-        linear-gradient(135deg,var(--primary),#00a8d8);
-    box-shadow:
-        0 14px 35px rgba(0,112,190,.35),
-        0 0 0 8px rgba(8,121,209,.08);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:.25s ease;
-}
-
-.ai-button:hover{
-    transform:translateY(-4px) scale(1.04);
-}
-
-.ai-face{
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    background:white;
-    position:relative;
-}
-
-.ai-face::before{
-    content:"";
-    position:absolute;
-    width:7px;
-    height:7px;
-    background:var(--primary);
-    border-radius:50%;
-    left:11px;
-    top:13px;
-    box-shadow:14px 0 0 var(--primary);
-}
-
-.ai-face::after{
-    content:"";
-    position:absolute;
-    width:20px;
-    height:8px;
-    border-bottom:3px solid var(--primary);
-    border-radius:50%;
-    left:11px;
-    top:21px;
-}
-
-/* =========================
-   CHAT WINDOW
-========================= */
-
-.chat-window{
-    position:fixed;
-    right:28px;
-    bottom:112px;
-    width:min(430px,calc(100vw - 28px));
-    height:min(720px,calc(100vh - 135px));
-    min-height:540px;
-    background:white;
-    border-radius:28px;
-    overflow:hidden;
-    box-shadow:0 30px 90px rgba(0,30,70,.25);
-    border:1px solid rgba(220,230,240,.9);
-    z-index:999;
-    display:none;
-    flex-direction:column;
-    animation:chatOpen .25s ease;
-}
-
-.chat-window.active{
-    display:flex;
-}
-
-@keyframes chatOpen{
-    from{
-        opacity:0;
-        transform:translateY(15px) scale(.98);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
-    to{
-        opacity:1;
-        transform:none;
+
+
+    .welcome {
+      color: white;
+      font-size: 34px;
+      margin-bottom: 5px;
     }
-}
 
-/* HEADER */
+    .hero-title {
+      color: white;
+      font-size: 54px;
+      font-weight: 900;
+      line-height: 1;
+    }
 
-.chat-header{
-    background:
-        linear-gradient(135deg,#086fca,#00a4b7);
-    color:white;
-    padding:17px 18px 15px;
-}
+    .hero-title span {
+      color: #19a9e4;
+    }
 
-.chat-header-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
+    .hero-subtitle {
+      color: white;
+      font-size: 29px;
+      font-weight: 700;
+      margin-top: 14px;
+    }
 
-.brand{
-    display:flex;
-    align-items:center;
-    gap:11px;
-}
+    .hero-description {
+      color: white;
+      font-size: 18px;
+      line-height: 1.5;
+      margin-top: 10px;
+      max-width: 650px;
+    }
 
-.brand-icon{
-    width:42px;
-    height:42px;
-    border-radius:13px;
-    background:white;
-    position:relative;
-}
 
-.brand-icon::before,
-.brand-icon::after{
-    content:"";
-    position:absolute;
-    background:var(--primary);
-    border-radius:3px;
-}
+    /* ================= SERVICES ================= */
 
-.brand-icon::before{
-    width:9px;
-    height:25px;
-    left:16px;
-    top:8px;
-}
+    .services {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 13px;
+      margin-top: 25px;
+    }
 
-.brand-icon::after{
-    width:25px;
-    height:9px;
-    left:8px;
-    top:16px;
-}
+    .service {
+      background: rgba(255,255,255,.97);
+      border-radius: 14px;
+      min-height: 112px;
+      padding: 18px;
 
-.brand-text strong{
-    display:block;
-    font-size:15px;
-}
+      display: flex;
+      align-items: center;
+      gap: 13px;
 
-.brand-text span{
-    display:flex;
-    align-items:center;
-    gap:5px;
-    font-size:11px;
-    opacity:.9;
-    margin-top:3px;
-}
+      cursor: pointer;
 
-.online{
-    width:6px;
-    height:6px;
-    background:#8cffbd;
-    border-radius:50%;
-}
+      transition: .2s;
 
-.close-chat{
-    border:none;
-    background:rgba(255,255,255,.15);
-    color:white;
-    width:34px;
-    height:34px;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:19px;
-}
+      box-shadow:
+        0 5px 18px rgba(0,0,0,.12);
+    }
 
-/* LANGUAGE BAR */
+    .service:hover {
+      transform: translateY(-3px);
+    }
 
-.language-bar{
-    display:flex;
-    gap:6px;
-    overflow-x:auto;
-    margin-top:13px;
-    scrollbar-width:none;
-}
+    .service-icon {
+      width: 54px;
+      height: 54px;
 
-.language-bar::-webkit-scrollbar{
-    display:none;
-}
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-.lang-btn{
-    flex:0 0 auto;
-    border:1px solid rgba(255,255,255,.28);
-    background:rgba(255,255,255,.10);
-    color:white;
-    padding:7px 10px;
-    border-radius:9px;
-    font-size:11px;
-    cursor:pointer;
-    transition:.2s;
-}
+      background: #e9f6ff;
+      border-radius: 12px;
 
-.lang-btn.active{
-    background:white;
-    color:var(--primary-dark);
-    font-weight:700;
-}
+      font-size: 27px;
+      flex-shrink: 0;
+    }
 
-/* MESSAGES */
+    .service-title {
+      font-weight: 800;
+      font-size: 16px;
+    }
 
-.messages{
-    flex:1;
-    overflow-y:auto;
-    padding:20px 15px 12px;
-    background:
+    .service-text {
+      color: #64748b;
+      font-size: 12px;
+      margin-top: 5px;
+      line-height: 1.3;
+    }
+
+    .arrow {
+      margin-left: auto;
+      color: #1475c5;
+      font-size: 23px;
+    }
+
+
+    /* ================= FEATURES ================= */
+
+    .features {
+      margin-top: 28px;
+
+      background: rgba(7,48,79,.9);
+
+      border-radius: 50px;
+
+      padding: 18px 22px;
+
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+
+      gap: 15px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      color: white;
+      font-size: 13px;
+    }
+
+    .feature-icon {
+      width: 43px;
+      height: 43px;
+
+      border-radius: 50%;
+
+      background: rgba(255,255,255,.15);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 20px;
+    }
+
+
+    /* ================= RIGHT ================= */
+
+    .right {
+      padding: 7px 15px 15px 0;
+
+      background:
         linear-gradient(
-            180deg,
-            #f7fbfe,
-            #ffffff
+          135deg,
+          #eef8ff,
+          #ffffff
         );
-    scroll-behavior:smooth;
-}
 
-.message-row{
-    display:flex;
-    margin-bottom:14px;
-}
-
-.message-row.user{
-    justify-content:flex-end;
-}
-
-.message{
-    max-width:86%;
-    padding:12px 14px;
-    border-radius:17px;
-    font-size:13px;
-    line-height:1.6;
-    white-space:pre-line;
-    word-break:break-word;
-}
-
-.message.bot{
-    background:white;
-    border:1px solid #e4edf4;
-    color:#27384c;
-    border-bottom-left-radius:5px;
-    box-shadow:0 4px 14px rgba(0,30,60,.04);
-}
-
-.message.user{
-    background:linear-gradient(135deg,#0879d1,#049eb7);
-    color:white;
-    border-bottom-right-radius:5px;
-}
-
-.message.emergency{
-    border:1px solid #fecaca;
-    background:#fff7f7;
-    color:#991b1b;
-}
-
-.message a{
-    color:var(--primary);
-    font-weight:700;
-    text-decoration:none;
-}
-
-.message.user a{
-    color:white;
-    text-decoration:underline;
-}
-
-/* TYPING */
-
-.typing{
-    display:none;
-    align-items:center;
-    gap:5px;
-    width:max-content;
-    background:white;
-    border:1px solid #e4edf4;
-    padding:10px 13px;
-    border-radius:15px;
-    margin-bottom:12px;
-}
-
-.typing.show{
-    display:flex;
-}
-
-.typing span{
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:#8ba0b5;
-    animation:typing 1s infinite;
-}
-
-.typing span:nth-child(2){
-    animation-delay:.15s;
-}
-
-.typing span:nth-child(3){
-    animation-delay:.3s;
-}
-
-@keyframes typing{
-    0%,60%,100%{
-        transform:translateY(0);
-    }
-    30%{
-        transform:translateY(-4px);
-    }
-}
-
-/* INPUT */
-
-.input-area{
-    border-top:1px solid var(--border);
-    padding:11px;
-    background:white;
-}
-
-.input-row{
-    display:flex;
-    gap:8px;
-    align-items:center;
-}
-
-.input-row input{
-    flex:1;
-    min-width:0;
-    border:1px solid #dce6ee;
-    background:#f8fbfd;
-    border-radius:14px;
-    padding:12px 13px;
-    outline:none;
-    font-size:13px;
-    color:#24364b;
-}
-
-.input-row input:focus{
-    border-color:#83c8ed;
-    box-shadow:0 0 0 3px rgba(8,121,209,.07);
-}
-
-.send-btn{
-    width:45px;
-    height:45px;
-    border:none;
-    border-radius:13px;
-    background:var(--primary);
-    color:white;
-    cursor:pointer;
-    font-size:18px;
-}
-
-.bottom-note{
-    text-align:center;
-    font-size:9px;
-    color:#98a7b5;
-    padding-top:7px;
-}
-
-/* RTL */
-
-.chat-window.rtl .message{
-    text-align:right;
-}
-
-.chat-window.rtl .input-row{
-    direction:rtl;
-}
-
-.chat-window.rtl .message-row.user{
-    justify-content:flex-start;
-}
-
-.chat-window.rtl .message-row.bot{
-    justify-content:flex-end;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:760px){
-
-    .hero{
-        padding:15px;
+      display: flex;
     }
 
-    .hero-card{
-        min-height:90vh;
-        align-items:flex-end;
+
+    /* ================= BOT CONTAINER ================= */
+
+    #gama-ai {
+
+      width: 100%;
+      height: calc(100vh - 108px);
+
+      min-height: 700px;
+
+      position: relative;
+
+      overflow: hidden;
+
+      border-radius: 23px;
+
+      background: white;
+
+      box-shadow:
+        0 8px 35px rgba(0,0,0,.16);
     }
 
-    .hero-content{
-        width:100%;
-        padding:38px 25px 55px;
+
+    /*
+      Botpress embedded Webchat
+    */
+
+    #gama-ai .bpWebchat {
+
+      position: absolute !important;
+
+      inset: 0 !important;
+
+      width: 100% !important;
+
+      height: 100% !important;
+
+      max-height: 100% !important;
+
+      border-radius: 23px !important;
     }
 
-    .hero h1{
-        font-size:48px;
-        letter-spacing:-2px;
+
+    /*
+      Hide floating Botpress button
+      because chat is embedded directly.
+    */
+
+    .bpFab {
+      display: none !important;
     }
 
-    .hero p{
-        font-size:15px;
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 1000px) {
+
+      .header-info {
+        display: none;
+      }
+
+      .main {
+        grid-template-columns: 1fr;
+      }
+
+      .left {
+        min-height: auto;
+        padding: 35px 20px;
+      }
+
+      .right {
+        padding: 15px;
+        min-height: 700px;
+      }
+
+      #gama-ai {
+        height: 700px;
+      }
+
+      .services {
+        grid-template-columns: repeat(2,1fr);
+      }
     }
 
-    .hero-art{
-        width:100%;
-        height:45%;
-        right:-35%;
-        top:5%;
-        transform:none;
+
+    @media (max-width: 600px) {
+
+      .header {
+        height: 75px;
+        padding: 8px 15px;
+      }
+
+      .logo {
+        width: 50px;
+        height: 50px;
+      }
+
+      .hospital-name {
+        font-size: 20px;
+      }
+
+      .tagline {
+        font-size: 10px;
+      }
+
+      .welcome {
+        font-size: 25px;
+      }
+
+      .hero-title {
+        font-size: 38px;
+      }
+
+      .hero-subtitle {
+        font-size: 21px;
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .services {
+        grid-template-columns: 1fr;
+      }
+
+      .features {
+        grid-template-columns: 1fr 1fr;
+        border-radius: 20px;
+      }
+
+      .right {
+        padding: 10px;
+      }
+
+      #gama-ai {
+        min-height: 650px;
+        height: 650px;
+      }
     }
 
-    .cross{
-        transform:scale(.65) rotate(15deg);
-        right:15%;
-        top:10%;
-    }
+  </style>
 
-    .ai-button{
-        right:18px;
-        bottom:18px;
-        width:62px;
-        height:62px;
-    }
-
-    .chat-window{
-        right:10px;
-        bottom:90px;
-        width:calc(100vw - 20px);
-        height:calc(100vh - 110px);
-        min-height:500px;
-        border-radius:24px;
-    }
-}
-</style>
 </head>
+
 
 <body>
 
-<!-- =========================
-     HOSPITAL LANDING PAGE
-========================= -->
 
-<main class="hero">
+  <!-- ================= HEADER ================= -->
 
-    <section class="hero-card">
+  <header class="header">
 
-        <div class="hero-content">
+    <div class="logo-area">
 
-            <div class="badge">
-                <span class="badge-dot"></span>
-                Gama Hospital Medical AI Concierge
-            </div>
+      <img
+        src="assets/gama-logo.png"
+        class="logo"
+        alt="Gama Hospital Logo"
+      >
 
-            <h1>
-                Healthcare<br>
-                <span>with intelligence.</span>
-            </h1>
+      <div>
 
-            <p>
-                A professional multilingual AI concierge designed to
-                assist Gama Hospital patients with hospital information,
-                doctors, departments, appointments, insurance and
-                emergency guidance.
-            </p>
+        <div class="hospital-name">
+          GAMA <span>HOSPITAL</span>
+        </div>
 
-            <div class="hero-info">
+        <div class="tagline">
+          Care Today · Healthier Tomorrow
+        </div>
 
-                <div class="info-chip">
-                    📍 Dhahran, Saudi Arabia
-                </div>
+      </div>
 
-                <div class="info-chip">
-                    🏥 Emergency 24/7
-                </div>
+    </div>
 
-                <div class="info-chip">
-                    🕐 Clinics 8 AM – 8 PM
-                </div>
 
-                <div class="info-chip">
-                    ☎ 920033175
-                </div>
+    <div class="header-info">
 
-            </div>
+      <div class="info">
+
+        <div class="info-icon">◷</div>
+
+        <div>
+          <div class="info-title">24/7</div>
+          <div class="info-sub">Patient Support</div>
+        </div>
+
+      </div>
+
+
+      <div class="info">
+
+        <div class="info-icon">☎</div>
+
+        <div>
+          <div class="info-title">
+            +966 13 123 4567
+          </div>
+
+          <div class="info-sub">
+            Call Us
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="info">
+
+        <div class="info-icon">⌖</div>
+
+        <div>
+          <div class="info-title">
+            Dhahran, Saudi Arabia
+          </div>
+
+          <div class="info-sub">
+            Our Location
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="emergency">
+
+        🚑 EMERGENCY
+
+        <small>
+          +966 13 123 9999
+        </small>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- ================= MAIN ================= -->
+
+  <main class="main">
+
+
+    <!-- ================= LEFT ================= -->
+
+    <section class="left">
+
+
+      <div>
+
+        <div class="welcome">
+          Welcome to
+        </div>
+
+        <div class="hero-title">
+          GAMA <span>HOSPITAL</span>
+        </div>
+
+        <div class="hero-subtitle">
+          AI Healthcare Concierge
+        </div>
+
+        <div class="hero-description">
+
+          Your 24/7 Digital Health Assistant
+          <br>
+
+          Get instant support for appointments,
+          doctors, departments, insurance,
+          location and more.
 
         </div>
 
-        <div class="hero-art">
-            <div class="cross"></div>
+      </div>
+
+
+      <!-- SERVICES -->
+
+      <div class="services">
+
+
+        <div
+          class="service"
+          onclick="askAI('I want to book an appointment')"
+        >
+
+          <div class="service-icon">
+            📅
+          </div>
+
+          <div>
+
+            <div class="service-title">
+              Book Appointment
+            </div>
+
+            <div class="service-text">
+              Schedule with your preferred doctor
+            </div>
+
+          </div>
+
+          <div class="arrow">
+            →
+          </div>
+
         </div>
+
+
+        <div
+          class="service"
+          onclick="askAI('I want to find a doctor')"
+        >
+
+          <div class="service-icon">
+            👨‍⚕️
+          </div>
+
+          <div>
+
+            <div class="service-title">
+              Find a Doctor
+            </div>
+
+            <div class="service-text">
+              Search by specialty
+            </div>
+
+          </div>
+
+          <div class="arrow">
+            →
+          </div>
+
+        </div>
+
+
+        <div
+          class="service"
+          onclick="askAI('Show me the departments available at Gama Hospital')"
+        >
+
+          <div class="service-icon">
+            🏥
+          </div>
+
+          <div>
+
+            <div class="service-title">
+              Departments
+            </div>
+
+            <div class="service-text">
+              Explore our medical services
+            </div>
+
+          </div>
+
+          <div class="arrow">
+            →
+          </div>
+
+        </div>
+
+
+        <div
+          class="service"
+          onclick="askAI('I need insurance and billing information')"
+        >
+
+          <div class="service-icon">
+            🛡️
+          </div>
+
+          <div>
+
+            <div class="service-title">
+              Insurance & Billing
+            </div>
+
+            <div class="service-text">
+              Get insurance and billing guidance
+            </div>
+
+          </div>
+
+          <div class="arrow">
+            →
+          </div>
+
+        </div>
+
+
+        <div
+          class="service"
+          onclick="askAI('Where is Gama Hospital located?')"
+        >
+
+          <div class="service-icon">
+            📍
+          </div>
+
+          <div>
+
+            <div class="service-title">
+              Hospital Location
+            </div>
+
+            <div class="service-text">
+              Directions and visiting information
+            </div>
+
+          </div>
+
+          <div class="arrow">
+            →
+          </div>
+
+        </div>
+
+
+        <div
+          class="service"
+          onclick="askAI('I need emergency assistance')"
+        >
+
+          <div class="service-icon">
+            🚨
+          </div>
+
+          <div>
+
+            <div class="service-title">
+              Emergency Assistance
+            </div>
+
+            <div class="service-text">
+              Immediate help and emergency information
+            </div>
+
+          </div>
+
+          <div class="arrow">
+            →
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <!-- FEATURES -->
+
+      <div class="features">
+
+        <div class="feature">
+          <div class="feature-icon">👥</div>
+          <div>
+            World-class<br>
+            Medical Care
+          </div>
+        </div>
+
+
+        <div class="feature">
+          <div class="feature-icon">♙</div>
+          <div>
+            Experienced<br>
+            Specialists
+          </div>
+        </div>
+
+
+        <div class="feature">
+          <div class="feature-icon">⚙</div>
+          <div>
+            Advanced<br>
+            Technology
+          </div>
+        </div>
+
+
+        <div class="feature">
+          <div class="feature-icon">♡</div>
+          <div>
+            Patient-Centric<br>
+            Approach
+          </div>
+        </div>
+
+      </div>
+
 
     </section>
 
-</main>
+
+    <!-- ================= AI ================= -->
+
+    <section class="right">
+
+      <div id="gama-ai"></div>
+
+    </section>
 
 
-<!-- =========================
-     AI FLOATING BUTTON
-========================= -->
-
-<button
-    class="ai-button"
-    id="aiButton"
-    aria-label="Open Gama Hospital AI Assistant"
-    title="Gama Hospital AI Assistant">
-
-    <div class="ai-face"></div>
-
-</button>
+  </main>
 
 
-<!-- =========================
-     CHAT WINDOW
-========================= -->
+  <!-- ================= BOTPRESS CONTROL ================= -->
 
-<section
-    class="chat-window"
-    id="chatWindow"
-    aria-label="Gama Hospital AI Assistant">
+  <script>
 
-    <header class="chat-header">
+    /*
+      Wait until Botpress is ready.
+    */
 
-        <div class="chat-header-top">
+    window.botpress?.on(
+      'webchat:initialized',
+      () => {
 
-            <div class="brand">
+        console.log(
+          'Gama AI Concierge initialized'
+        );
 
-                <div class="brand-icon"></div>
-
-                <div class="brand-text">
-                    <strong>GAMA AI Assistant</strong>
-
-                    <span>
-                        <i class="online"></i>
-                        Medical Concierge
-                    </span>
-                </div>
-
-            </div>
-
-            <button
-                class="close-chat"
-                id="closeChat"
-                aria-label="Close chat">
-                ×
-            </button>
-
-        </div>
+      }
+    );
 
 
-        <!-- 8 LANGUAGES -->
+    /*
+      Send quick-action messages
+      directly to the real Botpress AI.
+    */
 
-        <div class="language-bar">
+    function askAI(message) {
 
-            <button class="lang-btn active" data-lang="en">
-                English
-            </button>
+      if (!window.botpress) {
 
-            <button class="lang-btn" data-lang="ar">
-                العربية
-            </button>
+        console.log(
+          'Botpress is still loading...'
+        );
 
-            <button class="lang-btn" data-lang="ta">
-                தமிழ்
-            </button>
+        return;
+      }
 
-            <button class="lang-btn" data-lang="hi">
-                हिन्दी
-            </button>
 
-            <button class="lang-btn" data-lang="ml">
-                മലയാളം
-            </button>
+      /*
+        Open the AI first.
+      */
 
-            <button class="lang-btn"
+      window.botpress.open();
+
+
+      /*
+        Wait until Webchat is ready,
+        then send the selected request.
+      */
+
+      window.botpress.on(
+        'webchat:ready',
+        async () => {
+
+          try {
+
+            await window.botpress.sendMessage(
+              message
+            );
+
+          } catch (error) {
+
+            console.error(
+              'Unable to send message:',
+              error
+            );
+
+          }
+
+        }
+      );
+
+    }
+
+  </script>
+
+
+</body>
+</html>
