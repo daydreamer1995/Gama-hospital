@@ -1,373 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ta">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gama Hospital | AI Healthcare Concierge</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  <title>Medical AI Assistant</title>
+        body {
+            /* Gama Hospital Background Image with Professional Dark Overlay */
+            background: linear-gradient(rgba(0, 31, 63, 0.75), rgba(0, 31, 63, 0.75)), 
+                        url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+        .hero-container {
+            max-width: 800px;
+            padding: 20px;
+        }
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f8fb;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+        .hero-container h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+            letter-spacing: 1px;
+        }
 
-    .app {
-      width: 100%;
-      max-width: 900px;
-      height: 95vh;
-      background: white;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.12);
-      display: flex;
-      flex-direction: column;
-    }
+        .hero-container p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            color: #e0e0e0;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
 
-    .header {
-      background: #1677c8;
-      color: white;
-      padding: 18px 22px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
+        .hospital-info {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 10px;
+            display: inline-block;
+            font-size: 0.95rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
-    .logo {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-    }
-
-    .header h1 {
-      font-size: 21px;
-    }
-
-    .header p {
-      margin-top: 5px;
-      font-size: 13px;
-      opacity: 0.9;
-    }
-
-    .welcome {
-      text-align: center;
-      padding: 30px 20px 15px;
-    }
-
-    .welcome-icon {
-      width: 85px;
-      height: 85px;
-      margin: auto;
-      border-radius: 50%;
-      background: #eaf5ff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 42px;
-    }
-
-    .welcome h2 {
-      margin-top: 18px;
-      color: #1f2937;
-    }
-
-    .welcome p {
-      margin-top: 8px;
-      color: #667085;
-    }
-
-    .chat {
-      flex: 1;
-      padding: 20px;
-      overflow-y: auto;
-    }
-
-    .message {
-      max-width: 75%;
-      padding: 13px 16px;
-      margin-bottom: 14px;
-      border-radius: 16px;
-      line-height: 1.5;
-    }
-
-    .bot {
-      background: #eef5fa;
-      color: #243447;
-      border-bottom-left-radius: 4px;
-    }
-
-    .user {
-      background: #1677c8;
-      color: white;
-      margin-left: auto;
-      border-bottom-right-radius: 4px;
-    }
-
-    .input-area {
-      display: flex;
-      gap: 10px;
-      padding: 16px;
-      border-top: 1px solid #e5e7eb;
-      background: white;
-    }
-
-    .input-area input {
-      flex: 1;
-      padding: 14px;
-      border: 1px solid #d0d5dd;
-      border-radius: 12px;
-      outline: none;
-      font-size: 15px;
-    }
-
-    button {
-      border: none;
-      cursor: pointer;
-      border-radius: 12px;
-      padding: 0 18px;
-      font-size: 18px;
-    }
-
-    .mic {
-      background: #e9f4ff;
-      color: #1677c8;
-    }
-
-    .send {
-      background: #1677c8;
-      color: white;
-    }
-
-    .voice-status {
-      text-align: center;
-      font-size: 12px;
-      color: #667085;
-      padding-bottom: 8px;
-    }
-
-    @media(max-width:600px) {
-      .app {
-        height: 100vh;
-        border-radius: 0;
-      }
-
-      .message {
-        max-width: 88%;
-      }
-    }
-  </style>
+        .hospital-info span {
+            margin: 0 10px;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="app">
-
-  <div class="header">
-    <div class="logo">🩺</div>
-
-    <div>
-      <h1>Medical AI Assistant</h1>
-      <p>AI Healthcare Concierge</p>
-    </div>
-  </div>
-
-  <div class="welcome">
-    <div class="welcome-icon">🤖</div>
-
-    <h2>Welcome</h2>
-
-    <p>
-      Your multilingual AI healthcare assistant
-    </p>
-  </div>
-
-  <div class="chat" id="chat">
-
-    <div class="message bot">
-      Hello! How can I assist you today?
+    <div class="hero-container">
+        <h1>Gama Hospital AI Assistant</h1>
+        <p>உங்களின் நல்வாழ்வுக்காக எங்களது மல்டி-ஸ்பெஷாலிட்டி AI உதவியாளர் 24 மணி நேரமும் சேவையில் உள்ளார்.</p>
+        
+        <div class="hospital-info">
+            <span>📍 Al Qashlah, Dhahran, KSA</span> | 
+            <span>📞 920033175</span> | 
+            <span>🚨 24/7 Emergency</span>
+        </div>
     </div>
 
-  </div>
-
-  <div class="voice-status" id="voiceStatus">
-    Ready
-  </div>
-
-  <div class="input-area">
-
-    <button class="mic" id="micBtn" title="Voice input">
-      🎙️
-    </button>
-
-    <input
-      id="messageInput"
-      type="text"
-      placeholder="Type your message..."
-    >
-
-    <button class="send" id="sendBtn">
-      ➤
-    </button>
-
-  </div>
-
-</div>
-
-<script>
-
-const input = document.getElementById("messageInput");
-const sendBtn = document.getElementById("sendBtn");
-const micBtn = document.getElementById("micBtn");
-const chat = document.getElementById("chat");
-const voiceStatus = document.getElementById("voiceStatus");
-
-function addMessage(text, type) {
-
-  const message = document.createElement("div");
-
-  message.className = "message " + type;
-
-  message.textContent = text;
-
-  chat.appendChild(message);
-
-  chat.scrollTop = chat.scrollHeight;
-}
-
-function speak(text) {
-
-  if (!("speechSynthesis" in window)) {
-    return;
-  }
-
-  window.speechSynthesis.cancel();
-
-  const speech = new SpeechSynthesisUtterance(text);
-
-  speech.lang = "en-US";
-
-  window.speechSynthesis.speak(speech);
-}
-
-function sendMessage() {
-
-  const text = input.value.trim();
-
-  if (!text) {
-    return;
-  }
-
-  addMessage(text, "user");
-
-  input.value = "";
-
-  /*
-    Demo response.
-    Later we can replace this section with
-    your Gama Hospital Botpress AI connection.
-  */
-
-  setTimeout(() => {
-
-    const reply =
-      "Thank you for contacting the healthcare assistant. " +
-      "Please provide your hospital-related question.";
-
-    addMessage(reply, "bot");
-
-    speak(reply);
-
-  }, 700);
-}
-
-sendBtn.addEventListener("click", sendMessage);
-
-input.addEventListener("keydown", function(event) {
-
-  if (event.key === "Enter") {
-    sendMessage();
-  }
-
-});
-
-
-// Voice input
-const SpeechRecognition =
-  window.SpeechRecognition ||
-  window.webkitSpeechRecognition;
-
-if (SpeechRecognition) {
-
-  const recognition = new SpeechRecognition();
-
-  recognition.continuous = false;
-  recognition.interimResults = false;
-  recognition.lang = "en-US";
-
-  micBtn.addEventListener("click", () => {
-
-    voiceStatus.textContent = "Listening... 🎙️";
-
-    recognition.start();
-
-  });
-
-  recognition.onresult = function(event) {
-
-    const transcript =
-      event.results[0][0].transcript;
-
-    input.value = transcript;
-
-    voiceStatus.textContent = "Voice captured ✓";
-
-    sendMessage();
-
-  };
-
-  recognition.onerror = function() {
-
-    voiceStatus.textContent =
-      "Voice input unavailable";
-
-  };
-
-  recognition.onend = function() {
-
-    if (
-      voiceStatus.textContent ===
-      "Listening... 🎙️"
-    ) {
-      voiceStatus.textContent = "Ready";
-    }
-
-  };
-
-} else {
-
-  micBtn.disabled = true;
-
-  voiceStatus.textContent =
-    "Voice input is not supported in this browser.";
-
-}
-
-</script>
+    <!-- Botpress Webchat Scripts -->
+    <script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2026/09/28/18/20260928184020-AYXBWQWJ.js" defer></script>
 
 </body>
 </html>
