@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gama Hospital | AI Healthcare Concierge</title>
+    <!-- PWA Manifest link simulation for App installation -->
+    <link rel="manifest" href="manifest.json">
     <style>
         * {
             box-sizing: border-box;
@@ -13,69 +15,303 @@
         }
 
         body {
-            /* Gama Hospital Background Image with Professional Dark Overlay */
-            background: linear-gradient(rgba(0, 31, 63, 0.75), rgba(0, 31, 63, 0.75)), 
+            /* Gama Hospital Original Building Background with Professional Overlay */
+            background: linear-gradient(rgba(0, 31, 63, 0.8), rgba(0, 31, 63, 0.8)), 
                         url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
             height: 100vh;
             display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Top Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-circle {
+            width: 45px;
+            height: 45px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
-            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: transform 0.2s;
         }
 
-        .hero-container {
-            max-width: 800px;
-            padding: 20px;
+        .logo-circle:hover {
+            transform: scale(1.05);
         }
 
-        .hero-container h1 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-            letter-spacing: 1px;
+        .logo-circle img {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
         }
 
-        .hero-container p {
+        .brand-title h2 {
             font-size: 1.2rem;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-title span {
+            font-size: 0.8rem;
+            color: #00d2ff;
+        }
+
+        /* App Install Banner (Top popup simulation) */
+        #install-banner {
+            background: #ffffff;
+            color: #333;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            animation: slideDown 0.5s ease-out;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .install-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .install-info img {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+        }
+
+        .install-text h4 {
+            font-size: 0.9rem;
+            color: #000;
+        }
+
+        .install-text p {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .install-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .close-banner {
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            color: #999;
+            margin-left: 10px;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        /* Main Hero Section */
+        .hero-content {
+            text-align: center;
+            padding: 20px;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .hero-content h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: #dcdcdc;
             margin-bottom: 25px;
-            color: #e0e0e0;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         }
 
-        .hospital-info {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 15px 25px;
-            border-radius: 10px;
-            display: inline-block;
+        /* Quick Action Buttons (Call & WhatsApp) */
+        .quick-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
             font-size: 0.95rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
         }
 
-        .hospital-info span {
-            margin: 0 10px;
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .call-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .wa-btn {
+            background: #25d366;
+            color: white;
+        }
+
+        /* Floating AI Robot Button with Gama Logo vibe */
+        .ai-float-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #007bff;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            cursor: pointer;
+            z-index: 999;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 123, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            font-size: 0.8rem;
+            color: #aaa;
         }
     </style>
 </head>
 <body>
 
-    <div class="hero-container">
-        <h1>Gama Hospital AI Assistant</h1>
-        <p>உங்களின் நல்வாழ்வுக்காக எங்களது மல்டி-ஸ்பெஷாலிட்டி AI உதவியாளர் 24 மணி நேரமும் சேவையில் உள்ளார்.</p>
-        
-        <div class="hospital-info">
-            <span>📍 Al Qashlah, Dhahran, KSA</span> | 
-            <span>📞 920033175</span> | 
-            <span>🚨 24/7 Emergency</span>
+    <!-- Install App Banner (Triggered like a mobile Web App) -->
+    <div id="install-banner">
+        <div class="install-info">
+            <div style="background: #007bff; width: 35px; height: 35px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">G</div>
+            <div class="install-text">
+                <h4>Gama Hospital App</h4>
+                <p>Install for quick access to AI Concierge</p>
+            </div>
+        </div>
+        <div>
+            <button class="install-btn" onclick="installApp()">Install</button>
+            <button class="close-banner" onclick="closeBanner()">✕</button>
         </div>
     </div>
+
+    <!-- Header with Gama Logo -->
+    <header>
+        <div class="logo-section">
+            <div class="logo-circle" title="Gama Hospital">
+                <!-- Gama Hospital Logo representation -->
+                <span style="color: #007bff; font-weight: bold; font-size: 18px;">G</span>
+            </div>
+            <div class="brand-title">
+                <h2>Gama Hospital</h2>
+                <span>AI Health Assistant</span>
+            </div>
+        </div>
+        <div>
+            <span style="font-size: 0.9rem; background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 15px;">Dhahran, KSA</span>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <div class="hero-content">
+        <h1>உங்களின் நல்வாழ்வுக்கான டிஜிட்டல் வழிகாட்டி</h1>
+        <p>மருத்துவ சேவைகள், டாக்டர் விவரங்கள் மற்றும் அப்பாயிண்ட்மெண்ட் தகவல்களை எங்களது AI உதவியாளர் மூலம் உடனுக்குடன் அறியலாம்.</p>
+        
+        <!-- Quick Call & WhatsApp Buttons -->
+        <div class="quick-actions">
+            <a href="tel:920033175" class="action-btn call-btn">
+                📞 Emergency Call
+            </a>
+            <a href="https://wa.me/966920033175" target="_blank" class="action-btn wa-btn">
+                💬 WhatsApp Chat
+            </a>
+        </div>
+    </div>
+
+    <!-- Floating Chat Trigger -->
+    <div class="ai-float-btn" onclick="triggerBotpressChat()" title="Chat with Gama AI">
+        🤖
+    </div>
+
+    <footer>
+        &copy; 2026 Gama Hospital, Kingdom of Saudi Arabia. All Rights Reserved.
+    </footer>
 
     <!-- Botpress Webchat Scripts -->
     <script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js"></script>
     <script src="https://files.bpcontent.cloud/2026/09/28/18/20260928184020-AYXBWQWJ.js" defer></script>
 
+    <script>
+        // Close Install Banner
+        function closeBanner() {
+            document.getElementById('install-banner').style.display = 'none';
+        }
+
+        // Simulate App Installation prompt
+        function installApp() {
+            alert("Gama Hospital App இன்ஸ்டால் செய்ய தயாராகிறது! (PWA Prompt Triggered)");
+            closeBanner();
+        }
+
+        // Optional helper to open botpress chat if needed via custom logo click
+        function triggerBotpressChat() {
+            // Botpress default widget usually opens via its own floating button, 
+            // but this ensures user interaction connects smoothly.
+            if (window.botpressWebChat) {
+                window.botpressWebChat.sendEvent({ type: 'toggle' });
+            }
+        }
+    </script>
 </body>
 </html>
