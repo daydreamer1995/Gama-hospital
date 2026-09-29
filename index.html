@@ -13,10 +13,11 @@
         }
 
         body {
-            background: linear-gradient(rgba(5, 20, 40, 0.8), rgba(5, 15, 30, 0.9)), 
+            background: linear-gradient(rgba(5, 20, 40, 0.75), rgba(5, 15, 30, 0.85)), 
                         url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             min-height: 100vh;
             color: white;
             display: flex;
@@ -30,9 +31,9 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px 20px;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             color: #002b5c;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
             flex-wrap: wrap;
             gap: 10px;
         }
@@ -45,22 +46,28 @@
         }
 
         .logo-circle {
-            width: 40px;
-            height: 40px;
-            background: #e60000;
-            color: white;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
+            overflow: hidden;
+            background: white;
+            border: 2px solid #0056b3;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 1.3rem;
+        }
+
+        .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .logo-text h1 {
             font-size: 1.1rem;
             font-weight: 800;
             color: #002b5c;
+            letter-spacing: 0.5px;
         }
 
         .logo-text p {
@@ -87,34 +94,47 @@
         .emergency-pill {
             background: #ff1a1a;
             color: white;
-            padding: 8px 15px;
+            padding: 8px 16px;
             border-radius: 30px;
             font-weight: bold;
             font-size: 0.75rem;
             display: flex;
             align-items: center;
-            gap: 5px;
-            box-shadow: 0 4px 10px rgba(255, 26, 26, 0.4);
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(255, 26, 26, 0.4);
             text-decoration: none;
         }
 
-        /* Hero Layout */
-        .hero-section {
-            padding: 30px 20px;
-            max-width: 800px;
+        /* Main Container */
+        .main-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 30px 40px;
+            gap: 30px;
+            flex: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .left-section {
+            flex: 1.2;
+            max-width: 650px;
         }
 
         .hero-section h2 {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: #dcdcdc;
             font-weight: 400;
         }
 
         .hero-section h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 800;
             line-height: 1.1;
-            margin: 8px 0;
+            margin: 10px 0;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
         .hero-section h1 span {
@@ -122,228 +142,154 @@
         }
 
         .hero-section p {
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: #e0e0e0;
-            margin-top: 10px;
-            line-height: 1.4;
+            margin-top: 12px;
+            line-height: 1.5;
         }
 
         /* 6 Feature Cards Grid */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 12px;
-            padding: 0 20px 20px 20px;
-            max-width: 950px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 25px;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 15px;
+            background: rgba(255, 255, 255, 0.96);
+            padding: 16px;
             border-radius: 12px;
             color: #002b5c;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,191,255,0.3);
         }
 
         .card-content {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .card-icon {
-            width: 38px;
-            height: 38px;
+            width: 42px;
+            height: 42px;
             background: #e6f2ff;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
 
         .card-text h4 {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 700;
             color: #002b5c;
         }
 
         .card-text p {
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             color: #666;
             margin-top: 2px;
         }
 
         .arrow-icon {
             background: #e6f2ff;
-            width: 26px;
-            height: 26px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #007bff;
             font-weight: bold;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
 
-        /* Bottom Feature Banner */
-        .bottom-banner {
-            background: rgba(0, 20, 40, 0.85);
-            display: flex;
-            justify-content: space-around;
-            padding: 12px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .banner-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.75rem;
-            color: #ddd;
-        }
-
-        .banner-icon {
-            width: 28px;
-            height: 28px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-        }
-
-        /* Floating AI Logo Button (Right Side) */
-        .floating-ai-btn {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-            cursor: pointer;
-            z-index: 999;
-            background: white;
-            border: 2px solid #00bfff;
+        /* Right Section: Embedded AI Chat Box */
+        .right-section {
+            flex: 0.9;
+            max-width: 450px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 20px;
             overflow: hidden;
-            transition: transform 0.2s;
-        }
-
-        .floating-ai-btn img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .floating-ai-btn:hover {
-            transform: scale(1.08);
-        }
-
-        /* Chat Popup Modal Window */
-        .chat-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            display: none;
-            justify-content: flex-end;
-            align-items: flex-end;
-            z-index: 1000;
-        }
-
-        .chat-container {
-            background: #f8f9fa;
-            width: 100%;
-            max-width: 400px;
-            height: 550px;
-            border-radius: 20px 20px 0 0;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.4);
             display: flex;
             flex-direction: column;
-            overflow: hidden;
-            box-shadow: -5px 0 25px rgba(0,0,0,0.3);
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(100px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            height: 600px;
         }
 
         .chat-header {
             background: #ffffff;
-            padding: 12px 15px;
+            padding: 15px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #e1e8ed;
         }
 
         .chat-header-left {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .chat-header-text h3 {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #002b5c;
+            font-weight: 700;
         }
 
         .chat-header-text p {
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             color: #666;
         }
 
-        .close-chat {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
+        .lang-dropdown {
+            background: #f1f3f5;
+            border: 1px solid #ced4da;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #002b5c;
             cursor: pointer;
-            color: #666;
         }
 
         /* Chat Body */
         .chat-body {
             flex: 1;
-            padding: 12px;
+            padding: 15px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            background: #f0f4f8;
+            gap: 12px;
+            background: #f4f7fa;
         }
 
         .message {
-            max-width: 85%;
-            padding: 10px 12px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            line-height: 1.3;
+            max-width: 88%;
+            padding: 12px 14px;
+            border-radius: 12px;
+            font-size: 0.82rem;
+            line-height: 1.4;
         }
 
         .message.bot {
             background: white;
-            color: #333;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            color: #212529;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
             border-left: 4px solid #007bff;
         }
 
@@ -351,24 +297,25 @@
             background: #007bff;
             color: white;
             align-self: flex-end;
+            box-shadow: 0 2px 6px rgba(0,123,255,0.3);
         }
 
-        /* Quick Chips */
+        /* Quick Action Chips */
         .quick-chips {
             display: flex;
-            gap: 5px;
-            padding: 6px 10px;
+            gap: 6px;
+            padding: 8px 15px;
             background: #fff;
-            border-top: 1px solid #ddd;
+            border-top: 1px solid #e1e8ed;
             overflow-x: auto;
         }
 
         .chip {
             background: #eef2f7;
             border: 1px solid #d0dbe5;
-            padding: 5px 10px;
-            border-radius: 14px;
-            font-size: 0.7rem;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 0.72rem;
             white-space: nowrap;
             cursor: pointer;
             color: #002b5c;
@@ -382,26 +329,25 @@
 
         /* Chat Footer */
         .chat-footer {
-            padding: 10px;
+            padding: 12px 15px;
             background: white;
-            border-top: 1px solid #ddd;
+            border-top: 1px solid #e1e8ed;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         .mic-btn-chat {
             background: #007bff;
             color: white;
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9rem;
         }
 
         .mic-btn-chat.listening {
@@ -417,24 +363,145 @@
 
         .chat-input {
             flex: 1;
-            padding: 8px 12px;
-            border: 1px solid #ccc;
-            border-radius: 20px;
+            padding: 10px 16px;
+            border: 1px solid #ced4da;
+            border-radius: 25px;
             outline: none;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            background: #f8f9fa;
         }
 
         .send-btn {
             background: #007bff;
             color: white;
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        /* Bottom Banner */
+        .bottom-banner {
+            background: rgba(0, 15, 30, 0.9);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 20px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .banner-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            font-weight: 500;
+        }
+
+        .banner-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        /* Floating Logo Button for Mobile */
+        .floating-ai-btn {
+            display: none;
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            cursor: pointer;
+            z-index: 999;
+            border: 2px solid #0056b3;
+            overflow: hidden;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .floating-ai-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 900px) {
+            .main-content {
+                flex-direction: column;
+                padding: 20px 15px;
+                gap: 20px;
+            }
+            .right-section {
+                display: none;
+            }
+            .floating-ai-btn {
+                display: flex;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-section h1 {
+                font-size: 2.1rem;
+            }
+        }
+
+        /* Mobile Chat Modal Overlay */
+        .chat-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            display: none;
+            justify-content: flex-end;
+            align-items: flex-end;
+            z-index: 1000;
+        }
+
+        .chat-modal-overlay.active {
+            display: flex;
+        }
+
+        .chat-modal-container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 420px;
+            height: 85vh;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .close-modal-btn {
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            color: #666;
+            padding: 5px;
         }
     </style>
 </head>
@@ -442,8 +509,10 @@
 
     <!-- Top Header -->
     <header>
-        <div class="logo-area" onclick="toggleChat(true)" title="Open AI Assistant">
-            <div class="logo-circle">G</div>
+        <div class="logo-area" onclick="openChat()" title="Open AI Assistant">
+            <div class="logo-circle">
+                <img src="https://raw.githubusercontent.com/daydreamer1995/daydreamer1995.github.io/main/1000394113_3.png" alt="Gama Logo">
+            </div>
             <div class="logo-text">
                 <h1>GAMA HOSPITAL</h1>
                 <p>Care Today · Healthier Tomorrow</p>
@@ -456,206 +525,139 @@
         </div>
     </header>
 
-    <!-- Hero Content -->
-    <div class="hero-section">
-        <h2>Welcome to</h2>
-        <h1><span>GAMA</span> HOSPITAL<br>AI Healthcare Concierge</h1>
-        <p>Your 24/7 Digital Health Assistant. Get instant support for appointments, doctors, departments, insurance, location and more.</p>
-    </div>
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="left-section">
+            <div class="hero-section">
+                <h2>Welcome to</h2>
+                <h1><span>GAMA</span> HOSPITAL<br>AI Healthcare Concierge</h1>
+                <p>Your 24/7 Digital Health Assistant. Get instant support for appointments, doctors, departments, insurance, location and more.</p>
+            </div>
 
-    <!-- 6 Interactive Cards Grid -->
-    <div class="cards-grid">
-        <div class="card" onclick="openChatWithQuery('I want to book an appointment')">
-            <div class="card-content">
-                <div class="card-icon">📅</div>
-                <div class="card-text">
-                    <h4>Book Appointment</h4>
-                    <p>Schedule with preferred doctor</p>
+            <!-- 6 Feature Cards Grid -->
+            <div class="cards-grid">
+                <div class="card" onclick="triggerQuery('I want to book an appointment')">
+                    <div class="card-content">
+                        <div class="card-icon">📅</div>
+                        <div class="card-text">
+                            <h4>Book Appointment</h4>
+                            <p>Schedule with preferred doctor</p>
+                        </div>
+                    </div>
+                    <div class="arrow-icon">→</div>
+                </div>
+
+                <div class="card" onclick="triggerQuery('Find a doctor')">
+                    <div class="card-content">
+                        <div class="card-icon">👨‍⚕️</div>
+                        <div class="card-text">
+                            <h4>Find a Doctor</h4>
+                            <p>Search by speciality</p>
+                        </div>
+                    </div>
+                    <div class="arrow-icon">→</div>
+                </div>
+
+                <div class="card" onclick="triggerQuery('Explore departments')">
+                    <div class="card-content">
+                        <div class="card-icon">🏥</div>
+                        <div class="card-text">
+                            <h4>Departments</h4>
+                            <p>Explore medical services</p>
+                        </div>
+                    </div>
+                    <div class="arrow-icon">→</div>
+                </div>
+
+                <div class="card" onclick="triggerQuery('Insurance and billing help')">
+                    <div class="card-content">
+                        <div class="card-icon">🛡️</div>
+                        <div class="card-text">
+                            <h4>Insurance & Billing</h4>
+                            <p>Get insurance guidance</p>
+                        </div>
+                    </div>
+                    <div class="arrow-icon">→</div>
+                </div>
+
+                <div class="card" onclick="triggerQuery('Hospital location and directions')">
+                    <div class="card-content">
+                        <div class="card-icon">📍</div>
+                        <div class="card-text">
+                            <h4>Hospital Location</h4>
+                            <p>Directions & visiting hours</p>
+                        </div>
+                    </div>
+                    <div class="arrow-icon">→</div>
+                </div>
+
+                <div class="card" onclick="triggerQuery('Emergency assistance helpline')">
+                    <div class="card-content">
+                        <div class="card-icon">🚨</div>
+                        <div class="card-text">
+                            <h4>Emergency Assistance</h4>
+                            <p>Immediate help & helpline</p>
+                        </div>
+                    </div>
+                    <div class="arrow-icon">→</div>
                 </div>
             </div>
-            <div class="arrow-icon">→</div>
         </div>
 
-        <div class="card" onclick="openChatWithQuery('Find a doctor')">
-            <div class="card-content">
-                <div class="card-icon">👨‍⚕️</div>
-                <div class="card-text">
-                    <h4>Find a Doctor</h4>
-                    <p>Search by speciality</p>
+        <!-- Right Section: Desktop Embedded Chat -->
+        <div class="right-section">
+            <div class="chat-header">
+                <div class="chat-header-left">
+                    <div class="logo-circle" style="width: 35px; height: 35px;">
+                        <img src="https://raw.githubusercontent.com/daydreamer1995/daydreamer1995.github.io/main/1000394113_3.png" alt="Logo">
+                    </div>
+                    <div class="chat-header-text">
+                        <h3>GAMA HOSPITAL</h3>
+                        <p>AI Healthcare Concierge</p>
+                    </div>
                 </div>
+                <div class="lang-dropdown">🌐 EN ▼</div>
             </div>
-            <div class="arrow-icon">→</div>
-        </div>
 
-        <div class="card" onclick="openChatWithQuery('Explore departments')">
-            <div class="card-content">
-                <div class="card-icon">🏥</div>
-                <div class="card-text">
-                    <h4>Departments</h4>
-                    <p>Explore medical services</p>
+            <div class="chat-body" id="desktopChatBody">
+                <div class="message bot">
+                    مرحباً بك في مستشفى جاما!<br>
+                    Welcome to Gama Hospital!<br>
+                    வணக்கம்! காமா மருத்துவமனைக்கு உங்களை வரவேற்கிறோம்!<br>
+                    I'm your AI Healthcare Concierge. How may I assist you today?
                 </div>
             </div>
-            <div class="arrow-icon">→</div>
-        </div>
 
-        <div class="card" onclick="openChatWithQuery('Insurance and billing help')">
-            <div class="card-content">
-                <div class="card-icon">🛡️</div>
-                <div class="card-text">
-                    <h4>Insurance & Billing</h4>
-                    <p>Get insurance guidance</p>
-                </div>
+            <div class="quick-chips">
+                <div class="chip" onclick="sendCustomMessage('Book Appointment')">Book Appointment</div>
+                <div class="chip" onclick="sendCustomMessage('Find Doctor')">Find Doctor</div>
+                <div class="chip" onclick="sendCustomMessage('Departments')">Departments</div>
             </div>
-            <div class="arrow-icon">→</div>
-        </div>
 
-        <div class="card" onclick="openChatWithQuery('Hospital location and directions')">
-            <div class="card-content">
-                <div class="card-icon">📍</div>
-                <div class="card-text">
-                    <h4>Hospital Location</h4>
-                    <p>Directions & visiting hours</p>
-                </div>
+            <div class="chat-footer">
+                <button class="mic-btn-chat" onclick="startVoice('desktopInput')">🎤</button>
+                <input type="text" id="desktopInput" class="chat-input" placeholder="Type your message..." onkeypress="handleEnter(event, 'desktop')">
+                <button class="send-btn" onclick="submitMessage('desktop')">➤</button>
             </div>
-            <div class="arrow-icon">→</div>
-        </div>
-
-        <div class="card" onclick="openChatWithQuery('Emergency assistance helpline')">
-            <div class="card-content">
-                <div class="card-icon">🚨</div>
-                <div class="card-text">
-                    <h4>Emergency Assistance</h4>
-                    <p>Immediate help & helpline</p>
-                </div>
-            </div>
-            <div class="arrow-icon">→</div>
         </div>
     </div>
 
     <!-- Bottom Banner -->
     <div class="bottom-banner">
-        <div class="banner-item"><div class="banner-icon">⭐</div> World-class Care</div>
-        <div class="banner-item"><div class="banner-icon">👨‍⚕️</div> Specialists</div>
-        <div class="banner-item"><div class="banner-icon">⚡</div> Advanced Tech</div>
-        <div class="banner-item"><div class="banner-icon">❤️</div> Patient-Centric</div>
+        <div class="banner-item"><div class="banner-icon">⭐</div> World-class Medical Care</div>
+        <div class="banner-item"><div class="banner-icon">👨‍⚕️</div> Experienced Specialists</div>
+        <div class="banner-item"><div class="banner-icon">⚡</div> Advanced Technology</div>
+        <div class="banner-item"><div class="banner-icon">❤️</div> Patient-Centric Approach</div>
     </div>
 
-    <!-- Floating Right-Side AI Logo Button (Using actual logo image) -->
-    <div class="floating-ai-btn" onclick="toggleChat(true)" title="Open AI Assistant">
-        <img src="https://raw.githubusercontent.com/daydreamer1995/daydreamer1995.github.io/main/1000394113_3.png" alt="Gama AI Logo" onerror="this.parentElement.innerHTML='<div class=\'logo-circle\' style=\'width:100%;height:100%;font-size:1.2rem;\'>G</div>'">
+    <!-- Floating Logo Button for Mobile View -->
+    <div class="floating-ai-btn" onclick="openChatModal()" title="Open AI Chat">
+        <img src="https://raw.githubusercontent.com/daydreamer1995/daydreamer1995.github.io/main/1000394113_3.png" alt="Logo">
     </div>
 
-    <!-- Chat Popup Modal Window -->
-    <div class="chat-modal-overlay" id="chatModal">
-        <div class="chat-container">
+    <!-- Mobile Chat Modal -->
+    <div class="chat-modal-overlay" id="mobileChatModal">
+        <div class="chat-modal-container">
             <div class="chat-header">
                 <div class="chat-header-left">
-                    <div class="logo-circle" style="width: 32px; height: 32px; font-size: 0.9rem;">G</div>
-                    <div class="chat-header-text">
-                        <h3>GAMA HOSPITAL</h3>
-                        <p>AI Healthcare Concierge (Voice Enabled)</p>
-                    </div>
-                </div>
-                <button class="close-chat" onclick="toggleChat(false)">×</button>
-            </div>
-
-            <div class="chat-body" id="chatBody">
-                <div class="message bot">
-                    مرحباً بك في مستشفى جاما!<br>Welcome to Gama Hospital!<br>வணக்கம்! காமா மருத்துவமனைக்கு உங்களை வரவேற்கிறோம்!<br>I'm your AI Healthcare Concierge. How may I assist you today?
-                </div>
-            </div>
-
-            <!-- Quick Action Chips Inside Chat -->
-            <div class="quick-chips">
-                <div class="chip" onclick="sendQuickMessage('Book Appointment')">Book Appointment</div>
-                <div class="chip" onclick="sendQuickMessage('Find a Doctor')">Find Doctor</div>
-                <div class="chip" onclick="sendQuickMessage('Departments')">Departments</div>
-            </div>
-
-            <!-- Chat Input Footer -->
-            <div class="chat-footer">
-                <button class="mic-btn-chat" id="micBtn" onclick="startVoiceInput()" title="Speak">🎤</button>
-                <input type="text" id="userInput" class="chat-input" placeholder="Type or speak..." onkeypress="handleKey(event)">
-                <button class="send-btn" onclick="sendMessage()">➤</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- JavaScript Logic -->
-    <script>
-        const chatModal = document.getElementById('chatModal');
-        const chatBody = document.getElementById('chatBody');
-        const userInput = document.getElementById('userInput');
-        const micBtn = document.getElementById('micBtn');
-
-        function toggleChat(show) {
-            chatModal.style.display = show ? 'flex' : 'none';
-            if (show) userInput.focus();
-        }
-
-        // Text-to-Speech (AI Voice Response)
-        function speak(text) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = /[\u0B80-\u0BFF]/.test(text) ? 'ta-IN' : 'en-US';
-                window.speechSynthesis.speak(utterance);
-            }
-        }
-
-        // Voice Recognition (Microphone Input)
-        function startVoiceInput() {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!SpeechRecognition) {
-                alert("Speech recognition is not supported in this browser.");
-                return;
-            }
-            const recognition = new SpeechRecognition();
-            recognition.lang = 'ta-IN';
-
-            micBtn.classList.add('listening');
-            recognition.start();
-
-            recognition.onresult = function(event) {
-                userInput.value = event.results[0][0].transcript;
-                micBtn.classList.remove('listening');
-                sendMessage();
-            };
-
-            recognition.onerror = function() {
-                micBtn.classList.remove('listening');
-            };
-            recognition.onend = function() {
-                micBtn.classList.remove('listening');
-            };
-        }
-
-        function handleKey(e) {
-            if (e.key === 'Enter') sendMessage();
-        }
-
-        function openChatWithQuery(queryText) {
-            toggleChat(true);
-            userInput.value = queryText;
-            sendMessage();
-        }
-
-        function sendQuickMessage(text) {
-            userInput.value = text;
-            sendMessage();
-        }
-
-        function sendMessage() {
-            const text = userInput.value.trim();
-            if (!text) return;
-
-            const userDiv = document.createElement('div');
-            userDiv.className = 'message user';
-            userDiv.textContent = text;
-            chatBody.appendChild(userDiv);
-            userInput.value = '';
-            chatBody.scrollTop = chatBody.scrollHeight;
-
-            setTimeout(() => {
-                let reply = "காமா மருத்துவமனை உதவியாளர்: உங்கள் கோரிக்கையைச் சரிபார்க்கிறேன். தயவுசெய்து காத்திருக்கவும்.";
-          
+                    <div class="logo-circle" style="widt
