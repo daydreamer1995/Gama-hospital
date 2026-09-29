@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ta">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gama Hospital | AI Healthcare Concierge</title>
+    <title>GAMA HOSPITAL | AI Healthcare Concierge</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,7 +13,6 @@
         }
 
         body {
-            /* Gama Hospital Original Building Background with Professional Dark Overlay */
             background: linear-gradient(rgba(5, 20, 40, 0.75), rgba(5, 15, 30, 0.85)), 
                         url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
@@ -32,7 +31,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px 25px;
-            background: rgba(0, 10, 25, 0.8);
+            background: rgba(0, 10, 25, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -43,26 +42,17 @@
             gap: 12px;
         }
 
-        .logo-circle {
+        .logo-img {
             width: 45px;
             height: 45px;
-            background: #ffffff;
             border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
-
-        .logo-circle img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+            object-fit: cover;
+            border: 2px solid #00bfff;
+            background: white;
         }
 
         .brand-title h2 {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             letter-spacing: 0.5px;
             color: #ffffff;
         }
@@ -74,7 +64,7 @@
 
         .header-info {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             align-items: center;
             font-size: 0.9rem;
         }
@@ -104,13 +94,14 @@
         }
 
         .hero-left {
-            padding: 20px;
+            padding: 10px 20px;
         }
 
         .hero-left h1 {
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             margin-bottom: 15px;
             text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+            line-height: 1.2;
         }
 
         .hero-left h1 span {
@@ -118,10 +109,10 @@
         }
 
         .hero-left p {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: #dcdcdc;
-            margin-bottom: 30px;
-            line-height: 1.6;
+            margin-bottom: 25px;
+            line-height: 1.5;
         }
 
         /* Quick Feature Grid */
@@ -136,11 +127,11 @@
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 15px 20px;
+            padding: 15px;
             border-radius: 12px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            justify-content: space-between;
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -150,12 +141,18 @@
             transform: translateY(-3px);
         }
 
+        .feature-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
         .feature-icon {
-            font-size: 24px;
+            font-size: 22px;
         }
 
         .feature-text h4 {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #fff;
         }
 
@@ -165,9 +162,14 @@
             margin: 0;
         }
 
+        .arrow-icon {
+            color: #00bfff;
+            font-weight: bold;
+        }
+
         /* Right Side Chat Container Frame */
         .chat-frame-container {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.96);
             border-radius: 20px;
             height: 100%;
             max-height: 650px;
@@ -181,7 +183,7 @@
         .chat-header {
             background: #002b5c;
             color: white;
-            padding: 15px 20px;
+            padding: 12px 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -193,17 +195,17 @@
             gap: 10px;
         }
 
-        .chat-header-left img {
+        .chat-avatar {
             width: 35px;
             height: 35px;
             border-radius: 50%;
-            background: white;
-            padding: 2px;
+            object-fit: cover;
+            border: 1px solid #00bfff;
         }
 
         .chat-body {
             flex: 1;
-            padding: 20px;
+            padding: 18px;
             overflow-y: auto;
             background: #f4f7f6;
             display: flex;
@@ -303,10 +305,8 @@
     <!-- Top Header -->
     <header>
         <div class="logo-section">
-            <div class="logo-circle">
-                <!-- Gama Hospital Official Logo -->
-                <img src="https://raw.githubusercontent.com/daydreamer1995/Gama-hospital/main/logo.png" alt="Gama Logo" onerror="this.src='https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&w=100&q=80'">
-            </div>
+            <!-- உங்கள் லோகோ இமேஜ் ஃபைலின் பெயரை இங்கு மாற்றிக் கொள்ளவும் (ഉதாரணமாக: logo.png) -->
+            <img src="logo.png" alt="Gama Hospital Logo" class="logo-img">
             <div class="brand-title">
                 <h2>GAMA HOSPITAL</h2>
                 <span>Care Today · Healthier Tomorrow</span>
@@ -328,32 +328,44 @@
             
             <div class="feature-grid">
                 <div class="feature-card" onclick="setPrompt('Book an appointment with a specialist')">
-                    <div class="feature-icon">📅</div>
-                    <div class="feature-text">
-                        <h4>Book Appointment</h4>
-                        <p>Schedule with doctors</p>
+                    <div class="feature-content">
+                        <div class="feature-icon">📅</div>
+                        <div class="feature-text">
+                            <h4>Book Appointment</h4>
+                            <p>Schedule with doctors</p>
+                        </div>
                     </div>
+                    <div class="arrow-icon">➔</div>
                 </div>
                 <div class="feature-card" onclick="setPrompt('Find a doctor by specialty')">
-                    <div class="feature-icon">👨‍⚕️</div>
-                    <div class="feature-text">
-                        <h4>Find a Doctor</h4>
-                        <p>Search specialists</p>
+                    <div class="feature-content">
+                        <div class="feature-icon">👨‍⚕️</div>
+                        <div class="feature-text">
+                            <h4>Find a Doctor</h4>
+                            <p>Search specialists</p>
+                        </div>
                     </div>
+                    <div class="arrow-icon">➔</div>
                 </div>
                 <div class="feature-card" onclick="setPrompt('Show hospital departments')">
-                    <div class="feature-icon">🏥</div>
-                    <div class="feature-text">
-                        <h4>Departments</h4>
-                        <p>Explore medical services</p>
+                    <div class="feature-content">
+                        <div class="feature-icon">🏥</div>
+                        <div class="feature-text">
+                            <h4>Departments</h4>
+                            <p>Explore medical services</p>
+                        </div>
                     </div>
+                    <div class="arrow-icon">➔</div>
                 </div>
                 <div class="feature-card" onclick="setPrompt('What insurance is accepted here?')">
-                    <div class="feature-icon">🛡️</div>
-                    <div class="feature-text">
-                        <h4>Insurance & Billing</h4>
-                        <p>Get coverage details</p>
+                    <div class="feature-content">
+                        <div class="feature-icon">🛡️</div>
+                        <div class="feature-text">
+                            <h4>Insurance & Billing</h4>
+                            <p>Get coverage details</p>
+                        </div>
                     </div>
+                    <div class="arrow-icon">➔</div>
                 </div>
             </div>
         </div>
@@ -362,13 +374,13 @@
         <div class="chat-frame-container">
             <div class="chat-header">
                 <div class="chat-header-left">
-                    <img src="https://raw.githubusercontent.com/daydreamer1995/Gama-hospital/main/logo.png" alt="Bot Logo" onerror="this.src='https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&w=100&q=80'">
+                    <img src="logo.png" alt="Logo" class="chat-avatar">
                     <div>
-                        <h4 style="font-size: 0.95rem;">Gama AI Concierge</h4>
-                        <span style="font-size: 0.7rem; color: #a0d8ef;">Online | Multilingual & Voice</span>
+                        <h4 style="font-size: 0.9rem;">Gama AI Concierge</h4>
+                        <span style="font-size: 0.65rem; color: #a0d8ef;">Online | Multilingual & Voice</span>
                     </div>
                 </div>
-                <span style="font-size: 0.8rem; background: rgba(255,255,255,0.2); padding: 3px 8px; border-radius: 10px;">Auto-Voice</span>
+                <span style="font-size: 0.75rem; background: rgba(255,255,255,0.2); padding: 3px 8px; border-radius: 10px;">Auto-Voice</span>
             </div>
 
             <div class="chat-body" id="chatBody">
@@ -397,26 +409,23 @@
         
         let isListening = false;
 
-        // Text-to-Speech (AI Speaking Feature)
         function speakText(text) {
             if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel(); // Stop previous speech
+                window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(text);
                 
-                // Auto-detect language base
                 if (/[\u0600-\u06FF]/.test(text)) {
-                    utterance.lang = 'ar-SA'; // Arabic
+                    utterance.lang = 'ar-SA';
                 } else if (/[\u0B80-\u0BFF]/.test(text)) {
-                    utterance.lang = 'ta-IN'; // Tamil
+                    utterance.lang = 'ta-IN';
                 } else {
-                    utterance.lang = 'en-US'; // English
+                    utterance.lang, utterance.lang = 'en-US';
                 }
                 
                 window.speechSynthesis.speak(utterance);
             }
         }
 
-        // Speech Recognition (Mic Input Feature)
         function toggleVoiceInput() {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             if (!SpeechRecognition) {
@@ -427,7 +436,7 @@
             const recognition = new SpeechRecognition();
             recognition.continuous = false;
             recognition.interimResults = false;
-            recognition.lang = 'en-US'; // Can auto-detect or default to multi
+            recognition.lang = 'en-US';
 
             if (!isListening) {
                 recognition.start();
@@ -469,15 +478,14 @@
             const text = userInput.value.trim();
             if (!text) return;
 
-            // Append User Message
             const userMsg = document.createElement('div');
             userMsg.className = 'msg user';
             userMsg.textContent = text;
+            chatBox = chatBody;
             chatBody.appendChild(userMsg);
             userInput.value = '';
             chatBody.scrollTop = chatBody.scrollHeight;
 
-            // Simulated intelligent response (Can be linked with Botpress API backend)
             setTimeout(() => {
                 let botReply = "I am checking Gama Hospital records for your request regarding: " + text;
                 
@@ -495,7 +503,6 @@
                 chatBody.appendChild(botMsg);
                 chatBody.scrollTop = chatBody.scrollHeight;
 
-                // AI speaks out the response automatically!
                 speakText(botReply);
             }, 800);
         }
