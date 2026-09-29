@@ -13,7 +13,7 @@
         }
 
         body {
-            background: linear-gradient(rgba(5, 20, 40, 0.75), rgba(5, 15, 30, 0.85)), 
+            background: linear-gradient(rgba(5, 20, 40, 0.8), rgba(5, 15, 30, 0.9)), 
                         url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
@@ -29,21 +29,24 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 30px;
+            padding: 12px 20px;
             background: rgba(255, 255, 255, 0.95);
             color: #002b5c;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            cursor: pointer;
         }
 
         .logo-circle {
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             background: #e60000;
             color: white;
             border-radius: 50%;
@@ -51,32 +54,32 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
         }
 
         .logo-text h1 {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 800;
             color: #002b5c;
-            letter-spacing: 0.5px;
         }
 
         .logo-text p {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #555;
         }
 
         .header-info {
             display: flex;
             align-items: center;
-            gap: 30px;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .info-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
+            gap: 5px;
+            font-size: 0.75rem;
             color: #333;
             font-weight: 600;
         }
@@ -84,32 +87,34 @@
         .emergency-pill {
             background: #ff1a1a;
             color: white;
-            padding: 10px 20px;
+            padding: 8px 15px;
             border-radius: 30px;
             font-weight: bold;
+            font-size: 0.75rem;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 5px;
             box-shadow: 0 4px 10px rgba(255, 26, 26, 0.4);
+            text-decoration: none;
         }
 
         /* Hero Layout */
         .hero-section {
-            padding: 40px 50px;
-            max-width: 900px;
+            padding: 30px 20px;
+            max-width: 800px;
         }
 
         .hero-section h2 {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #dcdcdc;
             font-weight: 400;
         }
 
         .hero-section h1 {
-            font-size: 3.2rem;
+            font-size: 2.5rem;
             font-weight: 800;
             line-height: 1.1;
-            margin: 10px 0;
+            margin: 8px 0;
         }
 
         .hero-section h1 span {
@@ -117,78 +122,78 @@
         }
 
         .hero-section p {
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             color: #e0e0e0;
-            margin-top: 15px;
-            max-width: 600px;
-            line-height: 1.5;
+            margin-top: 10px;
+            line-height: 1.4;
         }
 
         /* 6 Feature Cards Grid */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            padding: 0 50px 30px 50px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px;
+            padding: 0 20px 20px 20px;
             max-width: 950px;
         }
 
         .card {
             background: rgba(255, 255, 255, 0.95);
-            padding: 18px;
-            border-radius: 14px;
+            padding: 15px;
+            border-radius: 12px;
             color: #002b5c;
             display: flex;
             align-items: center;
             justify-content: space-between;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
             cursor: pointer;
+            transition: transform 0.2s;
         }
 
         .card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
 
         .card-content {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .card-icon {
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             background: #e6f2ff;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         .card-text h4 {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 700;
             color: #002b5c;
         }
 
         .card-text p {
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             color: #666;
             margin-top: 2px;
         }
 
         .arrow-icon {
             background: #e6f2ff;
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #007bff;
             font-weight: bold;
+            font-size: 0.8rem;
         }
 
         /* Bottom Feature Banner */
@@ -196,66 +201,69 @@
             background: rgba(0, 20, 40, 0.85);
             display: flex;
             justify-content: space-around;
-            padding: 15px;
+            padding: 12px;
             border-top: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .banner-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 0.85rem;
+            gap: 8px;
+            font-size: 0.75rem;
             color: #ddd;
         }
 
         .banner-icon {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             background: rgba(255,255,255,0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 0.8rem;
         }
 
         /* Floating AI Logo Button (Right Side) */
         .floating-ai-btn {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: white;
-            width: 65px;
-            height: 65px;
+            bottom: 25px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
             cursor: pointer;
             z-index: 999;
-            border: 3px solid #00bfff;
+            background: white;
+            border: 2px solid #00bfff;
+            overflow: hidden;
             transition: transform 0.2s;
+        }
+
+        .floating-ai-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .floating-ai-btn:hover {
             transform: scale(1.08);
         }
 
-        .floating-ai-btn img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        /* Chat Popup Modal (Initially Hidden) */
+        /* Chat Popup Modal Window */
         .chat-modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             display: none;
             justify-content: flex-end;
             align-items: flex-end;
@@ -264,14 +272,14 @@
 
         .chat-container {
             background: #f8f9fa;
-            width: 420px;
-            height: 620px;
+            width: 100%;
+            max-width: 400px;
+            height: 550px;
             border-radius: 20px 20px 0 0;
             display: flex;
             flex-direction: column;
             overflow: hidden;
             box-shadow: -5px 0 25px rgba(0,0,0,0.3);
-            margin: 20px;
             animation: slideUp 0.3s ease;
         }
 
@@ -282,7 +290,7 @@
 
         .chat-header {
             background: #ffffff;
-            padding: 15px 20px;
+            padding: 12px 15px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -292,35 +300,23 @@
         .chat-header-left {
             display: flex;
             align-items: center;
-            gap: 12px;
-        }
-
-        .chat-header-logo {
-            width: 38px;
-            height: 38px;
-            background: #e60000;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
+            gap: 10px;
         }
 
         .chat-header-text h3 {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #002b5c;
         }
 
         .chat-header-text p {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #666;
         }
 
         .close-chat {
             background: none;
             border: none;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             cursor: pointer;
             color: #666;
         }
@@ -328,20 +324,20 @@
         /* Chat Body */
         .chat-body {
             flex: 1;
-            padding: 15px;
+            padding: 12px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
             background: #f0f4f8;
         }
 
         .message {
             max-width: 85%;
-            padding: 12px 15px;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            line-height: 1.4;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            line-height: 1.3;
         }
 
         .message.bot {
@@ -357,23 +353,23 @@
             align-self: flex-end;
         }
 
-        /* Chat Quick Action Chips */
+        /* Quick Chips */
         .quick-chips {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            padding: 8px 12px;
+            display: flex;
+            gap: 5px;
+            padding: 6px 10px;
             background: #fff;
             border-top: 1px solid #ddd;
+            overflow-x: auto;
         }
 
         .chip {
             background: #eef2f7;
             border: 1px solid #d0dbe5;
-            padding: 6px 8px;
-            border-radius: 16px;
+            padding: 5px 10px;
+            border-radius: 14px;
             font-size: 0.7rem;
-            text-align: center;
+            white-space: nowrap;
             cursor: pointer;
             color: #002b5c;
             font-weight: 600;
@@ -384,28 +380,28 @@
             color: white;
         }
 
-        /* Chat Footer Input */
+        /* Chat Footer */
         .chat-footer {
-            padding: 12px;
+            padding: 10px;
             background: white;
             border-top: 1px solid #ddd;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .mic-btn-chat {
             background: #007bff;
             color: white;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
         .mic-btn-chat.listening {
@@ -421,19 +417,19 @@
 
         .chat-input {
             flex: 1;
-            padding: 10px 15px;
+            padding: 8px 12px;
             border: 1px solid #ccc;
-            border-radius: 25px;
+            border-radius: 20px;
             outline: none;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
         .send-btn {
             background: #007bff;
             color: white;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
@@ -446,7 +442,7 @@
 
     <!-- Top Header -->
     <header>
-        <div class="logo-area">
+        <div class="logo-area" onclick="toggleChat(true)" title="Open AI Assistant">
             <div class="logo-circle">G</div>
             <div class="logo-text">
                 <h1>GAMA HOSPITAL</h1>
@@ -454,10 +450,9 @@
             </div>
         </div>
         <div class="header-info">
-            <div class="info-item">⏱️ 24/7 Patient Support</div>
+            <div class="info-item">⏱️ 24/7 Support</div>
             <div class="info-item">📞 +966 13 123 4567</div>
-            <div class="info-item">📍 Dhahran, Saudi Arabia</div>
-            <div class="emergency-pill">🚨 EMERGENCY +966 13 123 9999</div>
+            <a href="tel:+966131239999" class="emergency-pill">🚨 EMERGENCY +966 13 123 9999</a>
         </div>
     </header>
 
@@ -475,7 +470,7 @@
                 <div class="card-icon">📅</div>
                 <div class="card-text">
                     <h4>Book Appointment</h4>
-                    <p>Schedule with your preferred doctor</p>
+                    <p>Schedule with preferred doctor</p>
                 </div>
             </div>
             <div class="arrow-icon">→</div>
@@ -497,7 +492,7 @@
                 <div class="card-icon">🏥</div>
                 <div class="card-text">
                     <h4>Departments</h4>
-                    <p>Explore our medical services</p>
+                    <p>Explore medical services</p>
                 </div>
             </div>
             <div class="arrow-icon">→</div>
@@ -508,7 +503,7 @@
                 <div class="card-icon">🛡️</div>
                 <div class="card-text">
                     <h4>Insurance & Billing</h4>
-                    <p>Get insurance and billing guidance</p>
+                    <p>Get insurance guidance</p>
                 </div>
             </div>
             <div class="arrow-icon">→</div>
@@ -519,7 +514,7 @@
                 <div class="card-icon">📍</div>
                 <div class="card-text">
                     <h4>Hospital Location</h4>
-                    <p>Directions, visiting hours</p>
+                    <p>Directions & visiting hours</p>
                 </div>
             </div>
             <div class="arrow-icon">→</div>
@@ -530,7 +525,7 @@
                 <div class="card-icon">🚨</div>
                 <div class="card-text">
                     <h4>Emergency Assistance</h4>
-                    <p>Immediate help and helpline numbers</p>
+                    <p>Immediate help & helpline</p>
                 </div>
             </div>
             <div class="arrow-icon">→</div>
@@ -539,15 +534,15 @@
 
     <!-- Bottom Banner -->
     <div class="bottom-banner">
-        <div class="banner-item"><div class="banner-icon">⭐</div> World-class Medical Care</div>
-        <div class="banner-item"><div class="banner-icon">👨‍⚕️</div> Experienced Specialists</div>
-        <div class="banner-item"><div class="banner-icon">⚡</div> Advanced Technology</div>
-        <div class="banner-item"><div class="banner-icon">❤️</div> Patient-Centric Approach</div>
+        <div class="banner-item"><div class="banner-icon">⭐</div> World-class Care</div>
+        <div class="banner-item"><div class="banner-icon">👨‍⚕️</div> Specialists</div>
+        <div class="banner-item"><div class="banner-icon">⚡</div> Advanced Tech</div>
+        <div class="banner-item"><div class="banner-icon">❤️</div> Patient-Centric</div>
     </div>
 
-    <!-- Floating Right-Side AI Logo Button -->
+    <!-- Floating Right-Side AI Logo Button (Using actual logo image) -->
     <div class="floating-ai-btn" onclick="toggleChat(true)" title="Open AI Assistant">
-        <div class="logo-circle" style="width: 50px; height: 50px; font-size: 1.2rem;">G</div>
+        <img src="https://raw.githubusercontent.com/daydreamer1995/daydreamer1995.github.io/main/1000394113_3.png" alt="Gama AI Logo" onerror="this.parentElement.innerHTML='<div class=\'logo-circle\' style=\'width:100%;height:100%;font-size:1.2rem;\'>G</div>'">
     </div>
 
     <!-- Chat Popup Modal Window -->
@@ -555,7 +550,7 @@
         <div class="chat-container">
             <div class="chat-header">
                 <div class="chat-header-left">
-                    <div class="chat-header-logo">G</div>
+                    <div class="logo-circle" style="width: 32px; height: 32px; font-size: 0.9rem;">G</div>
                     <div class="chat-header-text">
                         <h3>GAMA HOSPITAL</h3>
                         <p>AI Healthcare Concierge (Voice Enabled)</p>
@@ -580,7 +575,7 @@
             <!-- Chat Input Footer -->
             <div class="chat-footer">
                 <button class="mic-btn-chat" id="micBtn" onclick="startVoiceInput()" title="Speak">🎤</button>
-                <input type="text" id="userInput" class="chat-input" placeholder="Type your message or speak..." onkeypress="handleKey(event)">
+                <input type="text" id="userInput" class="chat-input" placeholder="Type or speak..." onkeypress="handleKey(event)">
                 <button class="send-btn" onclick="sendMessage()">➤</button>
             </div>
         </div>
@@ -603,7 +598,6 @@
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(text);
-                // Detect if Tamil or English
                 utterance.lang = /[\u0B80-\u0BFF]/.test(text) ? 'ta-IN' : 'en-US';
                 window.speechSynthesis.speak(utterance);
             }
@@ -617,7 +611,7 @@
                 return;
             }
             const recognition = new SpeechRecognition();
-            recognition.lang = 'ta-IN'; // Default support for Tamil/English mixed
+            recognition.lang = 'ta-IN';
 
             micBtn.classList.add('listening');
             recognition.start();
@@ -655,7 +649,6 @@
             const text = userInput.value.trim();
             if (!text) return;
 
-            // Add User Message
             const userDiv = document.createElement('div');
             userDiv.className = 'message user';
             userDiv.textContent = text;
@@ -663,6 +656,6 @@
             userInput.value = '';
             chatBody.scrollTop = chatBody.scrollHeight;
 
-            // Simulated AI Response & Voice Output
             setTimeout(() => {
-      
+                let reply = "காமா மருத்துவமனை உதவியாளர்: உங்கள் கோரிக்கையைச் சரிபார்க்கிறேன். தயவுசெய்து காத்திருக்கவும்.";
+          
