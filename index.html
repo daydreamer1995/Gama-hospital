@@ -62,11 +62,10 @@
             color: #00bfff;
         }
 
-        .header-info {
+        .header-right {
             display: flex;
-            gap: 25px;
             align-items: center;
-            font-size: 0.9rem;
+            gap: 20px;
         }
 
         .emergency-btn-top {
@@ -80,25 +79,45 @@
             align-items: center;
             gap: 6px;
             box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+            font-size: 0.85rem;
+        }
+
+        /* Right side Floating Logo Button to open Chat */
+        .chat-trigger-btn {
+            background: rgba(0, 191, 255, 0.2);
+            border: 2px solid #00bfff;
+            padding: 5px 12px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .chat-trigger-btn:hover {
+            background: rgba(0, 191, 255, 0.4);
+            transform: scale(1.05);
+        }
+
+        .chat-trigger-btn span {
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
 
         /* Main Dashboard Layout */
         .main-container {
-            display: grid;
-            grid-template-columns: 1fr 420px;
-            gap: 25px;
-            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px;
             flex: 1;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .hero-left {
-            padding: 10px 20px;
+            max-width: 800px;
         }
 
         .hero-left h1 {
-            font-size: 2.6rem;
+            font-size: 2.8rem;
             margin-bottom: 15px;
             text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
             line-height: 1.2;
@@ -167,17 +186,37 @@
             font-weight: bold;
         }
 
-        /* Right Side Chat Container Frame */
-        .chat-frame-container {
-            background: rgba(255, 255, 255, 0.96);
-            border-radius: 20px;
+        /* Chat Modal Popup (Hidden by default, opens on right logo click) */
+        .chat-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
-            max-height: 650px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .chat-frame-container {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            width: 400px;
+            height: 550px;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
             color: #333;
+            animation: popup-scale 0.3s ease-in-out;
+        }
+
+        @keyframes popup-scale {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .chat-header {
@@ -201,6 +240,14 @@
             border-radius: 50%;
             object-fit: cover;
             border: 1px solid #00bfff;
+        }
+
+        .close-modal-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
         }
 
         .chat-body {
@@ -265,7 +312,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.2s;
         }
 
         .mic-btn.listening {
@@ -286,18 +332,6 @@
             font-size: 0.75rem;
             color: #888;
         }
-
-        @media (max-width: 900px) {
-            .main-container {
-                grid-template-columns: 1fr;
-                overflow-y: auto;
-                height: auto;
-            }
-            body {
-                height: auto;
-                overflow: auto;
-            }
-        }
     </style>
 </head>
 <body>
@@ -305,29 +339,30 @@
     <!-- Top Header -->
     <header>
         <div class="logo-section">
-            <!-- உங்கள் லோகோ இமேஜ் ஃபைலின் பெயரை இங்கு மாற்றிக் கொள்ளவும் (ഉதாரணமாக: logo.png) -->
-            <img src="logo.png" alt="Gama Hospital Logo" class="logo-img">
+            <img src="gama-hospital-logo.png" alt="Gama Hospital Logo" class="logo-img">
             <div class="brand-title">
                 <h2>GAMA HOSPITAL</h2>
                 <span>Care Today · Healthier Tomorrow</span>
             </div>
         </div>
-        <div class="header-info">
-            <span>🕒 24/7 Support</span>
-            <span>📞 +966 13 123 4567</span>
+        <div class="header-right">
             <a href="tel:966131239999" class="emergency-btn-top">🚨 EMERGENCY</a>
+            <!-- Right side logo button to launch AI Chat -->
+            <div class="chat-trigger-btn" onclick="toggleChatModal()">
+                <img src="gama-hospital-logo.png" alt="AI" style="width:28px; height:28px; border-radius:50%; object-fit:cover;">
+                <span>AI Assistant</span>
+            </div>
         </div>
     </header>
 
     <!-- Main Dashboard Section -->
     <div class="main-container">
-        <!-- Left Hero Section -->
         <div class="hero-left">
             <h1>Welcome to <span>GAMA HOSPITAL</span><br>AI Healthcare Concierge</h1>
-            <p>Your 24/7 Digital Health Assistant. Get instant support for appointments, doctors, departments, insurance, location, and voice guidance in your preferred language.</p>
+            <p>Your 24/7 Digital Health Assistant. Click the AI Assistant logo on the top right to launch the chat and get instant support for appointments, doctors, and voice guidance.</p>
             
             <div class="feature-grid">
-                <div class="feature-card" onclick="setPrompt('Book an appointment with a specialist')">
+                <div class="feature-card" onclick="openChatWithPrompt('Book an appointment with a specialist')">
                     <div class="feature-content">
                         <div class="feature-icon">📅</div>
                         <div class="feature-text">
@@ -337,7 +372,7 @@
                     </div>
                     <div class="arrow-icon">➔</div>
                 </div>
-                <div class="feature-card" onclick="setPrompt('Find a doctor by specialty')">
+                <div class="feature-card" onclick="openChatWithPrompt('Find a doctor by specialty')">
                     <div class="feature-content">
                         <div class="feature-icon">👨‍⚕️</div>
                         <div class="feature-text">
@@ -347,40 +382,22 @@
                     </div>
                     <div class="arrow-icon">➔</div>
                 </div>
-                <div class="feature-card" onclick="setPrompt('Show hospital departments')">
-                    <div class="feature-content">
-                        <div class="feature-icon">🏥</div>
-                        <div class="feature-text">
-                            <h4>Departments</h4>
-                            <p>Explore medical services</p>
-                        </div>
-                    </div>
-                    <div class="arrow-icon">➔</div>
-                </div>
-                <div class="feature-card" onclick="setPrompt('What insurance is accepted here?')">
-                    <div class="feature-content">
-                        <div class="feature-icon">🛡️</div>
-                        <div class="feature-text">
-                            <h4>Insurance & Billing</h4>
-                            <p>Get coverage details</p>
-                        </div>
-                    </div>
-                    <div class="arrow-icon">➔</div>
-                </div>
             </div>
         </div>
+    </div>
 
-        <!-- Right Side Integrated Chat & Voice Assistant -->
+    <!-- Chat Modal Overlay (Popup) -->
+    <div class="chat-modal-overlay" id="chatModalOverlay">
         <div class="chat-frame-container">
             <div class="chat-header">
                 <div class="chat-header-left">
-                    <img src="logo.png" alt="Logo" class="chat-avatar">
+                    <img src="gama-hospital-logo.png" alt="Logo" class="chat-avatar">
                     <div>
                         <h4 style="font-size: 0.9rem;">Gama AI Concierge</h4>
                         <span style="font-size: 0.65rem; color: #a0d8ef;">Online | Multilingual & Voice</span>
                     </div>
                 </div>
-                <span style="font-size: 0.75rem; background: rgba(255,255,255,0.2); padding: 3px 8px; border-radius: 10px;">Auto-Voice</span>
+                <button class="close-modal-btn" onclick="toggleChatModal()">✕</button>
             </div>
 
             <div class="chat-body" id="chatBody">
@@ -401,13 +418,30 @@
         &copy; 2026 Gama Hospital, Dhahran, Saudi Arabia. All Rights Reserved.
     </footer>
 
-    <!-- Script for Voice, Speech and Chat Logic -->
+    <!-- Script for Modal Popup, Voice, and Backend AI Integration -->
     <script>
+        const chatModalOverlay = document.getElementById('chatModalOverlay');
         const chatBody = document.getElementById('chatBody');
         const userInput = document.getElementById('userInput');
         const micBtn = document.getElementById('micBtn');
         
         let isListening = false;
+
+        // Function to Open/Close Chat Modal when Right Logo is clicked
+        function toggleChatModal() {
+            if (chatModalOverlay.style.display === 'flex') {
+                chatModalOverlay.style.display = 'none';
+            } else {
+                chatModalOverlay.style.display = 'flex';
+                userInput.focus();
+            }
+        }
+
+        function openChatWithPrompt(text) {
+            chatModalOverlay.style.display = 'flex';
+            userInput.value = text;
+            sendMessage();
+        }
 
         function speakText(text) {
             if ('speechSynthesis' in window) {
@@ -419,9 +453,10 @@
                 } else if (/[\u0B80-\u0BFF]/.test(text)) {
                     utterance.lang = 'ta-IN';
                 } else {
-                    utterance.lang, utterance.lang = 'en-US';
+                    utterance.lang = 'en-US';
                 }
                 
+                window.speechSynthesis.updateQueue ? window.speechSynthesis.updateQueue() : null;
                 window.speechSynthesis.speak(utterance);
             }
         }
@@ -463,11 +498,6 @@
             }
         }
 
-        function setPrompt(text) {
-            userInput.value = text;
-            sendMessage();
-        }
-
         function handleKeyPress(e) {
             if (e.key === 'Enter') {
                 sendMessage();
@@ -481,20 +511,21 @@
             const userMsg = document.createElement('div');
             userMsg.className = 'msg user';
             userMsg.textContent = text;
-            chatBox = chatBody;
             chatBody.appendChild(userMsg);
             userInput.value = '';
             chatBody.scrollTop = chatBody.scrollHeight;
 
+            // --- NOTE: If you have your friend's backend API link (AI Brain), 
+            // you can replace this setTimeout logic with a fetch() call to that backend link. ---
             setTimeout(() => {
                 let botReply = "I am checking Gama Hospital records for your request regarding: " + text;
                 
                 if (text.toLowerCase().includes('appointment') || text.includes('அப்பாயிண்ட்மெண்ட்')) {
                     botReply = "Sure! I can help you book an appointment with our specialist doctors at Gama Hospital. Please let me know your preferred department.";
                 } else if (text.toLowerCase().includes('insurance') || text.includes('காப்பீடு')) {
-                    botReply = "Gama Hospital accepts major insurance providers including Bupa, Tawuniya, and MedGulf. Would you like me to verify your specific card?";
+                    botReply = "Gama Hospital accepts major insurance providers including Bupa, Tawuniya, and MedGulf.";
                 } else if (text.toLowerCase().includes('doctor') || text.includes('டாக்டர்')) {
-                    botReply = "We have world-class specialists in Cardiology, Orthopedics, Pediatrics, and General Surgery. Which specialty are you looking for?";
+                    botReply = "We have world-class specialists in Cardiology, Orthopedics, Pediatrics, and General Surgery.";
                 }
 
                 const botMsg = document.createElement('div');
