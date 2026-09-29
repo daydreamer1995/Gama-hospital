@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +14,7 @@
 
         body {
             background: linear-gradient(rgba(5, 20, 40, 0.75), rgba(5, 15, 30, 0.85)), 
-                        url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1920&q=80');
+                        URL('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -23,6 +23,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            overflow-x: hidden;
         }
 
         /* Top Header */
@@ -30,41 +31,43 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 20px;
+            padding: 12px 25px;
             background: rgba(255, 255, 255, 0.98);
             color: #002b5c;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
         }
 
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             cursor: pointer;
         }
 
         .logo-circle {
-            width: 42px;
-            height: 42px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             overflow: hidden;
-            background: white;
+            background: #ffffff;
             border: 2px solid #0056b3;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
         .logo-circle img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
 
         .logo-text h1 {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 800;
             color: #002b5c;
             letter-spacing: 0.5px;
@@ -78,29 +81,36 @@
         .header-info {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             flex-wrap: wrap;
         }
 
         .info-item {
             display: flex;
             align-items: center;
-            gap: 5px;
-            font-size: 0.75rem;
+            gap: 6px;
+            font-size: 0.8rem;
             color: #333;
             font-weight: 600;
+        }
+
+        .info-item span {
+            font-size: 0.7rem;
+            color: #666;
+            display: block;
+            font-weight: 400;
         }
 
         .emergency-pill {
             background: #ff1a1a;
             color: white;
-            padding: 8px 16px;
+            padding: 9px 18px;
             border-radius: 30px;
             font-weight: bold;
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 7px;
             box-shadow: 0 4px 12px rgba(255, 26, 26, 0.4);
             text-decoration: none;
         }
@@ -110,30 +120,30 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            padding: 30px 40px;
-            gap: 30px;
+            padding: 25px 35px;
+            gap: 25px;
             flex: 1;
-            max-width: 1400px;
+            max-width: 1450px;
             margin: 0 auto;
             width: 100%;
         }
 
         .left-section {
-            flex: 1.2;
+            flex: 1.15;
             max-width: 650px;
         }
 
         .hero-section h2 {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #dcdcdc;
             font-weight: 400;
         }
 
         .hero-section h1 {
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             font-weight: 800;
             line-height: 1.1;
-            margin: 10px 0;
+            margin: 8px 0;
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
@@ -142,23 +152,23 @@
         }
 
         .hero-section p {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #e0e0e0;
-            margin-top: 12px;
-            line-height: 1.5;
+            margin-top: 10px;
+            line-height: 1.4;
         }
 
         /* 6 Feature Cards Grid */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 25px;
+            gap: 12px;
+            margin-top: 20px;
         }
 
         .card {
             background: rgba(255, 255, 255, 0.96);
-            padding: 16px;
+            padding: 14px;
             border-radius: 12px;
             color: #002b5c;
             display: flex;
@@ -177,211 +187,323 @@
         .card-content {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .card-icon {
-            width: 42px;
-            height: 42px;
+            width: 38px;
+            height: 38px;
             background: #e6f2ff;
-            border-radius: 10px;
+            border-radius: 9px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         .card-text h4 {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 700;
             color: #002b5c;
         }
 
         .card-text p {
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             color: #666;
-            margin-top: 2px;
+            margin-top: 1px;
         }
 
         .arrow-icon {
             background: #e6f2ff;
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #007bff;
             font-weight: bold;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
-        /* Right Section: Embedded AI Chat Box */
+        /* Right Section - Exact Chat UI Match */
         .right-section {
-            flex: 0.9;
-            max-width: 450px;
+            flex: 0.95;
+            max-width: 480px;
             width: 100%;
-            background: #ffffff;
-            border-radius: 20px;
+            background: #f8fafc;
+            border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 10px 35px rgba(0,0,0,0.4);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.45);
             display: flex;
             flex-direction: column;
-            height: 600px;
+            height: 640px;
+            border: 1px solid #e2e8f0;
         }
 
+        /* Chat Header */
         .chat-header {
             background: #ffffff;
-            padding: 15px 20px;
+            padding: 12px 18px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid #e1e8ed;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .chat-header-left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .chat-header-text h3 {
+        .chat-header-logo {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1.5px solid #0056b3;
+        }
+
+        .chat-header-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .chat-header-title h4 {
             font-size: 0.95rem;
             color: #002b5c;
-            font-weight: 700;
+            font-weight: 800;
         }
 
-        .chat-header-text p {
+        .chat-header-title p {
             font-size: 0.7rem;
-            color: #666;
+            color: #64748b;
         }
 
-        .lang-dropdown {
-            background: #f1f3f5;
-            border: 1px solid #ced4da;
-            padding: 6px 12px;
+        .chat-header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 5px 10px;
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 600;
-            color: #002b5c;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            gap: 5px;
             cursor: pointer;
         }
 
-        /* Chat Body */
+        .menu-dots {
+            font-size: 1.1rem;
+            color: #64748b;
+            cursor: pointer;
+            letter-spacing: 1px;
+        }
+
+        /* Chat Body / Messages */
         .chat-body {
             flex: 1;
             padding: 15px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            background: #f4f7fa;
+            gap: 14px;
+            background: #fdfdfd;
         }
 
-        .message {
-            max-width: 88%;
-            padding: 12px 14px;
-            border-radius: 12px;
-            font-size: 0.82rem;
-            line-height: 1.4;
-        }
-
-        .message.bot {
-            background: white;
-            color: #212529;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-            border-left: 4px solid #007bff;
-        }
-
-        .message.user {
-            background: #007bff;
-            color: white;
-            align-self: flex-end;
-            box-shadow: 0 2px 6px rgba(0,123,255,0.3);
-        }
-
-        /* Quick Action Chips */
-        .quick-chips {
+        .bot-msg-container {
             display: flex;
-            gap: 6px;
-            padding: 8px 15px;
-            background: #fff;
-            border-top: 1px solid #e1e8ed;
-            overflow-x: auto;
-        }
-
-        .chip {
-            background: #eef2f7;
-            border: 1px solid #d0dbe5;
-            padding: 6px 12px;
-            border-radius: 16px;
-            font-size: 0.72rem;
-            white-space: nowrap;
-            cursor: pointer;
-            color: #002b5c;
-            font-weight: 600;
-        }
-
-        .chip:hover {
-            background: #007bff;
-            color: white;
-        }
-
-        /* Chat Footer */
-        .chat-footer {
-            padding: 12px 15px;
-            background: white;
-            border-top: 1px solid #e1e8ed;
-            display: flex;
-            align-items: center;
             gap: 10px;
+            align-items: flex-start;
         }
 
-        .mic-btn-chat {
-            background: #007bff;
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
+        .bot-avatar {
+            width: 32px;
+            height: 32px;
+            background: #e0f2fe;
             border-radius: 50%;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+            border: 1px solid #bae6fd;
         }
 
-        .mic-btn-chat.listening {
-            background: #dc3545;
-            animation: pulse 1s infinite;
+        .msg-bubble-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            max-width: 85%;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1.1); }
-        }
-
-        .chat-input {
-            flex: 1;
-            padding: 10px 16px;
-            border: 1px solid #ced4da;
-            border-radius: 25px;
-            outline: none;
+        .msg-bubble {
+            background: #f1f5f9;
+            padding: 10px 14px;
+            border-radius: 12px;
             font-size: 0.85rem;
-            background: #f8f9fa;
+            color: #1e293b;
+            line-height: 1.4;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .msg-time {
+            font-size: 0.65rem;
+            color: #94a3b8;
+            padding-left: 4px;
+        }
+
+        /* Quick Action Chips inside chat */
+        .chat-chips {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin: 4px 0;
+        }
+
+        .chip {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 6px 8px;
+            border-radius: 16px;
+            font-size: 0.7rem;
+            color: #002b5c;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chip:hover {
+            background: #f0fdf4;
+            border-color: #86efac;
+        }
+
+        /* User Message */
+        .user-msg-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+            align-self: flex-end;
+            max-width: 85%;
+        }
+
+        .user-bubble {
+            background: #dbeafe;
+            color: #1e3a8a;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .user-time {
+            font-size: 0.65rem;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        /* Chat Footer / Input */
+        .chat-footer {
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            padding: 10px 15px;
+        }
+
+        .voice-bar {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .voice-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            color: #1d4ed8;
+            font-weight: 600;
+        }
+
+        .voice-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #475569;
+            font-size: 0.9rem;
+        }
+
+        .input-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mic-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,123,255,0.3);
+            flex-shrink: 0;
+        }
+
+        .text-input {
+            flex: 1;
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 9px 14px;
+            border-radius: 24px;
+            font-size: 0.82rem;
+            color: #334155;
+            outline: none;
+        }
+
+        .text-input::placeholder {
+            color: #94a3b8;
         }
 
         .send-btn {
             background: #007bff;
             color: white;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,123,255,0.3);
+            flex-shrink: 0;
         }
 
         /* Bottom Banner */
@@ -389,7 +511,7 @@
             background: rgba(0, 15, 30, 0.9);
             display: flex;
             justify-content: space-around;
-            padding: 15px 20px;
+            padding: 12px 20px;
             border-top: 1px solid rgba(255,255,255,0.15);
             flex-wrap: wrap;
             gap: 15px;
@@ -398,59 +520,32 @@
         .banner-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 0.85rem;
+            gap: 8px;
+            font-size: 0.8rem;
             color: #e2e8f0;
             font-weight: 500;
         }
 
         .banner-icon {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             background: rgba(255,255,255,0.12);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
 
-        /* Floating Logo Button for Mobile */
-        .floating-ai-btn {
-            display: none;
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: white;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-            cursor: pointer;
-            z-index: 999;
-            border: 2px solid #0056b3;
-            overflow: hidden;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .floating-ai-btn img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        @media (max-width: 900px) {
+        @media (max-width: 950px) {
             .main-content {
                 flex-direction: column;
-                padding: 20px 15px;
+                padding: 15px;
                 gap: 20px;
             }
             .right-section {
-                display: none;
-            }
-            .floating-ai-btn {
-                display: flex;
+                max-width: 100%;
+                height: 580px;
             }
             .cards-grid {
                 grid-template-columns: 1fr;
@@ -459,59 +554,15 @@
                 font-size: 2.1rem;
             }
         }
-
-        /* Mobile Chat Modal Overlay */
-        .chat-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.65);
-            display: none;
-            justify-content: flex-end;
-            align-items: flex-end;
-            z-index: 1000;
-        }
-
-        .chat-modal-overlay.active {
-            display: flex;
-        }
-
-        .chat-modal-container {
-            background: #ffffff;
-            width: 100%;
-            max-width: 420px;
-            height: 85vh;
-            border-radius: 20px 20px 0 0;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
-        }
-
-        .close-modal-btn {
-            background: none;
-            border: none;
-            font-size: 1.4rem;
-            cursor: pointer;
-            color: #666;
-            padding: 5px;
-        }
     </style>
 </head>
 <body>
 
     <!-- Top Header -->
     <header>
-        <div class="logo-area" onclick="openChat()" title="Open AI Assistant">
+        <div class="logo-area">
             <div class="logo-circle">
-                <img src="https://raw.githubusercontent.com/daydreamer1995/daydreamer1995.github.io/main/1000394113_3.png" alt="Gama Logo">
+                <img src="https://raw.githubusercontent.com/daydreamer1995/daydreamer1995.github.io/main/1000394113_2.png" alt="Gama Logo">
             </div>
             <div class="logo-text">
                 <h1>GAMA HOSPITAL</h1>
@@ -519,14 +570,25 @@
             </div>
         </div>
         <div class="header-info">
-            <div class="info-item">⏱️ 24/7 Support</div>
-            <div class="info-item">📞 +966 13 123 4567</div>
+            <div class="info-item">
+                ⏱️ 
+                <div>24/7 Support <span>Patient Support</span></div>
+            </div>
+            <div class="info-item">
+                📞 
+                <div>+966 13 123 4567 <span>Call Us</span></div>
+            </div>
+            <div class="info-item">
+                📍 
+                <div>Dhahran, Saudi Arabia <span>Our Location</span></div>
+            </div>
             <a href="tel:+966131239999" class="emergency-pill">🚨 EMERGENCY +966 13 123 9999</a>
         </div>
     </header>
 
     <!-- Main Content Area -->
     <div class="main-content">
+        <!-- Left Banner & Features -->
         <div class="left-section">
             <div class="hero-section">
                 <h2>Welcome to</h2>
@@ -536,7 +598,7 @@
 
             <!-- 6 Feature Cards Grid -->
             <div class="cards-grid">
-                <div class="card" onclick="triggerQuery('I want to book an appointment')">
+                <div class="card">
                     <div class="card-content">
                         <div class="card-icon">📅</div>
                         <div class="card-text">
@@ -547,7 +609,7 @@
                     <div class="arrow-icon">→</div>
                 </div>
 
-                <div class="card" onclick="triggerQuery('Find a doctor')">
+                <div class="card">
                     <div class="card-content">
                         <div class="card-icon">👨‍⚕️</div>
                         <div class="card-text">
@@ -558,7 +620,7 @@
                     <div class="arrow-icon">→</div>
                 </div>
 
-                <div class="card" onclick="triggerQuery('Explore departments')">
+                <div class="card">
                     <div class="card-content">
                         <div class="card-icon">🏥</div>
                         <div class="card-text">
@@ -569,9 +631,9 @@
                     <div class="arrow-icon">→</div>
                 </div>
 
-                <div class="card" onclick="triggerQuery('Insurance and billing help')">
+                <div class="card">
                     <div class="card-content">
-                        <div class="card-icon">🛡️</div>
+                        <div class="card-icon">🛡</div>
                         <div class="card-text">
                             <h4>Insurance & Billing</h4>
                             <p>Get insurance guidance</p>
@@ -580,7 +642,7 @@
                     <div class="arrow-icon">→</div>
                 </div>
 
-                <div class="card" onclick="triggerQuery('Hospital location and directions')">
+                <div class="card">
                     <div class="card-content">
                         <div class="card-icon">📍</div>
                         <div class="card-text">
@@ -591,7 +653,7 @@
                     <div class="arrow-icon">→</div>
                 </div>
 
-                <div class="card" onclick="triggerQuery('Emergency assistance helpline')">
+                <div class="card">
                     <div class="card-content">
                         <div class="card-icon">🚨</div>
                         <div class="card-text">
@@ -604,60 +666,38 @@
             </div>
         </div>
 
-        <!-- Right Section: Desktop Embedded Chat -->
+        <!-- Right Section: 100% Matching Simulated Chat UI (Connected with Botpress) -->
         <div class="right-section">
+            <!-- Chat Header -->
             <div class="chat-header">
                 <div class="chat-header-left">
-                    <div class="logo-circle" style="width: 35px; height: 35px;">
-                        <img src="https://raw.githubusercontent.com/daydreamer1995/daydreamer1995.github.io/main/1000394113_3.png" alt="Logo">
+                    <div class="chat-header-logo">
+                        <img src="https://raw.githubusercontent.com/daydreamer1995/daydreamer1995.github.io/main/1000394113_2.png" alt="Logo">
                     </div>
-                    <div class="chat-header-text">
-                        <h3>GAMA HOSPITAL</h3>
+                    <div class="chat-header-title">
+                        <h4>GAMA HOSPITAL</h4>
                         <p>AI Healthcare Concierge</p>
                     </div>
                 </div>
-                <div class="lang-dropdown">🌐 EN ▼</div>
-            </div>
-
-            <div class="chat-body" id="desktopChatBody">
-                <div class="message bot">
-                    مرحباً بك في مستشفى جاما!<br>
-                    Welcome to Gama Hospital!<br>
-                    வணக்கம்! காமா மருத்துவமனைக்கு உங்களை வரவேற்கிறோம்!<br>
-                    I'm your AI Healthcare Concierge. How may I assist you today?
+                <div class="chat-header-right">
+                    <div class="lang-btn">🌐 EN ⌄</div>
+                    <div class="menu-dots">⋮</div>
                 </div>
             </div>
 
-            <div class="quick-chips">
-                <div class="chip" onclick="sendCustomMessage('Book Appointment')">Book Appointment</div>
-                <div class="chip" onclick="sendCustomMessage('Find Doctor')">Find Doctor</div>
-                <div class="chip" onclick="sendCustomMessage('Departments')">Departments</div>
-            </div>
-
-            <div class="chat-footer">
-                <button class="mic-btn-chat" onclick="startVoice('desktopInput')">🎤</button>
-                <input type="text" id="desktopInput" class="chat-input" placeholder="Type your message..." onkeypress="handleEnter(event, 'desktop')">
-                <button class="send-btn" onclick="submitMessage('desktop')">➤</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bottom Banner -->
-    <div class="bottom-banner">
-        <div class="banner-item"><div class="banner-icon">⭐</div> World-class Medical Care</div>
-        <div class="banner-item"><div class="banner-icon">👨‍⚕️</div> Experienced Specialists</div>
-        <div class="banner-item"><div class="banner-icon">⚡</div> Advanced Technology</div>
-        <div class="banner-item"><div class="banner-icon">❤️</div> Patient-Centric Approach</div>
-    </div>
-
-    <!-- Floating Logo Button for Mobile View -->
-    <div class="floating-ai-btn" onclick="openChatModal()" title="Open AI Chat">
-        <img src="https://raw.githubusercontent.com/daydreamer1995/daydreamer1995.github.io/main/1000394113_3.png" alt="Logo">
-    </div>
-
-    <!-- Mobile Chat Modal -->
-    <div class="chat-modal-overlay" id="mobileChatModal">
-        <div class="chat-modal-container">
-            <div class="chat-header">
-                <div class="chat-header-left">
-                    <div class="logo-circle" style="widt
+            <!-- Chat Body -->
+            <div class="chat-body">
+                <!-- Bot Greeting Message (Arabic + English + Tamil as requested) -->
+                <div class="bot-msg-container">
+                    <div class="bot-avatar">🤖</div>
+                    <div class="msg-bubble-group">
+                        <div class="msg-bubble" dir="rtl" style="text-align: right; font-family: 'Tahoma', sans-serif;">
+                            مرحباً بك في مستشفى جاما!<br>
+                            Welcome to Gama Hospital!<br>
+                            வணக்கம்! காமா மருத்துவமனைக்கு வரவேற்கிறோம்!<br><br>
+                            I'm your AI Healthcare Concierge.<br>
+                            How may I assist you today?
+                        </div>
+                        <span class="msg-time">08:24 AM</span>
+                    </div>
+          
