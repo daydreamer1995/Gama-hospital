@@ -2,69 +2,131 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GAMA Hospital – AI Healthcare Concierge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GAMA Hospital – AI Healthcare Assistant | مستشفى جاما</title>
 <link rel="icon" href="assets/gama-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Tajawal:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></symbol>
+<symbol id="i-steth" viewBox="0 0 24 24"><path d="M11 2v2M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></symbol>
+<symbol id="i-bld" viewBox="0 0 24 24"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+<symbol id="i-amb" viewBox="0 0 24 24"><path d="M10 10H6M8 8v4"/><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M9 18h6M19 18h2a1 1 0 0 0 1-1v-3.3a1 1 0 0 0-.7-.95l-1.9-.64a1 1 0 0 1-.6-.5L16.4 8.5a1 1 0 0 0-.9-.5H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+<symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+<symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></symbol>
+<symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+</defs></svg>
+
 <div class="app chat-closed" id="app">
   <header class="topbar">
-    <button class="logo-btn" id="logoTrigger" aria-expanded="false" aria-label="Open or close Gama AI Concierge" onclick="toggleBotpressChat()">
-      <img src="assets/gama-logo.png" alt="Gama Hospital logo">
-      <span class="brand"><strong>GAMA <em>HOSPITAL</em></strong><small>Care Today. Healthier Tomorrow</small></span>
-    </button>
-    <div class="info">
-      <span>24/7 <small>Patient Support</small></span>
-      <a href="tel:920033175">920033175 <small>Call Us</small></a>
-      <span>Dhahran, Saudi Arabia <small>Our Location</small></span>
+    <div class="logo-btn header-brand" id="logoTrigger" role="img" aria-label="مستشفى جاما · GAMA HOSPITAL">
+      <img class="header-brand-icon" src="assets/gama-logo.png" alt="">
+      <span class="header-brand-copy">
+        <span class="brand-ar ar" lang="ar">مستشفى جاما</span>
+        <strong class="brand-en">GAMA <em>HOSPITAL</em></strong>
+        <small>Care Today. Healthier Tomorrow</small>
+      </span>
     </div>
-    <a class="sos" href="tel:920033175">🚑 EMERGENCY <b>920033175</b></a>
+
+    <div class="info">
+      <div><i><svg class="ic"><use href="#i-clock"/></svg></i><span><b>Emergency · 24/7</b><small>Outpatient Clinics: 8:00 AM–8:00 PM</small><small class="ar" lang="ar">الطوارئ على مدار الساعة · العيادات 8 صباحاً–8 مساءً</small></span></div>
+      <div><i><svg class="ic"><use href="#i-pin"/></svg></i><span><b>Dhahran, Saudi Arabia</b><small>Our Location</small><small class="ar" lang="ar">الظهران، المملكة العربية السعودية</small></span></div>
+    </div>
+
+    <button class="chat-nav" id="chatNavButton" type="button">Chat with us</button>
+    <a class="sos" href="tel:+966920033175"><i><svg class="ic"><use href="#i-amb"/></svg></i><span><b>EMERGENCY<em class="ar" lang="ar">طوارئ</em></b><small>920033175</small></span></a>
   </header>
 
   <main class="portal">
     <section class="hero">
       <div class="hero-text">
-        <p class="w">Welcome to</p>
-        <h1>GAMA <em>HOSPITAL</em></h1>
-        <h2>AI Healthcare Concierge</h2>
-        <p class="sub"><b>Your 24/7 Digital Health Assistant</b><br>Get instant support for appointments, doctors, departments, insurance, location and more.</p>
+        <p class="w">Welcome to <span class="ar" lang="ar">مرحباً بكم في</span></p>
+        <div class="name"><span class="ar" lang="ar">مستشفى جاما</span><h1>GAMA HOSPITAL</h1></div>
+        <h2>AI Healthcare Assistant <span class="ar" lang="ar">مساعد الرعاية الصحية الذكي</span></h2>
+        <p class="sub"><b>Your 24/7 Digital Health Assistant <span class="ar" lang="ar">مساعدك الصحي الرقمي على مدار الساعة</span></b><span class="desc">Get instant support for appointments, doctors, departments, insurance, location and more.<span class="ar" lang="ar">احصل على دعم فوري للمواعيد والأطباء والأقسام والتأمين والموقع وغير ذلك.</span></span></p>
       </div>
+
       <div class="actions">
-        <button class="card" data-q="I want to book an appointment"><i>📅</i><span><b>Book Appointment</b><small>Schedule with your preferred doctor</small></span></button>
-        <button class="card" data-q="Help me find a doctor"><i>🩺</i><span><b>Find a Doctor</b><small>Search by speciality</small></span></button>
-        <button class="card" data-q="Which departments do you have?"><i>🏥</i><span><b>Departments</b><small>Explore our medical services</small></span></button>
-        <button class="card" data-q="Tell me about insurance and billing"><i>🛡️</i><span><b>Insurance &amp; Billing</b><small>Get insurance and billing guidance</small></span></button>
-        <button class="card" data-q="Where is the hospital located?"><i>📍</i><span><b>Hospital Location</b><small>Directions, visiting hours</small></span></button>
-        <button class="card emergency" data-q="I need emergency assistance"><i>🚨</i><span><b>Emergency Assistance</b><small>Immediate help and helpline numbers</small></span></button>
+        <button class="card" type="button" data-chat-prompt="I want to book an appointment"><i><svg class="ic"><use href="#i-cal"/></svg></i><span><b>Book Appointment</b><b class="ar" lang="ar">حجز موعد</b><small>Schedule with your preferred doctor</small><small class="ar" lang="ar">احجز مع طبيبك المفضل</small></span><u>›</u></button>
+        <button class="card" type="button" data-chat-prompt="Help me find a doctor"><i><svg class="ic"><use href="#i-steth"/></svg></i><span><b>Find a Doctor</b><b class="ar" lang="ar">البحث عن طبيب</b><small>Search by speciality</small><small class="ar" lang="ar">ابحث حسب التخصص</small></span><u>›</u></button>
+        <button class="card" type="button" data-chat-prompt="Which departments do you have?"><i><svg class="ic"><use href="#i-bld"/></svg></i><span><b>Departments</b><b class="ar" lang="ar">الأقسام</b><small>Explore our medical services</small><small class="ar" lang="ar">اكتشف خدماتنا الطبية</small></span><u>›</u></button>
+        <button class="card" type="button" data-chat-prompt="Tell me about insurance and billing"><i><svg class="ic"><use href="#i-shield"/></svg></i><span><b>Insurance &amp; Billing</b><b class="ar" lang="ar">التأمين والفواتير</b><small>Get insurance and billing guidance</small><small class="ar" lang="ar">إرشادات التأمين والفواتير</small></span><u>›</u></button>
+        <button class="card" type="button" data-chat-prompt="Where is the hospital located?"><i><svg class="ic"><use href="#i-pin"/></svg></i><span><b>Hospital Location</b><b class="ar" lang="ar">موقع المستشفى</b><small>Directions, visiting hours</small><small class="ar" lang="ar">الاتجاهات وساعات الزيارة</small></span><u>›</u></button>
+        <button class="card emergency" type="button" data-chat-prompt="I need emergency assistance"><i><svg class="ic"><use href="#i-alert"/></svg></i><span><b>Emergency Assistance</b><b class="ar" lang="ar">المساعدة الطارئة</b><small>Immediate help and helpline numbers</small><small class="ar" lang="ar">مساعدة فورية وأرقام الطوارئ</small></span><u>›</u></button>
       </div>
-      <ul class="strip"><li>World-class Medical Care</li><li>Experienced Specialists</li><li>Advanced Technology</li><li>Patient-Centric Approach</li></ul>
+
+      <ul class="strip">
+        <li><i><svg class="ic"><use href="#i-award"/></svg></i><span>World-class Medical Care<small class="ar" lang="ar">رعاية طبية عالمية المستوى</small></span></li>
+        <li><i><svg class="ic"><use href="#i-users"/></svg></i><span>Experienced Specialists<small class="ar" lang="ar">أخصائيون ذوو خبرة</small></span></li>
+        <li><i><svg class="ic"><use href="#i-cpu"/></svg></i><span>Advanced Technology<small class="ar" lang="ar">تقنية متقدمة</small></span></li>
+        <li><i><svg class="ic"><use href="#i-heart"/></svg></i><span>Patient-Centric Approach<small class="ar" lang="ar">رعاية تتمحور حول المريض</small></span></li>
+      </ul>
     </section>
   </main>
 
-  <aside class="chat" id="chatPanel" aria-label="Gama Hospital AI Healthcare Concierge">
-    <header class="chat-head">
-      <button class="logo-btn" onclick="toggleBotpressChat()" aria-label="Close chat"><img src="assets/gama-logo.png" alt="Gama logo"></button>
-      <div><strong>GAMA HOSPITAL</strong><small>AI Healthcare Concierge</small></div>
-      <select id="lang" aria-label="Language"><option value="en">EN</option><option value="ar">AR</option><option value="ta">TA</option></select>
-    </header>
-    <div class="msgs" id="msgs" aria-live="polite"></div>
-    <div class="chips" id="chips">
-      <button data-q="I want to book an appointment">📅 Book Appointment</button><button data-q="Help me find a doctor">🩺 Find a Doctor</button><button data-q="Which departments do you have?">🏥 Departments</button>
-      <button data-q="Tell me about insurance">🛡️ Insurance</button><button data-q="Where is the hospital located?">📍 Location</button><button class="red" data-q="I need emergency assistance">🚨 Emergency</button>
+  <aside class="chat" id="chatPanel" aria-label="Gama Hospital AI Healthcare Assistant">
+    <div class="chat-toolbar">
+      <img class="chat-avatar" src="assets/gama-logo.png" alt="Gama Hospital AI assistant">
+      <div class="chat-title"><strong>GAMA HOSPITAL</strong><small>AI Healthcare Assistant · 24/7</small></div>
+      <div class="chat-controls">
+        <label class="sr-only" for="voiceLanguage">Speech input language</label>
+        <select id="voiceLanguage" class="voice-language" aria-label="Speech input language">
+          <option value="en-US">English (US)</option>
+          <option value="en-IN">English (India)</option>
+          <option value="ar-SA">العربية</option>
+          <option value="ta-IN">தமிழ்</option>
+          <option value="hi-IN">हिन्दी</option>
+          <option value="ur-PK">اردو</option>
+          <option value="ml-IN">മലയാളം</option>
+          <option value="bn-IN">বাংলা</option>
+          <option value="gu-IN">ગુજરાતી</option>
+          <option value="kn-IN">ಕನ್ನಡ</option>
+          <option value="or-IN">ଓଡ଼ିଆ</option>
+          <option value="pa-IN">ਪੰਜਾਬੀ</option>
+          <option value="te-IN">తెలుగు</option>
+          <option value="mr-IN">मराठी</option>
+          <option value="ne-NP">नेपाली</option>
+          <option value="si-LK">සිංහල</option>
+          <option value="fr-FR">Français</option>
+          <option value="es-ES">Español</option>
+          <option value="pt-PT">Português</option>
+          <option value="de-DE">Deutsch</option>
+          <option value="ru-RU">Русский</option>
+          <option value="zh-CN">中文</option>
+          <option value="ja-JP">日本語</option>
+          <option value="ko-KR">한국어</option>
+          <option value="th-TH">ไทย</option>
+        </select>
+        <button class="voice-button" id="voiceInput" type="button" aria-label="Speak to the assistant" title="Speak to the assistant">🎙</button>
+        <button class="voice-button" id="speechToggle" type="button" aria-label="Mute spoken replies" aria-pressed="true" title="Mute spoken replies">🔊</button>
+        <button class="chat-close" id="chatClose" type="button" aria-label="Close chat">×</button>
+      </div>
     </div>
-    <form class="composer" id="composer">
-      <button type="button" id="micBtn" class="mic" aria-label="Speak your message">🎤</button>
-      <input id="chatInput" type="text" placeholder="Type your message or speak…" autocomplete="off">
-      <button type="submit" class="send" aria-label="Send">➤</button>
-    </form>
-    <div class="status"><span id="status">Voice ready</span><label><input type="checkbox" id="autoRead"> 🔊 Read replies aloud</label></div>
+
+    <div class="chat-contact-row" aria-label="Hospital contact options">
+      <a class="call-chip" href="tel:+966920033175"><span aria-hidden="true">☎</span> Call 920033175</a>
+      <a class="wa-chip" href="https://wa.me/966920033175?text=Hello%20GAMA%20Hospital" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">◉</span> WhatsApp</a>
+    </div>
+    <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
+    <div id="bp-embedded-webchat" class="bp-embedded-webchat"></div>
   </aside>
 </div>
 
-<!-- Botpress Webchat (official embed) -->
+<!-- Botpress AI Brain / Webchat -->
 <script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js"></script>
-<script src="https://files.bpcontent.cloud/2026/09/28/18/20260928184020-AYXBWQWJ.js" defer></script>
 <script src="script.js" defer></script>
+<script src="https://files.bpcontent.cloud/2026/09/28/18/20260928184020-AYXBWQWJ.js" defer></script>
 </body>
 </html>
