@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GAMA Hospital – AI Healthcare Concierge</title>
+<link rel="icon" href="assets/gama-logo.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app chat-closed" id="app">
+  <header class="topbar">
+    <button class="logo-btn" id="logoTrigger" aria-expanded="false" aria-label="Open or close Gama AI Concierge" onclick="toggleBotpressChat()">
+      <img src="assets/gama-logo.png" alt="Gama Hospital logo">
+      <span class="brand"><strong>GAMA <em>HOSPITAL</em></strong><small>Care Today. Healthier Tomorrow</small></span>
+    </button>
+    <div class="info">
+      <span>24/7 <small>Patient Support</small></span>
+      <a href="tel:920033175">920033175 <small>Call Us</small></a>
+      <span>Dhahran, Saudi Arabia <small>Our Location</small></span>
+    </div>
+    <a class="sos" href="tel:920033175">🚑 EMERGENCY <b>920033175</b></a>
+  </header>
+
+  <main class="portal">
+    <section class="hero">
+      <div class="hero-text">
+        <p class="w">Welcome to</p>
+        <h1>GAMA <em>HOSPITAL</em></h1>
+        <h2>AI Healthcare Concierge</h2>
+        <p class="sub"><b>Your 24/7 Digital Health Assistant</b><br>Get instant support for appointments, doctors, departments, insurance, location and more.</p>
+      </div>
+      <div class="actions">
+        <button class="card" data-q="I want to book an appointment"><i>📅</i><span><b>Book Appointment</b><small>Schedule with your preferred doctor</small></span></button>
+        <button class="card" data-q="Help me find a doctor"><i>🩺</i><span><b>Find a Doctor</b><small>Search by speciality</small></span></button>
+        <button class="card" data-q="Which departments do you have?"><i>🏥</i><span><b>Departments</b><small>Explore our medical services</small></span></button>
+        <button class="card" data-q="Tell me about insurance and billing"><i>🛡️</i><span><b>Insurance &amp; Billing</b><small>Get insurance and billing guidance</small></span></button>
+        <button class="card" data-q="Where is the hospital located?"><i>📍</i><span><b>Hospital Location</b><small>Directions, visiting hours</small></span></button>
+        <button class="card emergency" data-q="I need emergency assistance"><i>🚨</i><span><b>Emergency Assistance</b><small>Immediate help and helpline numbers</small></span></button>
+      </div>
+      <ul class="strip"><li>World-class Medical Care</li><li>Experienced Specialists</li><li>Advanced Technology</li><li>Patient-Centric Approach</li></ul>
+    </section>
+  </main>
+
+  <aside class="chat" id="chatPanel" aria-label="Gama Hospital AI Healthcare Concierge">
+    <header class="chat-head">
+      <button class="logo-btn" onclick="toggleBotpressChat()" aria-label="Close chat"><img src="assets/gama-logo.png" alt="Gama logo"></button>
+      <div><strong>GAMA HOSPITAL</strong><small>AI Healthcare Concierge</small></div>
+      <select id="lang" aria-label="Language"><option value="en">EN</option><option value="ar">AR</option><option value="ta">TA</option></select>
+    </header>
+    <div class="msgs" id="msgs" aria-live="polite"></div>
+    <div class="chips" id="chips">
+      <button data-q="I want to book an appointment">📅 Book Appointment</button><button data-q="Help me find a doctor">🩺 Find a Doctor</button><button data-q="Which departments do you have?">🏥 Departments</button>
+      <button data-q="Tell me about insurance">🛡️ Insurance</button><button data-q="Where is the hospital located?">📍 Location</button><button class="red" data-q="I need emergency assistance">🚨 Emergency</button>
+    </div>
+    <form class="composer" id="composer">
+      <button type="button" id="micBtn" class="mic" aria-label="Speak your message">🎤</button>
+      <input id="chatInput" type="text" placeholder="Type your message or speak…" autocomplete="off">
+      <button type="submit" class="send" aria-label="Send">➤</button>
+    </form>
+    <div class="status"><span id="status">Voice ready</span><label><input type="checkbox" id="autoRead"> 🔊 Read replies aloud</label></div>
+  </aside>
+</div>
+
+<!-- Botpress Webchat (official embed) -->
+<script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2026/09/28/18/20260928184020-AYXBWQWJ.js" defer></script>
+<script src="script.js" defer></script>
+</body>
+</html>
