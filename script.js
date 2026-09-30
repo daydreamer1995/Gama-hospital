@@ -85,3 +85,23 @@
 
   addMsg('مرحباً بك في مستشفى جاما!\nWelcome to Gama Hospital!\nவணக்கம்! காமா மருத்துவமனைக்கு வரவேற்கிறோம்!\nI\'m your AI Healthcare Concierge. How may I assist you today?');
 })();
+document.addEventListener("DOMContentLoaded", () => {
+  const moreBtn = document.getElementById("moreBtn");
+
+  if (moreBtn) {
+    moreBtn.addEventListener("click", async () => {
+      try {
+        if (
+          window.botpress &&
+          typeof window.botpress.restartConversation === "function"
+        ) {
+          await window.botpress.restartConversation();
+        }
+
+        console.log("New Gama Hospital conversation started.");
+      } catch (error) {
+        console.error("Failed to restart conversation:", error);
+      }
+    });
+  }
+});
