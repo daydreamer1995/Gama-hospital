@@ -4,8 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>GAMA Hospital – AI Healthcare Assistant | مستشفى جاما</title>
+<meta name="description" content="GAMA Hospital, Dhahran, Saudi Arabia. Your 24/7 AI healthcare assistant: answers, departments, clinics and appointment requests.">
+<meta name="theme-color" content="#0a2f5c">
+<meta property="og:title" content="GAMA Hospital – AI Healthcare Assistant">
+<meta property="og:description" content="Ask about departments, doctors, insurance and appointments, 24/7, in your language.">
 <link rel="icon" href="assets/gama-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Tajawal:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -18,20 +23,16 @@
 <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
 <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></symbol>
 <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
-<symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
 <symbol id="i-amb" viewBox="0 0 24 24"><path d="M10 10H6M8 8v4"/><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M9 18h6M19 18h2a1 1 0 0 0 1-1v-3.3a1 1 0 0 0-.7-.95l-1.9-.64a1 1 0 0 1-.6-.5L16.4 8.5a1 1 0 0 0-.9-.5H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
 <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></symbol>
 <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
 <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></symbol>
 <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></symbol>
-<symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></symbol>
-<symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
-<symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
 </defs></svg>
 
 <div class="app chat-closed" id="app">
-  <header class="topbar">
-    <div class="logo-btn header-brand" id="logoTrigger" role="img" aria-label="مستشفى جاما · GAMA HOSPITAL">
+  <header class="topbar" id="topbar">
+    <div class="logo-btn header-brand" id="logoTrigger" role="button" tabindex="0" aria-expanded="false" aria-controls="chatPanel" aria-label="Open or close the Gama AI assistant" title="Chat with Gama AI">
       <img class="header-brand-icon" src="assets/gama-logo.png" alt="">
       <span class="header-brand-copy">
         <span class="brand-ar ar" lang="ar">مستشفى جاما</span>
@@ -43,7 +44,7 @@
       <div><i><svg class="ic"><use href="#i-clock"/></svg></i><span><b>Emergency · 24/7</b><small>Outpatient Clinics: 8:00 AM–8:00 PM</small><small class="ar" lang="ar">الطوارئ على مدار الساعة · العيادات 8 صباحاً–8 مساءً</small></span></div>
       <div><i><svg class="ic"><use href="#i-pin"/></svg></i><span><b>Dhahran, Saudi Arabia</b><small>Our Location</small><small class="ar" lang="ar">الظهران، المملكة العربية السعودية</small></span></div>
     </div>
-    <button class="chat-nav" id="chatNavButton" type="button">Chat with us</button>
+    <button class="chat-nav" id="chatNavButton" type="button" aria-controls="chatPanel">Chat with us</button>
     <a class="sos" href="tel:+966920033175"><i><svg class="ic"><use href="#i-amb"/></svg></i><span><b>EMERGENCY<em class="ar" lang="ar">طوارئ</em></b><small>920033175</small></span></a>
   </header>
 
@@ -79,31 +80,7 @@
       <div class="chat-controls">
         <label class="sr-only" for="voiceLanguage">Speech input language</label>
         <select id="voiceLanguage" class="voice-language" aria-label="Speech input language">
-          <option value="en-US">English (US)</option>
-          <option value="en-IN">English (India)</option>
-          <option value="ar-SA">العربية</option>
-          <option value="ta-IN">தமிழ்</option>
-          <option value="hi-IN">हिन्दी</option>
-          <option value="ur-PK">اردو</option>
-          <option value="ml-IN">മലയാളം</option>
-          <option value="bn-IN">বাংলা</option>
-          <option value="gu-IN">ગુજરાતી</option>
-          <option value="kn-IN">ಕನ್ನಡ</option>
-          <option value="or-IN">ଓଡ଼ିଆ</option>
-          <option value="pa-IN">ਪੰਜਾਬੀ</option>
-          <option value="te-IN">తెలుగు</option>
-          <option value="mr-IN">मराठी</option>
-          <option value="ne-NP">नेपाली</option>
-          <option value="si-LK">සිංහල</option>
-          <option value="fr-FR">Français</option>
-          <option value="es-ES">Español</option>
-          <option value="pt-PT">Português</option>
-          <option value="de-DE">Deutsch</option>
-          <option value="ru-RU">Русский</option>
-          <option value="zh-CN">中文</option>
-          <option value="ja-JP">日本語</option>
-          <option value="ko-KR">한국어</option>
-          <option value="th-TH">ไทย</option>
+          <option value="en-US">English (US)</option><option value="en-IN">English (India)</option><option value="ar-SA">العربية</option><option value="ta-IN">தமிழ்</option><option value="hi-IN">हिन्दी</option><option value="ur-PK">اردو</option><option value="ml-IN">മലയാളം</option><option value="bn-IN">বাংলা</option><option value="gu-IN">ગુજરાતી</option><option value="kn-IN">ಕನ್ನಡ</option><option value="or-IN">ଓଡ଼ିଆ</option><option value="pa-IN">ਪੰਜਾਬੀ</option><option value="te-IN">తెలుగు</option><option value="mr-IN">मराठी</option><option value="ne-NP">नेपाली</option><option value="si-LK">සිංහල</option><option value="fr-FR">Français</option><option value="es-ES">Español</option><option value="pt-PT">Português</option><option value="de-DE">Deutsch</option><option value="ru-RU">Русский</option><option value="zh-CN">中文</option><option value="ja-JP">日本語</option><option value="ko-KR">한국어</option><option value="th-TH">ไทย</option>
         </select>
         <button class="voice-button" id="voiceInput" type="button" aria-label="Speak to the assistant" title="Speak to the assistant">🎙</button>
         <button class="voice-button" id="speechToggle" type="button" aria-label="Mute spoken replies" aria-pressed="true" title="Mute spoken replies">🔊</button>
@@ -112,15 +89,49 @@
     </div>
     <div class="chat-contact-row" aria-label="Hospital contact options">
       <a class="call-chip" href="tel:+966920033175"><span aria-hidden="true">☎</span> Call 920033175</a>
-      <a class="wa-chip" href="https://wa.me/966920033175?text=Hello%20GAMA%20Hospital" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">◉</span> WhatsApp</a>
+      <a class="wa-chip" id="waChip" href="https://wa.me/966920033175?text=Hello%20GAMA%20Hospital" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">◉</span> WhatsApp</a>
+      <button class="dept-chip" id="deptOpen" type="button" aria-controls="deptDrawer" aria-expanded="false">🏥 Departments</button>
+      <a class="book-chip" id="bookChip" href="https://gamahospital.com/en-us/P/book-appointment" target="_blank" rel="noopener noreferrer">📅 Book online</a>
     </div>
     <p class="voice-status" id="voiceStatus" aria-live="polite"></p>
-    <div id="bp-embedded-webchat" class="bp-embedded-webchat"></div>
+    <!-- Voiceflow web chat mounts here (embedded mode) -->
+    <div id="vf-embedded-webchat" class="vf-embedded-webchat"><p class="vf-loading" id="vfLoading">Connecting to Gama AI…</p></div>
+    <p class="chat-note">AI assistant for general information. It cannot diagnose or confirm bookings. Please do not share ID numbers or medical records here. Emergency? Call 920033175.</p>
+
+    <section class="drawer" id="deptDrawer" hidden aria-label="Departments directory">
+      <div class="drawer-head"><strong>Departments <span class="ar" lang="ar">الأقسام</span></strong><button class="chat-close" id="deptClose" type="button" aria-label="Close departments">×</button></div>
+      <input id="deptSearch" type="search" placeholder="Search a department or diagnosis (e.g. diabetes, kidney, pregnancy)" aria-label="Search departments or diagnosis" autocomplete="off">
+      <p class="drawer-note">Helps you reach the right clinic. This is not a medical diagnosis. Tap WhatsApp to chat with the hospital about that department.</p>
+      <p class="dept-warn" id="deptWarn" hidden>This may be an emergency. Please call <a href="tel:+966920033175">920033175</a> now or come to the Emergency Department, open 24/7.</p>
+      <ul class="dept-list" id="deptList"></ul>
+    </section>
   </aside>
 </div>
-<!-- Botpress AI Brain / Webchat -->
-<script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js"></script>
+
+<!-- Voiceflow AI Brain / Webchat (your embed code, embedded into the right panel) -->
+<script type="text/javascript">
+  (function(d, t) {
+      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      v.onload = function() {
+        window.voiceflow.chat.load({
+          verify: { projectID: '6ab3a2f7cc4448cae1becd66' },
+          url: 'https://general-runtime.voiceflow.com',
+          voice: {
+            url: 'https://runtime-api.voiceflow.com'
+          },
+          render: { mode: 'embedded', target: document.getElementById('vf-embedded-webchat') },
+          // our own toolbar acts as the chat header, so the built-in header is hidden
+          assistant: { stylesheet: 'data:text/css;base64,' + btoa('.vfrc-header{display:none!important}') }
+        });
+      }
+      v.onerror = function() {
+        var el = d.getElementById('vfLoading');
+        if (el) el.textContent = 'The AI assistant is unavailable right now. Please call 920033175 or use WhatsApp.';
+      }
+      v.src = 'https://cdn.voiceflow.com/widget-next/bundle.mjs'; v.type = 'text/javascript'; s.parentNode.insertBefore(v, s);
+  })(document, 'script');
+</script>
+<script src="config.js"></script>
 <script src="script.js" defer></script>
-<script src="https://files.bpcontent.cloud/2026/09/28/18/20260928184020-AYXBWQWJ.js" defer></script>
 </body>
 </html>
