@@ -1,460 +1,123 @@
-/* GAMA Hospital Webchat controls.
-   Botpress supplies the conversation. Browser speech APIs provide voice input/output.
-*/
 (() => {
-  'use strict';
+  const $ = id => document.getElementById(id);
+  const app = $('app'), logo = $('logoTrigger'), navBtn = $('chatNavButton'), closeBtn = $('chatClose');
+  const langSel = $('voiceLanguage'), micBtn = $('voiceInput'), spkBtn = $('speechToggle'), status = $('voiceStatus');
+  const tts = window.speechSynthesis;
+  let speakOn = true;
+  const say = t => { status.textContent = t; };
 
-  const app = document.getElementById('app');
-  const launcher = document.getElementById('launcher');
-  const chatNavButton = document.getElementById('chatNavButton');
-  const launcherMic = document.getElementById('launcherMic');
-  const closeButton = document.getElementById('chatClose');
-  const logoTrigger = document.getElementById('logoTrigger');
-  const voiceInput = document.getElementById('voiceInput');
-  const speechToggle = document.getElementById('speechToggle');
-  const languageSelect = document.getElementById('voiceLanguage');
-  const voiceStatus = document.getElementById('voiceStatus');
-
-  let webchatReady = false;
-  const pendingMessages = [];
-  const pendingSpokenReplies = [];
-  let drainingMessages = false;
-  let awaitingBotReply = false;
-  let lastSentUserText = '';
-  let speechEnabled = true;
-  let recognition = null;
-  let listening = false;
-  let lastSpokenMessageId = '';
-  let lastQuestionLanguage = '';
-  let welcomeSpoken = false;
-  let skipDuplicateWelcome = false;
-  const speechWaitingForVoices = [];
-  let voiceLoadFallbackTimer = 0;
-  let voiceListWaitExpired = false;
-
-  const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (languageSelect && Array.from(languageSelect.options).some((option) => option.value.toLowerCase() === (navigator.language || '').toLowerCase())) {
-    languageSelect.value = navigator.language;
-  }
-
-  function setPanelOpen(open) {
-    if (!app) return;
+  /* ---------- Open / close the chat panel (logo, "Chat with us" button, or ×) ---------- */
+  const isOpen = () => !app.classList.contains('chat-closed');
+  function setOpen(open) {
     app.classList.toggle('chat-closed', !open);
-    launcher?.setAttribute('aria-expanded', String(open));
+    logo.setAttribute('aria-expanded', open);
+    if (!open) { tts && tts.cancel(); stopListening(); closeDrawer(); }
   }
+  const toggle = () => setOpen(!isOpen());
+  window.toggleChat = toggle;
+  logo.addEventListener('click', toggle);
+  logo.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+  navBtn.addEventListener('click', toggle);
+  closeBtn.addEventListener('click', () => setOpen(false));
+  new ResizeObserver(() => document.documentElement.style.setProperty('--hh', $('topbar').offsetHeight + 'px')).observe($('topbar'));
 
-  function setStatus(message, show = true) {
-    if (!voiceStatus) return;
-    voiceStatus.textContent = message;
-    voiceStatus.classList.toggle('visible', show && Boolean(message));
+  /* ---------- Send a question to the Voiceflow assistant ---------- */
+  function ask(text) {
+    text = (text || '').trim(); if (!text) return;
+    const vf = window.voiceflow && window.voiceflow.chat;
+    if (!vf || typeof vf.interact !== 'function') { say('Gama AI is connecting. Please try again in a moment.'); return; }
+    try { vf.interact({ type: 'text', payload: text }); } catch (e) { console.error(e); say('Could not send. Please type in the chat box.'); }
   }
-
-  function openBotpressChat(announce = true) {
-    setPanelOpen(true);
-    window.speechSynthesis?.resume?.();
-    if (announce) announceWelcome();
-    if (window.botpress && typeof window.botpress.open === 'function') {
-      window.botpress.open();
-    }
-  }
-
-  function closeBotpressChat() {
-    setPanelOpen(false);
-    if (window.botpress && typeof window.botpress.close === 'function') {
-      window.botpress.close();
-    }
-  }
-
-  async function flushPendingMessages() {
-    if (drainingMessages || !webchatReady || !window.botpress || typeof window.botpress.sendMessage !== 'function') return;
-    drainingMessages = true;
-    try {
-      while (pendingMessages.length && webchatReady) {
-        const message = pendingMessages.shift();
-        try {
-          await window.botpress.sendMessage(message);
-        } catch (error) {
-          console.error('Could not send message to the assistant:', error);
-        }
-      }
-    } finally {
-      drainingMessages = false;
-      if (pendingMessages.length && webchatReady) flushPendingMessages();
-    }
-  }
-
-  function sendChatMessage(text) {
-    const message = String(text || '').trim();
-    if (!message) return;
-    lastQuestionLanguage = languageFor(message);
-    lastSentUserText = message;
-    awaitingBotReply = true;
-    pendingMessages.push(message);
-    openBotpressChat();
-    flushPendingMessages();
-  }
-
-  function sendSpokenText(text) {
-    const message = String(text || '').trim();
-    if (!message) return;
-    sendChatMessage(message);
-    setStatus('Recognized and sent: ' + message, true);
-    window.setTimeout(() => setStatus('', false), 4500);
-  }
-
-  function beginListening() {
-    if (window.location.protocol === 'file:' || !window.isSecureContext) {
-      setStatus('Voice typing needs the published HTTPS demo page. Open the WordPress or GitHub Pages link, then allow microphone access.', true);
+  document.querySelectorAll('[data-chat-prompt]').forEach(b => b.addEventListener('click', () => {
+    if (!isOpen()) { // the chat opens only from the logo or the "Chat with us" button
+      [logo, navBtn].forEach(el => { el.classList.add('nudge'); setTimeout(() => el.classList.remove('nudge'), 600); });
       return;
     }
-    if (!Recognition) {
-      setStatus('Voice input needs Chrome or Edge and an HTTPS WordPress page.', true);
-      return;
-    }
+    ask(b.dataset.chatPrompt);
+  }));
 
-    window.speechSynthesis?.cancel?.();
-    if (!recognition) {
-      recognition = new Recognition();
-      recognition.continuous = false;
-      recognition.interimResults = true;
-      recognition.maxAlternatives = 1;
-
-      recognition.onresult = (event) => {
-        let finalText = '';
-        let interimText = '';
-        for (let i = event.resultIndex; i < event.results.length; i += 1) {
-          const phrase = event.results[i][0]?.transcript || '';
-          if (event.results[i].isFinal) finalText += phrase;
-          else interimText += phrase;
-        }
-        if (interimText) setStatus('Typing: ' + interimText, true);
-        if (finalText.trim()) sendSpokenText(finalText);
-      };
-
-      recognition.onerror = (event) => {
-        const messages = {
-          'not-allowed': 'Allow microphone access in your browser to use voice input.',
-          'service-not-allowed': 'Voice recognition is unavailable in this browser.',
-          'no-speech': 'I did not hear speech. Tap the microphone and try again.',
-          'audio-capture': 'No microphone was found. Connect or enable a microphone and try again.',
-          network: 'Speech recognition needs an internet connection. Check your connection and try again.',
-          aborted: 'Voice typing stopped. Tap the microphone to try again.'
-        };
-        setStatus(messages[event.error] || 'Voice input error: ' + event.error, true);
-      };
-
-      recognition.onstart = () => setStatus('Listening… your speech will appear as text and be sent.', true);
-      recognition.onend = () => {
-        listening = false;
-        voiceInput?.classList.remove('listening');
-        voiceInput?.setAttribute('aria-pressed', 'false');
-        if (voiceStatus?.textContent.startsWith('Typing:')) setStatus('', false);
-        while (pendingSpokenReplies.length) {
-          const pending = pendingSpokenReplies.shift();
-          speakText(pending.text, pending.language);
-        }
-      };
-    }
-
-    recognition.lang = languageSelect?.value || navigator.language || 'en-US';
-    try {
-      recognition.start();
-      listening = true;
-      voiceInput?.classList.add('listening');
-      voiceInput?.setAttribute('aria-pressed', 'true');
-      setStatus('Listening… speak now.', true);
-    } catch (error) {
-      if (error.name === 'InvalidStateError') {
-        setStatus('Already listening. Speak now.', true);
-        return;
-      }
-      setStatus('Could not start the microphone. Check browser permissions.', true);
-    }
-  }
-
-  function languageFor(text) {
-    const selected = (languageSelect?.value || '').toLowerCase();
-    const useSelected = (prefixes, fallback) => prefixes.some((prefix) => selected.startsWith(prefix)) ? languageSelect.value : fallback;
-
-    if (/[\u0600-\u06FF\u0750-\u077F]/u.test(text)) return useSelected(['ar', 'ur', 'fa', 'ps'], 'ar-SA');
-    if (/[\u0B80-\u0BFF]/u.test(text)) return 'ta-IN';
-    if (/[\u0900-\u097F]/u.test(text)) return useSelected(['hi', 'mr', 'ne'], 'hi-IN');
-    if (/[\u0D00-\u0D7F]/u.test(text)) return 'ml-IN';
-    if (/[\u0A00-\u0A7F]/u.test(text)) return 'pa-IN';
-    if (/[\u0C00-\u0C7F]/u.test(text)) return 'te-IN';
-    if (/[\u0980-\u09FF]/u.test(text)) return 'bn-IN';
-    if (/[\u0A80-\u0AFF]/u.test(text)) return 'gu-IN';
-    if (/[\u0C80-\u0CFF]/u.test(text)) return 'kn-IN';
-    if (/[\u0B00-\u0B7F]/u.test(text)) return 'or-IN';
-    if (/[\u0D80-\u0DFF]/u.test(text)) return 'si-LK';
-    if (/[\u0E00-\u0E7F]/u.test(text)) return 'th-TH';
-    if (/[\u1000-\u109F]/u.test(text)) return 'my-MM';
-    if (/[\uAC00-\uD7AF\u1100-\u11FF]/u.test(text)) return 'ko-KR';
-    if (/[\u3040-\u30FF]/u.test(text)) return 'ja-JP';
-    if (/[\u4E00-\u9FFF]/u.test(text)) return useSelected(['zh'], 'zh-CN');
-    if (/[\u0400-\u04FF]/u.test(text)) return useSelected(['ru', 'uk', 'bg'], 'ru-RU');
-    if (/[¿¡ñ]/iu.test(text) || /\b(hola|gracias|quiero|necesito|por favor|dónde|cita|ayuda)\b/iu.test(text)) return 'es-ES';
-    if (/[ãõ]/iu.test(text) || /\b(olá|obrigado|obrigada|preciso|por favor|consulta)\b/iu.test(text)) return 'pt-PT';
-    if (/[äöüß]/iu.test(text) || /\b(hallo|danke|bitte|ich|möchte|krankenhaus)\b/iu.test(text)) return 'de-DE';
-    if (/[œæ]/iu.test(text) || /\b(bonjour|merci|je|vous|rendez-vous|hôpital|besoin)\b/iu.test(text)) return 'fr-FR';
-    if (/[A-Za-z\u00C0-\u024F]/u.test(text)) {
-      const latinLanguages = ['en', 'es', 'fr', 'de', 'pt', 'it', 'nl', 'tr', 'id', 'vi', 'fil', 'sw'];
-      if (latinLanguages.some((prefix) => selected.startsWith(prefix))) return languageSelect.value;
-      const browserLanguage = navigator.language || '';
-      return /^[a-z]{2,3}-/i.test(browserLanguage) ? browserLanguage : 'en-US';
-    }
-    return languageSelect?.value || navigator.language || 'en-US';
-  }
-
-  function welcomeForLanguage(language) {
-    const prefix = String(language || '').toLowerCase().split('-')[0];
-    const greetings = {
-      en: 'Welcome to Gama Hospital. I am the Gama Hospital AI Assistant. How may I help you today?',
-      ta: 'வணக்கம். காமா மருத்துவமனைக்கு உங்களை அன்புடன் வரவேற்கிறோம். நான் காமா மருத்துவமனையின் AI உதவியாளர். இன்று உங்களுக்கு எப்படி உதவலாம்?',
-      ar: 'مرحباً بكم في مستشفى جاما. أنا المساعد الذكي لمستشفى جاما. كيف يمكنني مساعدتكم اليوم؟',
-      hi: 'नमस्ते। गामा अस्पताल में आपका स्वागत है। मैं गामा अस्पताल का AI सहायक हूँ। आज मैं आपकी कैसे मदद कर सकता हूँ?',
-      ur: 'گاما ہسپتال میں خوش آمدید۔ میں گاما ہسپتال کا AI اسسٹنٹ ہوں۔ آج میں آپ کی کیا مدد کر سکتا ہوں؟',
-      ml: 'നമസ്കാരം. ഗാമ ആശുപത്രിയിലേക്ക് സ്വാഗതം. ഞാൻ ഗാമ ആശുപത്രിയുടെ AI അസിസ്റ്റന്റാണ്. ഇന്ന് എങ്ങനെ സഹായിക്കാം?',
-      es: 'Bienvenido a Gama Hospital. Soy el asistente de inteligencia artificial de Gama Hospital. ¿Cómo puedo ayudarle hoy?',
-      fr: 'Bienvenue à Gama Hospital. Je suis l’assistant IA de Gama Hospital. Comment puis-je vous aider aujourd’hui?',
-      de: 'Willkommen im Gama Hospital. Ich bin der KI-Assistent des Gama Hospital. Wie kann ich Ihnen heute helfen?',
-      pt: 'Bem-vindo ao Gama Hospital. Sou o assistente de inteligência artificial do Gama Hospital. Como posso ajudar hoje?'
-    };
-    return greetings[prefix] || '';
-  }
-
-  function speakText(text, language) {
-    if (!speechEnabled || !('speechSynthesis' in window) || !text) return;
-    if (listening) {
-      pendingSpokenReplies.push({ text, language });
-      return;
-    }
-
-    const synth = window.speechSynthesis;
-    if (synth.getVoices().length === 0 && !voiceListWaitExpired && !voiceLoadFallbackTimer) {
-      speechWaitingForVoices.push({ text, language });
-      voiceLoadFallbackTimer = window.setTimeout(() => {
-        voiceLoadFallbackTimer = 0;
-        voiceListWaitExpired = true;
-        const waiting = speechWaitingForVoices.splice(0);
-        waiting.forEach((item) => speakText(item.text, item.language));
-      }, 1200);
-      return;
-    }
-    if (synth.getVoices().length === 0 && !voiceListWaitExpired) {
-      speechWaitingForVoices.push({ text, language });
-      return;
-    }
-
-    window.speechSynthesis.resume?.();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = language || 'en-US';
-    const voices = synth.getVoices();
-    const languagePrefix = utterance.lang.toLowerCase().split('-')[0];
-    const matchingVoice = voices.find((voice) => voice.lang.toLowerCase().startsWith(languagePrefix));
-    if (matchingVoice) utterance.voice = matchingVoice;
-    utterance.rate = 0.96;
-    utterance.pitch = 1;
-    utterance.volume = 1;
-    utterance.onstart = () => setStatus('Assistant is speaking…', true);
-    utterance.onend = () => {
-      if (voiceStatus?.textContent === 'Assistant is speaking…') setStatus('', false);
-    };
-    utterance.onerror = (event) => {
-      console.warn('Assistant voice playback failed:', event.error);
-      setStatus('Voice playback is unavailable. Check your browser speech voices.', true);
-    };
-    try {
-      synth.speak(utterance);
-    } catch (error) {
-      console.error('Could not start assistant speech:', error);
-      setStatus('Assistant voice could not start. Check browser audio and speech voice settings.', true);
-    }
-  }
-
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.addEventListener?.('voiceschanged', () => {
-      if (!window.speechSynthesis.getVoices().length) return;
-      if (voiceLoadFallbackTimer) {
-        window.clearTimeout(voiceLoadFallbackTimer);
-        voiceLoadFallbackTimer = 0;
-      }
-      voiceListWaitExpired = false;
-      const waiting = speechWaitingForVoices.splice(0);
-      waiting.forEach((item) => speakText(item.text, item.language));
+  /* ---------- Text-to-Speech: each line is read in its own language ---------- */
+  const SCRIPTS = [[/[\u0B80-\u0BFF]/, 'ta-IN'], [/[\u0D00-\u0D7F]/, 'ml-IN'], [/[\u0C00-\u0C7F]/, 'te-IN'], [/[\u0C80-\u0CFF]/, 'kn-IN'],
+    [/[\u0980-\u09FF]/, 'bn-IN'], [/[\u0A80-\u0AFF]/, 'gu-IN'], [/[\u0A00-\u0A7F]/, 'pa-IN'], [/[\u0900-\u097F]/, 'hi-IN'],
+    [/[\u0E00-\u0E7F]/, 'th-TH'], [/[\u3040-\u30FF]/, 'ja-JP'], [/[\uAC00-\uD7AF]/, 'ko-KR'], [/[\u4E00-\u9FFF]/, 'zh-CN'],
+    [/[\u0400-\u04FF]/, 'ru-RU'], [/[\u0600-\u06FF]/, 'ar-SA']];
+  const langOf = s => /[\u0679\u0688\u0691\u06BA\u06D2\u06C1]/.test(s) ? 'ur-PK' : ((SCRIPTS.find(([re]) => re.test(s)) || [])[1] || langSel.value);
+  const voiceFor = l => tts.getVoices().find(v => v.lang.replace('_', '-') === l) || tts.getVoices().find(v => v.lang.startsWith(l.split('-')[0]));
+  function speak(raw, queue) {
+    if (!tts || !speakOn) return;
+    if (!queue) tts.cancel();
+    const clean = raw.replace(/<[^>]+>/g, ' ').replace(/https?:\S+/g, '').replace(/[*_`#>\[\]]/g, '').replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '');
+    clean.split(/\n+/).flatMap(l => l.match(/[^.!?؟।]+[.!?؟।]?/g) || []).map(s => s.trim()).filter(s => /[\p{L}\p{N}]/u.test(s)).forEach(c => {
+      const l = langOf(c), u = new SpeechSynthesisUtterance(c), v = voiceFor(l);
+      u.lang = l; u.rate = .95; if (v) u.voice = v; tts.speak(u);
     });
   }
-
-  function announceWelcome() {
-    if (welcomeSpoken || !speechEnabled || !('speechSynthesis' in window)) return;
-    welcomeSpoken = true;
-    const language = languageSelect?.value || navigator.language || 'en-US';
-    const greeting = welcomeForLanguage(language);
-    if (greeting) {
-      skipDuplicateWelcome = true;
-      speakText(greeting, language);
-    }
-  }
-
-  function messageParts(message) {
-    const candidates = [
-      message,
-      message?.message,
-      message?.data,
-      message?.event,
-      message?.payload,
-      message?.data?.message,
-      message?.data?.payload,
-      message?.event?.message,
-      message?.event?.payload
-    ].filter(Boolean);
-
-    const getText = (value) => {
-      if (typeof value === 'string') return value;
-      if (Array.isArray(value)) return value.map(getText).filter(Boolean).join('\n');
-      if (!value || typeof value !== 'object') return '';
-      if (typeof value.text === 'string') return value.text;
-      if (typeof value.preview === 'string') return value.preview;
-      if (typeof value.content === 'string') return value.content;
-      if (Array.isArray(value.blocks)) return getText(value.blocks);
-      if (Array.isArray(value.payload)) return getText(value.payload);
-      if (value.payload) return getText(value.payload);
-      return '';
-    };
-
-    const text = candidates.map(getText).find((value) => value.trim()) || '';
-    const direction = String(
-      message?.direction || message?.message?.direction || message?.data?.direction || message?.event?.direction || ''
-    ).toLowerCase();
-    const id = message?.id || message?.messageId || message?.message?.id || message?.data?.id || '';
-    return { text: text.trim(), direction, id: String(id) };
-  }
-
-  function speakBotReply(message, acceptEitherDirection = false) {
-    if (!speechEnabled || !('speechSynthesis' in window) || !message) return;
-    const { text, direction, id } = messageParts(message);
-    if (!acceptEitherDirection && direction && direction !== 'outgoing') return;
-    if (!text) return;
-    if (id && id === lastSpokenMessageId) return;
-    if (id) lastSpokenMessageId = id;
-
-    const cleanText = text
-      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-      .replace(/\bGama Hospital AI Concierge\b/gi, 'Gama Hospital AI Assistant');
-    if (skipDuplicateWelcome && /(welcome|gama hospital ai|வணக்கம்|வரவேற்கிறோம்|مرحباً)/iu.test(cleanText)) {
-      skipDuplicateWelcome = false;
-      return;
-    }
-    skipDuplicateWelcome = false;
-    setStatus('Reply received. Starting voice…', true);
-    speakText(cleanText, lastQuestionLanguage || languageFor(cleanText));
-  }
-
-  function handleBotpressMessage(message) {
-    if (!message) return;
-    const { text, direction } = messageParts(message);
-    const isUserMessage = ['incoming', 'user', 'from_user', 'from-user'].includes(direction);
-    if (text && lastSentUserText && text.trim().toLowerCase() === lastSentUserText.trim().toLowerCase()) {
-      lastQuestionLanguage = languageFor(text);
-      lastSentUserText = '';
-      awaitingBotReply = true;
-      return;
-    }
-    if (isUserMessage) {
-      if (text) lastQuestionLanguage = languageFor(text);
-      awaitingBotReply = true;
-      return;
-    }
-    if (awaitingBotReply && text) {
-      awaitingBotReply = false;
-      speakBotReply(message, true);
-      return;
-    }
-    speakBotReply(message);
-  }
-
-  document.querySelectorAll('[data-chat-prompt]').forEach((button) => {
-    button.addEventListener('click', () => {
-      const text = String(button.dataset.chatPrompt || '').trim();
-      if (!text) return;
-      sendChatMessage(text);
-    });
+  tts && tts.getVoices();
+  spkBtn.addEventListener('click', () => {
+    speakOn = !speakOn; tts && !speakOn && tts.cancel();
+    spkBtn.textContent = speakOn ? '🔊' : '🔇';
+    spkBtn.setAttribute('aria-pressed', speakOn);
+    const label = speakOn ? 'Mute spoken replies' : 'Turn on spoken replies';
+    spkBtn.setAttribute('aria-label', label); spkBtn.title = label;
+  });
+  // Read the assistant's replies aloud when the widget reports them (Voiceflow posts "voiceflow:interact" events)
+  window.addEventListener('message', e => {
+    if (typeof e.data !== 'string' || !e.data.startsWith('{"type":"voiceflow:interact"')) return;
+    let d; try { d = JSON.parse(e.data); } catch (_) { return; }
+    (function walk(n) {
+      if (!n || typeof n !== 'object') return;
+      if (Array.isArray(n)) return n.forEach(walk);
+      if ((n.type === 'text' || n.type === 'speak') && n.payload && typeof n.payload.message === 'string') speak(n.payload.message, true);
+      else Object.values(n).forEach(walk);
+    })(d);
   });
 
-  launcher?.addEventListener('click', openBotpressChat);
-  chatNavButton?.addEventListener('click', openBotpressChat);
-  closeButton?.addEventListener('click', closeBotpressChat);
-  logoTrigger?.addEventListener('click', openBotpressChat);
-
-  launcherMic?.addEventListener('click', () => {
-    openBotpressChat(false);
-    if (listening) recognition?.stop();
-    else beginListening();
-  });
-
-  voiceInput?.addEventListener('click', () => {
-    if (listening) {
-      recognition?.stop();
-      return;
-    }
-    openBotpressChat(false);
-    beginListening();
-  });
-
-  speechToggle?.addEventListener('click', () => {
-    speechEnabled = !speechEnabled;
-    speechToggle.setAttribute('aria-pressed', String(speechEnabled));
-    speechToggle.setAttribute('aria-label', speechEnabled ? 'Mute spoken replies' : 'Enable spoken replies');
-    speechToggle.title = speechEnabled ? 'Mute spoken replies' : 'Enable spoken replies';
-    speechToggle.textContent = speechEnabled ? '🔊' : '🔇';
-    if (!speechEnabled) window.speechSynthesis?.cancel();
-    else {
-      window.speechSynthesis?.resume?.();
-      announceWelcome();
-    }
-  });
-
-  let botpressEventsBound = false;
-  function bindBotpressEvents() {
-    if (botpressEventsBound || !window.botpress || typeof window.botpress.on !== 'function') return botpressEventsBound;
-    botpressEventsBound = true;
-    window.botpress.on('webchat:initialized', closeBotpressChat);
-    window.botpress.on('webchat:ready', () => {
-      webchatReady = true;
-      flushPendingMessages();
-    });
-    window.botpress.on('webchat:opened', () => setPanelOpen(true));
-    window.botpress.on('webchat:closed', () => {
-      webchatReady = false;
-      setPanelOpen(false);
-    });
-    window.botpress.on('message', handleBotpressMessage);
-    return true;
+  /* ---------- Speech-to-Text: speak, then the words are sent to the assistant ---------- */
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let rec = null, listening = false;
+  function stopListening() { if (rec && listening) rec.stop(); }
+  if (!SR) { micBtn.disabled = true; micBtn.title = 'Voice input is not supported in this browser. Please type.'; }
+  else {
+    rec = new SR(); rec.interimResults = true; let text = '';
+    rec.onstart = () => { listening = true; text = ''; tts && tts.cancel(); micBtn.classList.add('on'); say('Listening…'); };
+    rec.onresult = e => { text = [...e.results].map(r => r[0].transcript).join(''); say('“' + text + '”'); };
+    rec.onend = () => { listening = false; micBtn.classList.remove('on'); if (text.trim()) { say('Sent: “' + text + '”'); ask(text); } else say(''); };
+    rec.onerror = e => say(e.error === 'not-allowed' ? 'Microphone blocked. Allow access in your browser settings.' : 'Voice input failed. Please type instead.');
+    micBtn.addEventListener('click', () => { if (listening) return rec.stop(); rec.lang = langSel.value; try { rec.start(); } catch (_) {} });
   }
 
-  if (!bindBotpressEvents()) {
-    let bindAttempts = 0;
-    const bindTimer = window.setInterval(() => {
-      bindAttempts += 1;
-      if (bindBotpressEvents() || bindAttempts >= 100) window.clearInterval(bindTimer);
-    }, 100);
+  /* ---------- Department directory: routing, diagnosis-to-clinic finder, WhatsApp reroute (see config.js) ---------- */
+  const CFG = window.GAMA_CONFIG || { hospital: {}, whatsapp: {}, links: {}, departments: [], emergencyKeywords: [] };
+  const digits = v => String(v || '').replace(/\D/g, '');
+  const waLink = (num, msg) => 'https://wa.me/' + digits(num || CFG.whatsapp.main) + '?text=' + encodeURIComponent(msg);
+  const hasWA = num => !!digits(num || CFG.whatsapp.main);
+  if (hasWA()) $('waChip').href = waLink('', CFG.whatsapp.message || 'Hello');
+  if (CFG.links && CFG.links.book) $('bookChip').href = CFG.links.book;
+  const drawer = $('deptDrawer'), listEl = $('deptList'), search = $('deptSearch'), warn = $('deptWarn'), openBtn = $('deptOpen');
+  function renderDepts(q) {
+    q = (q || '').trim().toLowerCase();
+    warn.hidden = !(q && (CFG.emergencyKeywords || []).some(k => q.includes(k)));
+    const rows = CFG.departments.map(d => {
+      const kws = d.keywords || [];
+      const hay = [d.en, d.ar].concat(kws).join(' ').toLowerCase();
+      return { d, hit: !q || hay.includes(q), suggested: !!q && kws.some(k => k.includes(q) || q.includes(k)) };
+    }).filter(r => r.hit).sort((a, b) => b.suggested - a.suggested);
+    if (!rows.length) { listEl.innerHTML = `<li class="empty">No match. Ask the AI assistant or call <a href="tel:+966${CFG.hospital.phone}">${CFG.hospital.phone}</a>.</li>`; return; }
+    listEl.innerHTML = rows.map(({ d, suggested }) => {
+      const act = hasWA(d.whatsapp)
+        ? `<a class="wa" target="_blank" rel="noopener noreferrer" href="${waLink(d.whatsapp, 'Hello GAMA Hospital, I need help with the ' + d.en + ' department.')}">WhatsApp</a>`
+        : `<a href="tel:+966${CFG.hospital.phone}">Call</a>`;
+      return `<li class="dept"><div class="dn"><b>${d.en}</b><span class="ar" lang="ar">${d.ar}</span>${suggested ? '<em>Suggested clinic</em>' : ''}</div><div class="da">${act}<button type="button" data-ask="${d.en}">Ask AI</button></div></li>`;
+    }).join('');
   }
-
-  function hideExternalBotpressLauncher() {
-    document.querySelectorAll('iframe[title="Botpress"], .bpFabWrapper, .bpFab, .bpMessagePreviewContainer, [class*="bp"], [id*="bp"]').forEach((element) => {
-      if (element.closest('#bp-embedded-webchat')) return;
-      const style = window.getComputedStyle(element);
-      const text = (element.innerText || element.textContent || '').replace(/\s+/g, ' ').trim();
-      const isGreetingPopup = /hi!?\s*👋?\s*need help\?/i.test(text);
-      if (element.matches('.bpFabWrapper, .bpFab, .bpMessagePreviewContainer') || (style.position === 'fixed' && isGreetingPopup)) {
-        element.style.setProperty('display', 'none', 'important');
-        element.style.setProperty('visibility', 'hidden', 'important');
-        element.style.setProperty('pointer-events', 'none', 'important');
-      }
-    });
-  }
-
-  hideExternalBotpressLauncher();
-  new MutationObserver(hideExternalBotpressLauncher).observe(document.documentElement, { childList: true, subtree: true });
-  setPanelOpen(false);
+  function openDrawer() { drawer.hidden = false; openBtn.setAttribute('aria-expanded', 'true'); search.value = ''; renderDepts(''); search.focus(); }
+  function closeDrawer() { if (!drawer || drawer.hidden) return; drawer.hidden = true; openBtn.setAttribute('aria-expanded', 'false'); }
+  openBtn.addEventListener('click', openDrawer);
+  $('deptClose').addEventListener('click', closeDrawer);
+  search.addEventListener('input', () => renderDepts(search.value));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+  listEl.addEventListener('click', e => {
+    const b = e.target.closest('[data-ask]'); if (!b) return;
+    closeDrawer(); ask('Tell me about the ' + b.dataset.ask + ' department and how I can book an appointment.');
+  });
 })();
