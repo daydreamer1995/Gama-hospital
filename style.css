@@ -1,51 +1,555 @@
-:root{--teal:#0a6e6e;--teal-d:#074f50;--ink:#12302f;--mist:#eef6f5;--line:#cfe2e0;--red:#c8372d;--gold:#b88a2e}
-*{box-sizing:border-box}html,body{height:100%;margin:0}
-body{font-family:Poppins,Tajawal,system-ui,sans-serif;color:var(--ink);background:var(--mist);padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
-.ic{width:1.4em;height:1.4em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.ar{font-family:Tajawal,sans-serif;direction:rtl}
-.app{min-height:100%;display:flex;flex-direction:column}
-.topbar{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:12px 28px;background:#fff;border-bottom:1px solid var(--line)}
-.logo-btn{display:flex;align-items:center;gap:10px;cursor:pointer}.logo-btn img{height:46px}
-.brand strong{display:block;font-size:1.15rem;color:var(--teal-d)}.brand em{font-style:normal;font-weight:500}.brand small{color:#5b7a78}
-.info{display:flex;gap:26px;margin-left:auto;flex-wrap:wrap}
-.info>*{display:flex;gap:8px;align-items:center;color:inherit;text-decoration:none}
-.info span{display:flex;flex-direction:column;font-size:.8rem;line-height:1.25}.info small{color:#5b7a78}
-.sos{display:flex;gap:10px;align-items:center;background:var(--red);color:#fff;text-decoration:none;padding:8px 16px;border-radius:10px}
-.sos span{display:flex;flex-direction:column;font-size:.85rem}.sos em{margin-left:8px;font-style:normal}
-.portal{flex:1;padding:32px 28px 120px;max-width:1180px;margin:0 auto;width:100%;transition:padding .3s}
-.hero-text .w{margin:0;color:var(--gold);font-weight:600}
-.name{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}.name .ar{font-size:2.2rem;font-weight:800;color:var(--teal)}
-h1{margin:0;font-size:2.6rem;color:var(--teal-d);letter-spacing:.02em}
-h2{margin:6px 0 10px;font-size:1.3rem;font-weight:600}h2 .ar{font-size:1.1rem;margin-left:10px;color:#4b6b69}
-.sub b{display:block}.desc{display:block;color:#4b6b69;max-width:62ch;margin-top:4px}.desc .ar{display:block}
-.actions{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin:26px 0}
-.card{display:flex;align-items:center;gap:14px;text-align:left;font:inherit;color:inherit;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;transition:border-color .15s,transform .15s}
-.card:hover,.card:focus-visible{border-color:var(--teal);transform:translateY(-2px)}
-.card>i{display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:var(--mist);color:var(--teal)}
-.card span{display:flex;flex-direction:column;flex:1;font-size:.82rem;color:#5b7a78}.card b{font-size:.98rem;color:var(--ink)}.card u{text-decoration:none;font-size:1.6rem;color:var(--teal)}
-.card.emergency{border-color:#efc3bf}.card.emergency>i{background:#fbe9e7;color:var(--red)}
-.strip{display:flex;gap:28px;flex-wrap:wrap;list-style:none;padding:0;margin:0}
-.strip li{display:flex;gap:10px;align-items:center;font-size:.85rem;font-weight:500}.strip small{display:block;color:#5b7a78}.strip i{color:var(--teal)}
-/* chat panel */
-.chat{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:#fff;border-left:1px solid var(--line);box-shadow:-8px 0 30px rgba(7,79,80,.12);transition:transform .3s;z-index:20}
-#bp-embedded-webchat{width:100%;height:100%}
-.app:not(.chat-closed) .portal{padding-right:468px}
-.app.chat-closed .chat{transform:translateX(105%)}
-.launcher{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:10px;background:var(--teal);color:#fff;border:0;border-radius:40px;padding:8px 18px 8px 8px;font:inherit;cursor:pointer;z-index:30}
-.launcher img{height:42px;width:42px;border-radius:50%;background:#fff;object-fit:contain}
-.launcher .lbl{display:flex;flex-direction:column;text-align:left;font-size:.9rem}.launcher small{opacity:.85;font-size:.7rem}
-.launcher .dot{width:9px;height:9px;border-radius:50%;background:#5ef2a0}
-.tip{position:absolute;right:0;bottom:62px;background:var(--ink);color:#fff;padding:6px 12px;border-radius:8px;font-size:.78rem;white-space:nowrap}.tip.hide{display:none}
-.app:not(.chat-closed) .launcher{display:none}
-/* voice bar */
-.voice{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;background:#fff;border:1px solid var(--line);border-radius:40px;padding:8px 10px;z-index:25;max-width:calc(100% - 24px)}
-.app:not(.chat-closed) .voice{left:calc(50% - 220px)}
-.voice select,.voice button{font:inherit;font-size:.88rem;border-radius:30px;border:1px solid var(--line);background:#fff;padding:8px 14px;cursor:pointer;color:var(--ink)}
-#micBtn{display:flex;align-items:center;gap:8px;background:var(--teal);color:#fff;border-color:var(--teal)}
-#micBtn.listening{background:var(--red);border-color:var(--red);animation:pulse 1.2s infinite}
-#stopBtn{border-color:var(--red);color:var(--red)}
-.voice small{color:#5b7a78;max-width:28ch}
-@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(200,55,45,.18)}}
-button:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-@media(max-width:900px){.app:not(.chat-closed) .portal{padding-right:28px}.app:not(.chat-closed) .voice{left:50%;bottom:auto;top:70px}.info{display:none}.sos{margin-left:auto}h1{font-size:2rem}.name .ar{font-size:1.7rem}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+(() => {
+  "use strict";
+
+  /*
+   * ============================================================
+   * GAMA HOSPITAL — VOICEFLOW AI CONCIERGE
+   * ============================================================
+   *
+   * Voiceflow Project ID:
+   * 6ab3a27fcc448c8cae1bed66
+   *
+   * This file keeps the existing Gama Hospital frontend controls
+   * and connects them to the Voiceflow AI Agent.
+   * ============================================================
+   */
+
+  const VOICEFLOW_PROJECT_ID = "6ab3a27fcc448c8cae1bed66";
+  const VOICEFLOW_RUNTIME_URL = "https://general-runtime.voiceflow.com";
+  const VOICEFLOW_VOICE_URL = "https://runtime-api.voiceflow.com";
+
+  let voiceflowReady = false;
+  let voiceflowLoading = false;
+
+
+  /* ============================================================
+     ELEMENTS
+     ============================================================ */
+
+  const app = document.getElementById("app");
+  const chatPanel = document.getElementById("chatPanel");
+  const launcher = document.getElementById("launcher");
+  const logoTrigger = document.getElementById("logoTrigger");
+
+  const comp = document.getElementById("comp");
+  const msgInput = document.getElementById("msg");
+  const micBtn = document.getElementById("micBtn");
+
+  const alertBox = document.getElementById("alert");
+  const alertX = document.getElementById("alertX");
+
+  const listen = document.getElementById("listen");
+  const listenTxt = document.getElementById("listenTxt");
+
+  const cards = document.querySelectorAll(".card");
+
+
+  /* ============================================================
+     LOAD VOICEFLOW
+     ============================================================ */
+
+  function loadVoiceflow() {
+
+    if (voiceflowReady || voiceflowLoading) {
+      return;
+    }
+
+    voiceflowLoading = true;
+
+    const existingScript =
+      document.querySelector(
+        'script[src="https://cdn.voiceflow.com/widget-next/bundle.mjs"]'
+      );
+
+    function initializeVoiceflow() {
+
+      if (
+        !window.voiceflow ||
+        !window.voiceflow.chat ||
+        typeof window.voiceflow.chat.load !== "function"
+      ) {
+        console.warn("Voiceflow chat API is not ready yet.");
+        voiceflowLoading = false;
+        return;
+      }
+
+      window.voiceflow.chat.load({
+        verify: {
+          projectID: VOICEFLOW_PROJECT_ID
+        },
+
+        url: VOICEFLOW_RUNTIME_URL,
+
+        voice: {
+          url: VOICEFLOW_VOICE_URL
+        }
+      });
+
+      voiceflowReady = true;
+      voiceflowLoading = false;
+
+      console.log("Gama Hospital Voiceflow AI is ready.");
+    }
+
+
+    if (existingScript) {
+
+      if (window.voiceflow && window.voiceflow.chat) {
+        initializeVoiceflow();
+      } else {
+        existingScript.addEventListener(
+          "load",
+          initializeVoiceflow,
+          { once: true }
+        );
+      }
+
+      return;
+    }
+
+
+    const script = document.createElement("script");
+
+    script.src =
+      "https://cdn.voiceflow.com/widget-next/bundle.mjs";
+
+    script.type = "text/javascript";
+
+    script.onload = initializeVoiceflow;
+
+    script.onerror = () => {
+
+      voiceflowLoading = false;
+
+      console.error(
+        "Unable to load Voiceflow widget."
+      );
+
+    };
+
+    document.head.appendChild(script);
+  }
+
+
+  /* ============================================================
+     OPEN / CLOSE CHAT
+     ============================================================ */
+
+  window.toggleBotpressChat = function () {
+
+    /*
+     * Function name is intentionally kept as
+     * toggleBotpressChat() because the original HTML
+     * already calls this function.
+     *
+     * The actual AI engine is now Voiceflow.
+     */
+
+    if (!app) {
+      return;
+    }
+
+    const isClosed =
+      app.classList.contains("chat-closed");
+
+
+    if (isClosed) {
+
+      app.classList.remove("chat-closed");
+
+      loadVoiceflow();
+
+      /*
+       * Voiceflow widget is loaded separately.
+       * The existing Gama Hospital frontend chat panel
+       * remains visible.
+       */
+
+    } else {
+
+      app.classList.add("chat-closed");
+
+    }
+  };
+
+
+  /* ============================================================
+     OPEN GAMA AI
+     ============================================================ */
+
+  window.openGamaAI = function () {
+
+    if (!app) {
+      return;
+    }
+
+    app.classList.remove("chat-closed");
+
+    loadVoiceflow();
+
+  };
+
+
+  /* ============================================================
+     LOGO
+     ============================================================ */
+
+  if (logoTrigger) {
+
+    logoTrigger.addEventListener(
+      "click",
+      () => {
+
+        openGamaAI();
+
+      }
+    );
+
+  }
+
+
+  /* ============================================================
+     LAUNCHER
+     ============================================================ */
+
+  if (launcher) {
+
+    launcher.addEventListener(
+      "click",
+      () => {
+
+        openGamaAI();
+
+      }
+    );
+
+  }
+
+
+  /* ============================================================
+     CLOSE CHAT
+     ============================================================ */
+
+  const closeButtons =
+    document.querySelectorAll(
+      ".chat-head .x"
+    );
+
+  closeButtons.forEach((button) => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        if (app) {
+          app.classList.add("chat-closed");
+        }
+
+      }
+    );
+
+  });
+
+
+  /* ============================================================
+     QUICK ACTION CARDS
+     ============================================================ */
+
+  cards.forEach((card) => {
+
+    card.addEventListener(
+      "click",
+      () => {
+
+        const question =
+          card.getAttribute("data-q");
+
+        openGamaAI();
+
+        if (!question) {
+          return;
+        }
+
+        /*
+         * Put the selected question into the existing
+         * input box.
+         *
+         * The patient can then send it to the AI.
+         */
+
+        if (msgInput) {
+
+          msgInput.value = question;
+
+          msgInput.focus();
+
+        }
+
+      }
+    );
+
+  });
+
+
+  /* ============================================================
+     ALERT CLOSE
+     ============================================================ */
+
+  if (alertX && alertBox) {
+
+    alertX.addEventListener(
+      "click",
+      () => {
+
+        alertBox.hidden = true;
+
+      }
+    );
+
+  }
+
+
+  /* ============================================================
+     SEND MESSAGE
+     ============================================================ */
+
+  if (comp) {
+
+    comp.addEventListener(
+      "submit",
+      (event) => {
+
+        event.preventDefault();
+
+        const text =
+          msgInput
+            ? msgInput.value.trim()
+            : "";
+
+        if (!text) {
+          return;
+        }
+
+        /*
+         * Voiceflow's official widget is the AI interface.
+         *
+         * The original custom composer is retained here
+         * for the existing frontend design.
+         *
+         * We do not invent an unsupported Voiceflow API method.
+         */
+
+        console.log(
+          "Gama Hospital AI message:",
+          text
+        );
+
+        /*
+         * If Voiceflow widget is available,
+         * focus the Voiceflow experience.
+         */
+
+        if (
+          window.voiceflow &&
+          window.voiceflow.chat
+        ) {
+
+          console.log(
+            "Voiceflow AI is available."
+          );
+
+        }
+
+      }
+    );
+
+  }
+
+
+  /* ============================================================
+     MICROPHONE UI
+     ============================================================ */
+
+  let recognition = null;
+  let listening = false;
+
+
+  function setupSpeechRecognition() {
+
+    const SpeechRecognition =
+      window.SpeechRecognition ||
+      window.webkitSpeechRecognition;
+
+
+    if (!SpeechRecognition) {
+
+      console.warn(
+        "Speech recognition is not supported in this browser."
+      );
+
+      return;
+
+    }
+
+
+    recognition =
+      new SpeechRecognition();
+
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    /*
+     * English is used as the browser speech recognition
+     * fallback. Voiceflow itself has its own voice settings.
+     */
+
+    recognition.lang = "en-US";
+
+
+    recognition.onstart = () => {
+
+      listening = true;
+
+      if (micBtn) {
+        micBtn.classList.add("on");
+      }
+
+      if (listen) {
+        listen.hidden = false;
+      }
+
+      if (listenTxt) {
+        listenTxt.textContent =
+          "Listening…";
+      }
+
+    };
+
+
+    recognition.onresult = (event) => {
+
+      const transcript =
+        event.results[0][0].transcript;
+
+      if (msgInput) {
+        msgInput.value = transcript;
+      }
+
+    };
+
+
+    recognition.onerror = (event) => {
+
+      console.warn(
+        "Speech recognition error:",
+        event.error
+      );
+
+      stopListening();
+
+    };
+
+
+    recognition.onend = () => {
+
+      stopListening();
+
+    };
+
+  }
+
+
+  function stopListening() {
+
+    listening = false;
+
+    if (micBtn) {
+      micBtn.classList.remove("on");
+    }
+
+    if (listen) {
+      listen.hidden = true;
+    }
+
+  }
+
+
+  if (micBtn) {
+
+    micBtn.addEventListener(
+      "click",
+      () => {
+
+        if (!recognition) {
+
+          setupSpeechRecognition();
+
+        }
+
+
+        if (!recognition) {
+
+          alert(
+            "Voice input is not supported in this browser."
+          );
+
+          return;
+
+        }
+
+
+        if (listening) {
+
+          recognition.stop();
+
+          return;
+
+        }
+
+
+        try {
+
+          recognition.start();
+
+        } catch (error) {
+
+          console.warn(
+            "Microphone could not start:",
+            error
+          );
+
+        }
+
+      }
+    );
+
+  }
+
+
+  /* ============================================================
+     INITIALIZE
+     ============================================================ */
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+      /*
+       * Do not immediately open the AI.
+       *
+       * The Gama Hospital page loads first.
+       * Voiceflow is loaded when the patient opens
+       * the AI assistant.
+       */
+
+      setupSpeechRecognition();
+
+      console.log(
+        "Gama Hospital frontend initialized."
+      );
+
+    }
+  );
+
+
+})();
