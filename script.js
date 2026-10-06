@@ -1,178 +1,192 @@
 "use strict";
 
 
-/* =========================================
+/* =================================================
    GAMA HOSPITAL
-   VOICEFLOW AI CONTROL
-========================================= */
+   VOICEFLOW AI CONTROLLER
+================================================= */
 
 
-/* =========================================
-   OPEN GAMA AI CHAT
-========================================= */
+/* =================================================
+   OPEN VOICEFLOW CHAT
+================================================= */
 
-window.openGamaAI = function(message) {
-
-
-  function openChat() {
+window.openGamaAI =
+  function(message) {
 
 
-    /* Voiceflow இன்னும் load ஆகவில்லை */
-
-    if (
-      !window.voiceflow ||
-      !window.voiceflow.chat
-    ) {
-
-      console.log(
-        "GAMA AI is loading..."
-      );
-
-      return false;
-
-    }
+    function openNow() {
 
 
-    try {
-
-
-      /* ==============================
-         OPEN VOICEFLOW CHAT BOX
-      ============================== */
+      /* Voiceflow not ready */
 
       if (
-        typeof window.voiceflow.chat.open ===
-        "function"
+        !window.voiceflow ||
+        !window.voiceflow.chat
       ) {
 
-        window.voiceflow.chat.open();
+        return false;
 
       }
 
 
-      /* ==============================
-         SEND CARD MESSAGE
-      ============================== */
+      try {
 
-      if (
-        message &&
-        typeof window.voiceflow.chat.interact ===
-        "function"
-      ) {
 
-        setTimeout(function() {
+        /* =========================================
+           OPEN REAL VOICEFLOW CHAT BOX
+        ========================================= */
 
-          try {
+        if (
+          typeof
+          window.voiceflow.chat.open ===
+          "function"
+        ) {
 
-            window.voiceflow.chat.interact({
+          window.voiceflow.chat.open();
 
-              type: "text",
+        }
 
-              payload: {
 
-                message: message
+        /* =========================================
+           SEND THE SELECTED CARD REQUEST
+        ========================================= */
+
+        if (
+          message &&
+          typeof
+          window.voiceflow.chat.interact ===
+          "function"
+        ) {
+
+
+          setTimeout(
+            function() {
+
+
+              try {
+
+
+                /*
+                 * Voiceflow text event
+                 */
+
+                window.voiceflow.chat.interact({
+
+                  type: "text",
+
+                  payload: message
+
+                });
+
 
               }
 
-            });
+              catch(error) {
 
-          }
+                console.error(
+                  "GAMA AI message error:",
+                  error
+                );
 
-          catch(error) {
+              }
 
-            console.warn(
-              "GAMA AI message error:",
-              error
-            );
 
-          }
+            },
+            500
+          );
 
-        }, 700);
+        }
+
+
+        return true;
 
       }
 
 
-      return true;
+      catch(error) {
+
+        console.error(
+          "GAMA AI open error:",
+          error
+        );
+
+        return false;
+
+      }
 
     }
 
-    catch(error) {
 
-      console.error(
-        "GAMA AI open error:",
-        error
+
+    /* =========================================
+       WAIT FOR VOICEFLOW
+    ========================================= */
+
+    if (
+      openNow()
+    ) {
+
+      return;
+
+    }
+
+
+    let attempts = 0;
+
+
+    const retry =
+      setInterval(
+        function() {
+
+
+          attempts++;
+
+
+          if (
+            openNow() ||
+            attempts >= 15
+          ) {
+
+            clearInterval(retry);
+
+          }
+
+
+        },
+        400
       );
 
-      return false;
 
-    }
-
-  }
-
-
-  /* ==============================
-     FIRST TRY
-  ============================== */
-
-  if (openChat()) {
-
-    return;
-
-  }
-
-
-  /* ==============================
-     RETRY IF VOICEFLOW LOADING
-  ============================== */
-
-  let attempts = 0;
-
-
-  const retry =
-    setInterval(function() {
-
-
-      attempts++;
-
-
-      if (
-        openChat() ||
-        attempts >= 12
-      ) {
-
-        clearInterval(retry);
-
-      }
-
-
-    }, 500);
-
-};
+  };
 
 
 
-/* =========================================
+/* =================================================
    PAGE READY
-========================================= */
+================================================= */
 
 document.addEventListener(
   "DOMContentLoaded",
   function() {
 
 
-    /* =====================================
-       OPEN GAMA AI BUTTON
-    ===================================== */
+    /* =========================================
+       MAIN GAMA AI BUTTON
+    ========================================= */
 
-    const mainAI =
+    const openGamaAIButton =
       document.getElementById(
         "openGamaAI"
       );
 
 
-    if (mainAI) {
+    if (
+      openGamaAIButton
+    ) {
 
-      mainAI.addEventListener(
+
+      openGamaAIButton.addEventListener(
         "click",
         function() {
 
@@ -185,9 +199,9 @@ document.addEventListener(
 
 
 
-    /* =====================================
+    /* =========================================
        FLOATING GAMA AI BUTTON
-    ===================================== */
+    ========================================= */
 
     const floatingAI =
       document.getElementById(
@@ -195,7 +209,10 @@ document.addEventListener(
       );
 
 
-    if (floatingAI) {
+    if (
+      floatingAI
+    ) {
+
 
       floatingAI.addEventListener(
         "click",
@@ -210,9 +227,9 @@ document.addEventListener(
 
 
 
-    /* =====================================
-       ALL GAMA AI CARDS
-    ===================================== */
+    /* =========================================
+       ALL WHITE ACTION CARDS
+    ========================================= */
 
     const cards =
       document.querySelectorAll(
@@ -249,9 +266,9 @@ document.addEventListener(
 
 
 
-    /* =====================================
+    /* =========================================
        DEPARTMENT MODAL
-    ===================================== */
+    ========================================= */
 
     const modal =
       document.getElementById(
@@ -259,7 +276,7 @@ document.addEventListener(
       );
 
 
-    const openDepartment =
+    const departmentButton =
       document.getElementById(
         "departmentButton"
       );
@@ -277,16 +294,16 @@ document.addEventListener(
       );
 
 
-    const list =
+    const departmentList =
       document.getElementById(
         "departmentList"
       );
 
 
 
-    /* =====================================
-       DEPARTMENT DATA
-    ===================================== */
+    /* =========================================
+       DEPARTMENTS
+    ========================================= */
 
     const departments = [
 
@@ -318,16 +335,18 @@ document.addEventListener(
 
 
 
-    /* =====================================
+    /* =========================================
        RENDER DEPARTMENTS
-    ===================================== */
+    ========================================= */
 
     function renderDepartments(
       query
     ) {
 
 
-      if (!list) {
+      if (
+        !departmentList
+      ) {
 
         return;
 
@@ -335,18 +354,21 @@ document.addEventListener(
 
 
       const keyword =
-        (query || "")
+        (
+          query || ""
+        )
         .trim()
         .toLowerCase();
 
 
-      list.innerHTML = "";
-
+      departmentList.innerHTML =
+        "";
 
 
       departments
         .filter(
           function(department) {
+
 
             return (
               keyword === "" ||
@@ -354,6 +376,7 @@ document.addEventListener(
                 .toLowerCase()
                 .includes(keyword)
             );
+
 
           }
         )
@@ -385,14 +408,6 @@ document.addEventListener(
               );
 
 
-            whatsapp.target =
-              "_blank";
-
-
-            whatsapp.rel =
-              "noopener noreferrer";
-
-
             whatsapp.href =
               "https://wa.me/966920033175?text=" +
               encodeURIComponent(
@@ -401,18 +416,31 @@ document.addEventListener(
               );
 
 
+            whatsapp.target =
+              "_blank";
+
+
+            whatsapp.rel =
+              "noopener noreferrer";
+
+
             whatsapp.textContent =
               "WhatsApp";
 
 
-            li.appendChild(name);
+            li.appendChild(
+              name
+            );
+
 
             li.appendChild(
               whatsapp
             );
 
 
-            list.appendChild(li);
+            departmentList.appendChild(
+              li
+            );
 
 
           }
@@ -422,17 +450,17 @@ document.addEventListener(
 
 
 
-    /* =====================================
+    /* =========================================
        OPEN DEPARTMENT MODAL
-    ===================================== */
+    ========================================= */
 
     if (
-      openDepartment &&
+      departmentButton &&
       modal
     ) {
 
 
-      openDepartment.addEventListener(
+      departmentButton.addEventListener(
         "click",
         function() {
 
@@ -441,17 +469,23 @@ document.addEventListener(
             false;
 
 
-          renderDepartments("");
+          renderDepartments(
+            ""
+          );
 
 
           setTimeout(
             function() {
 
-              if (search) {
+
+              if (
+                search
+              ) {
 
                 search.focus();
 
               }
+
 
             },
             100
@@ -466,9 +500,9 @@ document.addEventListener(
 
 
 
-    /* =====================================
-       CLOSE DEPARTMENT
-    ===================================== */
+    /* =========================================
+       CLOSE MODAL
+    ========================================= */
 
     if (
       closeDepartment &&
@@ -480,8 +514,10 @@ document.addEventListener(
         "click",
         function() {
 
+
           modal.hidden =
             true;
+
 
         }
       );
@@ -491,11 +527,13 @@ document.addEventListener(
 
 
 
-    /* =====================================
-       CLICK OUTSIDE MODAL
-    ===================================== */
+    /* =========================================
+       OUTSIDE CLICK
+    ========================================= */
 
-    if (modal) {
+    if (
+      modal
+    ) {
 
 
       modal.addEventListener(
@@ -504,11 +542,14 @@ document.addEventListener(
 
 
           if (
-            event.target === modal
+            event.target ===
+            modal
           ) {
+
 
             modal.hidden =
               true;
+
 
           }
 
@@ -521,11 +562,13 @@ document.addEventListener(
 
 
 
-    /* =====================================
-       SEARCH DEPARTMENT
-    ===================================== */
+    /* =========================================
+       SEARCH
+    ========================================= */
 
-    if (search) {
+    if (
+      search
+    ) {
 
 
       search.addEventListener(
@@ -546,9 +589,9 @@ document.addEventListener(
 
 
 
-    /* =====================================
-       ESC KEY
-    ===================================== */
+    /* =========================================
+       ESCAPE
+    ========================================= */
 
     document.addEventListener(
       "keydown",
