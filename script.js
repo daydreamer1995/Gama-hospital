@@ -1,55 +1,577 @@
-(() => {
-  const $ = id => document.getElementById(id);
-  const CFG = window.GAMA_CONFIG || { hospital: {}, whatsapp: {}, departments: [], emergencyKeywords: [] };
+"use strict";
 
-  /* ---------- Small helper message ---------- */
-  function toast(msg) {
-    const t = document.createElement('div'); t.className = 'toast'; t.setAttribute('role', 'status'); t.textContent = msg;
-    document.body.appendChild(t); setTimeout(() => t.remove(), 3500);
-  }
 
-  /* ---------- Cards: open the Voiceflow chat and send the question ---------- */
-  function ask(text) {
-    const vf = window.voiceflow && window.voiceflow.chat;
-    if (!vf || typeof vf.open !== 'function') { toast('The assistant is still loading. Please try again, or call ' + (CFG.hospital.phone || '920033175') + '.'); return; }
+/* =========================================
+   GAMA HOSPITAL
+   VOICEFLOW AI CONTROL
+========================================= */
+
+
+/* =========================================
+   OPEN GAMA AI CHAT
+========================================= */
+
+window.openGamaAI = function(message) {
+
+
+  function openChat() {
+
+
+    /* Voiceflow இன்னும் load ஆகவில்லை */
+
+    if (
+      !window.voiceflow ||
+      !window.voiceflow.chat
+    ) {
+
+      console.log(
+        "GAMA AI is loading..."
+      );
+
+      return false;
+
+    }
+
+
     try {
-      vf.open();
-      setTimeout(() => { try { vf.interact({ type: 'text', payload: text }); } catch (e) { console.error(e); } }, 500);
-    } catch (e) { console.error(e); }
-  }
-  document.querySelectorAll('[data-chat-prompt]').forEach(b => b.addEventListener('click', () => ask(b.dataset.chatPrompt)));
 
-  /* ---------- Departments: routing, diagnosis-to-clinic finder, WhatsApp reroute (see config.js) ---------- */
-  const digits = v => String(v || '').replace(/\D/g, '');
-  const waLink = (num, msg) => 'https://wa.me/' + digits(num || CFG.whatsapp.main) + '?text=' + encodeURIComponent(msg);
-  const hasWA = num => !!digits(num || CFG.whatsapp.main);
-  if (hasWA()) $('waChip').href = waLink('', CFG.whatsapp.message || 'Hello');
-  const modal = $('deptDrawer'), listEl = $('deptList'), search = $('deptSearch'), warn = $('deptWarn'), openBtn = $('deptOpen');
-  function renderDepts(q) {
-    q = (q || '').trim().toLowerCase();
-    warn.hidden = !(q && (CFG.emergencyKeywords || []).some(k => q.includes(k)));
-    const rows = CFG.departments.map(d => {
-      const kws = d.keywords || [];
-      const hay = [d.en, d.ar].concat(kws).join(' ').toLowerCase();
-      return { d, hit: !q || hay.includes(q), suggested: !!q && kws.some(k => k.includes(q) || q.includes(k)) };
-    }).filter(r => r.hit).sort((a, b) => b.suggested - a.suggested);
-    if (!rows.length) { listEl.innerHTML = `<li class="empty">No match. Ask the AI assistant or call <a href="tel:+966${CFG.hospital.phone}">${CFG.hospital.phone}</a>.</li>`; return; }
-    listEl.innerHTML = rows.map(({ d, suggested }) => {
-      const act = hasWA(d.whatsapp)
-        ? `<a class="wa" target="_blank" rel="noopener noreferrer" href="${waLink(d.whatsapp, 'Hello GAMA Hospital, I need help with the ' + d.en + ' department.')}">WhatsApp</a>`
-        : `<a href="tel:+966${CFG.hospital.phone}">Call</a>`;
-      return `<li class="dept"><div class="dn"><b>${d.en}</b><span class="ar" lang="ar">${d.ar}</span>${suggested ? '<em>Suggested clinic</em>' : ''}</div><div class="da">${act}<button type="button" data-ask="${d.en}">Ask AI</button></div></li>`;
-    }).join('');
+
+      /* ==============================
+         OPEN VOICEFLOW CHAT BOX
+      ============================== */
+
+      if (
+        typeof window.voiceflow.chat.open ===
+        "function"
+      ) {
+
+        window.voiceflow.chat.open();
+
+      }
+
+
+      /* ==============================
+         SEND CARD MESSAGE
+      ============================== */
+
+      if (
+        message &&
+        typeof window.voiceflow.chat.interact ===
+        "function"
+      ) {
+
+        setTimeout(function() {
+
+          try {
+
+            window.voiceflow.chat.interact({
+
+              type: "text",
+
+              payload: {
+
+                message: message
+
+              }
+
+            });
+
+          }
+
+          catch(error) {
+
+            console.warn(
+              "GAMA AI message error:",
+              error
+            );
+
+          }
+
+        }, 700);
+
+      }
+
+
+      return true;
+
+    }
+
+    catch(error) {
+
+      console.error(
+        "GAMA AI open error:",
+        error
+      );
+
+      return false;
+
+    }
+
   }
-  function openModal() { modal.hidden = false; search.value = ''; renderDepts(''); search.focus(); }
-  function closeModal() { modal.hidden = true; openBtn.focus(); }
-  openBtn.addEventListener('click', openModal);
-  $('deptClose').addEventListener('click', closeModal);
-  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-  search.addEventListener('input', () => renderDepts(search.value));
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
-  listEl.addEventListener('click', e => {
-    const b = e.target.closest('[data-ask]'); if (!b) return;
-    modal.hidden = true; ask('Tell me about the ' + b.dataset.ask + ' department and how I can book an appointment.');
-  });
-})();
+
+
+  /* ==============================
+     FIRST TRY
+  ============================== */
+
+  if (openChat()) {
+
+    return;
+
+  }
+
+
+  /* ==============================
+     RETRY IF VOICEFLOW LOADING
+  ============================== */
+
+  let attempts = 0;
+
+
+  const retry =
+    setInterval(function() {
+
+
+      attempts++;
+
+
+      if (
+        openChat() ||
+        attempts >= 12
+      ) {
+
+        clearInterval(retry);
+
+      }
+
+
+    }, 500);
+
+};
+
+
+
+/* =========================================
+   PAGE READY
+========================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+
+    /* =====================================
+       OPEN GAMA AI BUTTON
+    ===================================== */
+
+    const mainAI =
+      document.getElementById(
+        "openGamaAI"
+      );
+
+
+    if (mainAI) {
+
+      mainAI.addEventListener(
+        "click",
+        function() {
+
+          window.openGamaAI();
+
+        }
+      );
+
+    }
+
+
+
+    /* =====================================
+       FLOATING GAMA AI BUTTON
+    ===================================== */
+
+    const floatingAI =
+      document.getElementById(
+        "gamaFloatingAI"
+      );
+
+
+    if (floatingAI) {
+
+      floatingAI.addEventListener(
+        "click",
+        function() {
+
+          window.openGamaAI();
+
+        }
+      );
+
+    }
+
+
+
+    /* =====================================
+       ALL GAMA AI CARDS
+    ===================================== */
+
+    const cards =
+      document.querySelectorAll(
+        ".action-card[data-chat-prompt]"
+      );
+
+
+    cards.forEach(
+      function(card) {
+
+
+        card.addEventListener(
+          "click",
+          function() {
+
+
+            const message =
+              card.getAttribute(
+                "data-chat-prompt"
+              );
+
+
+            window.openGamaAI(
+              message
+            );
+
+
+          }
+        );
+
+
+      }
+    );
+
+
+
+    /* =====================================
+       DEPARTMENT MODAL
+    ===================================== */
+
+    const modal =
+      document.getElementById(
+        "departmentModal"
+      );
+
+
+    const openDepartment =
+      document.getElementById(
+        "departmentButton"
+      );
+
+
+    const closeDepartment =
+      document.getElementById(
+        "closeDepartment"
+      );
+
+
+    const search =
+      document.getElementById(
+        "departmentSearch"
+      );
+
+
+    const list =
+      document.getElementById(
+        "departmentList"
+      );
+
+
+
+    /* =====================================
+       DEPARTMENT DATA
+    ===================================== */
+
+    const departments = [
+
+      "Cardiology",
+
+      "Internal Medicine",
+
+      "General Surgery",
+
+      "Orthopedics",
+
+      "Pediatrics",
+
+      "Obstetrics & Gynecology",
+
+      "ENT",
+
+      "Ophthalmology",
+
+      "Dermatology",
+
+      "Urology",
+
+      "Nephrology",
+
+      "Emergency Department"
+
+    ];
+
+
+
+    /* =====================================
+       RENDER DEPARTMENTS
+    ===================================== */
+
+    function renderDepartments(
+      query
+    ) {
+
+
+      if (!list) {
+
+        return;
+
+      }
+
+
+      const keyword =
+        (query || "")
+        .trim()
+        .toLowerCase();
+
+
+      list.innerHTML = "";
+
+
+
+      departments
+        .filter(
+          function(department) {
+
+            return (
+              keyword === "" ||
+              department
+                .toLowerCase()
+                .includes(keyword)
+            );
+
+          }
+        )
+
+
+        .forEach(
+          function(department) {
+
+
+            const li =
+              document.createElement(
+                "li"
+              );
+
+
+            const name =
+              document.createElement(
+                "span"
+              );
+
+
+            name.textContent =
+              department;
+
+
+            const whatsapp =
+              document.createElement(
+                "a"
+              );
+
+
+            whatsapp.target =
+              "_blank";
+
+
+            whatsapp.rel =
+              "noopener noreferrer";
+
+
+            whatsapp.href =
+              "https://wa.me/966920033175?text=" +
+              encodeURIComponent(
+                "Hello GAMA Hospital, I need information about " +
+                department
+              );
+
+
+            whatsapp.textContent =
+              "WhatsApp";
+
+
+            li.appendChild(name);
+
+            li.appendChild(
+              whatsapp
+            );
+
+
+            list.appendChild(li);
+
+
+          }
+        );
+
+    }
+
+
+
+    /* =====================================
+       OPEN DEPARTMENT MODAL
+    ===================================== */
+
+    if (
+      openDepartment &&
+      modal
+    ) {
+
+
+      openDepartment.addEventListener(
+        "click",
+        function() {
+
+
+          modal.hidden =
+            false;
+
+
+          renderDepartments("");
+
+
+          setTimeout(
+            function() {
+
+              if (search) {
+
+                search.focus();
+
+              }
+
+            },
+            100
+          );
+
+
+        }
+      );
+
+
+    }
+
+
+
+    /* =====================================
+       CLOSE DEPARTMENT
+    ===================================== */
+
+    if (
+      closeDepartment &&
+      modal
+    ) {
+
+
+      closeDepartment.addEventListener(
+        "click",
+        function() {
+
+          modal.hidden =
+            true;
+
+        }
+      );
+
+
+    }
+
+
+
+    /* =====================================
+       CLICK OUTSIDE MODAL
+    ===================================== */
+
+    if (modal) {
+
+
+      modal.addEventListener(
+        "click",
+        function(event) {
+
+
+          if (
+            event.target === modal
+          ) {
+
+            modal.hidden =
+              true;
+
+          }
+
+
+        }
+      );
+
+
+    }
+
+
+
+    /* =====================================
+       SEARCH DEPARTMENT
+    ===================================== */
+
+    if (search) {
+
+
+      search.addEventListener(
+        "input",
+        function() {
+
+
+          renderDepartments(
+            search.value
+          );
+
+
+        }
+      );
+
+
+    }
+
+
+
+    /* =====================================
+       ESC KEY
+    ===================================== */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+
+        if (
+          event.key === "Escape" &&
+          modal &&
+          !modal.hidden
+        ) {
+
+
+          modal.hidden =
+            true;
+
+
+        }
+
+
+      }
+    );
+
+
+  }
+);
