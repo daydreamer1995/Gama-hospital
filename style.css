@@ -2,34 +2,46 @@
   box-sizing: border-box;
 }
 
+
 html,
 body {
   margin: 0;
   padding: 0;
-  min-height: 100%;
-  font-family: Poppins, Tajawal, Arial, sans-serif;
-  background: #062e5a;
-}
 
-body {
+  width: 100%;
+
+  font-family:
+    Poppins,
+    Tajawal,
+    Arial,
+    sans-serif;
+
+  background: #062e5a;
+
   overflow-x: hidden;
 }
+
 
 button,
 a {
   font-family: inherit;
 }
 
+
 button {
   cursor: pointer;
 }
 
 
-/* ================= HEADER ================= */
+/* =================================================
+   HEADER
+================================================= */
 
 .topbar {
 
-  min-height: 86px;
+  min-height: 78px;
+
+  width: 100%;
 
   background: #ffffff;
 
@@ -37,18 +49,23 @@ button {
 
   align-items: center;
 
-  gap: 22px;
+  gap: 18px;
 
-  padding: 8px 20px;
+  padding:
+    7px 16px;
 
   position: relative;
 
-  z-index: 20;
+  z-index: 100;
 
   box-shadow:
-    0 2px 12px rgba(0,0,0,.08);
+    0 2px 10px
+    rgba(0,0,0,.08);
+
 }
 
+
+/* BRAND */
 
 .header-brand {
 
@@ -56,19 +73,21 @@ button {
 
   align-items: center;
 
-  min-width: 420px;
+  min-width: 350px;
+
 }
 
 
 .header-logo {
 
-  width: 62px;
+  width: 54px;
 
-  height: 62px;
+  height: 54px;
 
   object-fit: contain;
 
-  margin-right: 13px;
+  margin-right: 11px;
+
 }
 
 
@@ -79,52 +98,64 @@ button {
   flex-direction: column;
 
   line-height: 1.05;
+
 }
 
 
 .brand-ar {
 
-  font-family: Tajawal, Arial, sans-serif;
+  font-family: Tajawal;
 
   font-weight: 800;
 
-  font-size: 18px;
+  font-size: 16px;
+
+  color: #111f31;
+
 }
 
 
 .brand-name {
 
-  color: #e3212d;
-
-  font-size: 25px;
+  font-size: 22px;
 
   font-weight: 800;
+
+  color: #df1f2d;
+
 }
 
 
 .brand-name span {
 
-  color: #146fd3;
+  color: #1770ce;
+
 }
 
 
 .brand-copy small {
 
-  margin-top: 4px;
+  color: #66778a;
 
-  color: #637286;
+  font-size: 10px;
 
-  font-size: 12px;
+  margin-top: 3px;
+
 }
 
+
+/* HEADER INFO */
 
 .header-info {
 
   display: flex;
 
-  gap: 28px;
+  align-items: center;
+
+  gap: 20px;
 
   margin-left: auto;
+
 }
 
 
@@ -134,44 +165,56 @@ button {
 
   align-items: center;
 
-  gap: 10px;
+  gap: 8px;
 
-  padding-right: 24px;
+  padding-right: 20px;
 
   border-right:
-    1px solid #dce4ed;
+    1px solid #dde5ed;
+
 }
 
 
 .info-icon {
 
-  color: #073d74;
+  color: #0a3e73;
 
-  font-size: 32px;
+  font-size: 28px;
+
 }
 
 
-.info-item div:last-child {
+.info-item > div:last-child {
 
   display: flex;
 
   flex-direction: column;
+
 }
 
 
 .info-item strong {
 
-  color: #14283f;
+  color: #14263b;
 
-  font-size: 15px;
+  font-size: 13px;
+
 }
 
 
 .info-item small {
 
-  color: #66778b;
+  color: #68788b;
 
-  font-size: 11px;
+  font-size: 9px;
+
+}
+
+
+.arabic {
+
+  font-family: Tajawal, Arial, sans-serif;
+
 }
 
 
@@ -179,18 +222,24 @@ button {
 
   text-decoration: none;
 
-  color: #087c3a;
+  color: #087b39;
 
   border:
-    1px solid #b8e5c8;
+    1px solid #b9e3c8;
 
-  border-radius: 30px;
+  background: #ffffff;
 
-  padding: 12px 21px;
+  padding:
+    9px 17px;
+
+  border-radius: 24px;
+
+  font-size: 13px;
 
   font-weight: 700;
 
   white-space: nowrap;
+
 }
 
 
@@ -200,26 +249,30 @@ button {
 
   align-items: center;
 
-  gap: 9px;
+  gap: 8px;
 
-  color: #fff;
+  padding:
+    9px 15px;
 
   background: #e91e2d;
 
+  color: #ffffff;
+
   text-decoration: none;
 
-  border-radius: 16px;
-
-  padding: 11px 18px;
+  border-radius: 14px;
 
   box-shadow:
-    0 8px 18px rgba(233,30,45,.2);
+    0 6px 15px
+    rgba(233,30,45,.18);
+
 }
 
 
 .ambulance {
 
-  font-size: 27px;
+  font-size: 23px;
+
 }
 
 
@@ -228,12 +281,14 @@ button {
   display: flex;
 
   flex-direction: column;
+
 }
 
 
 .emergency strong {
 
-  font-size: 13px;
+  font-size: 11px;
+
 }
 
 
@@ -241,41 +296,47 @@ button {
 
   font-style: normal;
 
-  margin-left: 8px;
+  margin-left: 7px;
+
 }
 
 
 .emergency small {
 
-  font-size: 15px;
+  font-size: 13px;
 
   font-weight: 800;
+
 }
 
 
-/* ================= HERO ================= */
+/* =================================================
+   HERO
+================================================= */
 
 .hero {
 
   min-height:
-    calc(100vh - 86px);
-
-  position: relative;
+    calc(100vh - 78px);
 
   padding:
-    80px 14px 14px;
+    54px 12px 12px;
+
+  position: relative;
 
   background:
 
     linear-gradient(
       to bottom,
-      rgba(0,37,75,.08),
-      rgba(3,43,84,.30) 35%,
-      #062e5a 72%
+      rgba(4,63,111,.06),
+      rgba(4,46,88,.18) 35%,
+      #062e5a 73%
     ),
 
     url("assets/gama-hospital.jpg")
-    center top / cover no-repeat;
+    center top /
+    cover no-repeat;
+
 }
 
 
@@ -285,29 +346,36 @@ button {
 
   z-index: 2;
 
-  color: #fff;
+  color: #ffffff;
 
-  max-width: 1000px;
+  max-width: 980px;
 
   margin-bottom: 18px;
+
 }
 
 
+/* WELCOME */
+
 .welcome {
 
-  font-size: 30px;
+  font-size: 24px;
 
-  margin-bottom: 4px;
+  line-height: 1.15;
+
 }
 
 
 .welcome span {
 
+  margin-left: 9px;
+
   font-family: Tajawal;
 
-  margin-left: 10px;
 }
 
+
+/* HOSPITAL NAME */
 
 .hospital-title {
 
@@ -315,9 +383,12 @@ button {
 
   align-items: center;
 
-  gap: 18px;
-
   flex-wrap: wrap;
+
+  gap: 13px;
+
+  margin-top: 2px;
+
 }
 
 
@@ -325,11 +396,12 @@ button {
 
   font-family: Tajawal;
 
-  font-size: 49px;
+  font-size: 39px;
 
   font-weight: 800;
 
-  color: #9bd8ff;
+  color: #99d7ff;
+
 }
 
 
@@ -337,22 +409,30 @@ button {
 
   margin: 0;
 
-  font-size: 60px;
+  font-size: 50px;
 
   line-height: 1;
 
-  color: #fff;
+  font-weight: 800;
 
-  letter-spacing: -2px;
+  letter-spacing: -1.5px;
+
+  color: #ffffff;
+
 }
 
+
+/* AI TITLE */
 
 .hero-content h2 {
 
   margin:
-    18px 0 10px;
+    15px 0 8px;
 
-  font-size: 30px;
+  font-size: 24px;
+
+  line-height: 1.15;
+
 }
 
 
@@ -360,90 +440,114 @@ button {
 
   font-family: Tajawal;
 
-  font-size: 21px;
+  font-size: 17px;
 
-  margin-left: 12px;
+  margin-left: 8px;
+
 }
 
+
+/* DESCRIPTION */
 
 .description {
 
-  font-size: 16px;
+  font-size: 13px;
+
+  line-height: 1.4;
+
 }
 
 
-.description strong {
+.description-title {
 
-  font-size: 17px;
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+
 }
 
 
-.description > span {
+.description-title strong {
+
+  font-size: 14px;
+
+}
+
+
+.description-title span {
 
   font-family: Tajawal;
 
-  margin-left: 10px;
+  font-size: 13px;
+
 }
 
 
 .description p {
 
-  margin: 4px 0;
+  margin:
+    3px 0;
+
 }
 
 
-.arabic {
+.description .arabic {
 
-  font-family:
-    Tajawal,
-    Arial,
-    sans-serif;
+  font-size: 12px;
+
 }
 
 
-/* ================= HERO BUTTONS ================= */
+/* =================================================
+   HERO BUTTONS
+================================================= */
 
 .hero-buttons {
 
   display: flex;
 
+  gap: 10px;
+
   flex-wrap: wrap;
 
-  gap: 12px;
+  margin-top: 15px;
 
-  margin-top: 19px;
 }
 
 
 .department-button,
 .gama-ai-button {
 
+  min-height: 42px;
+
+  border-radius: 24px;
+
+  padding:
+    9px 18px;
+
   border:
-    1px solid rgba(255,255,255,.5);
+    1px solid
+    rgba(255,255,255,.45);
 
-  border-radius: 28px;
+  color: #ffffff;
 
-  padding: 13px 23px;
+  background:
+    rgba(255,255,255,.13);
 
-  color: #fff;
+  backdrop-filter:
+    blur(5px);
+
+  font-size: 12px;
 
   font-weight: 700;
 
-  background:
-    rgba(255,255,255,.12);
+  transition:
+    .2s ease;
 
-  backdrop-filter: blur(5px);
-}
-
-
-.gama-ai-button {
-
-  background: #0875e1;
-
-  border-color: #55aaf4;
-
-  box-shadow:
-    0 8px 20px rgba(0,0,0,.2);
 }
 
 
@@ -452,10 +556,47 @@ button {
 
   transform:
     translateY(-2px);
+
 }
 
 
-/* ================= CARDS ================= */
+.gama-ai-button {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  background: #0875e1;
+
+  border-color: #53aaf5;
+
+  box-shadow:
+    0 7px 18px
+    rgba(0,0,0,.18);
+
+}
+
+
+.gama-ai-button img {
+
+  width: 24px;
+
+  height: 24px;
+
+  object-fit: contain;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+}
+
+
+/* =================================================
+   CARDS
+================================================= */
 
 .action-grid {
 
@@ -463,90 +604,106 @@ button {
 
   z-index: 3;
 
+  width: 100%;
+
   display: grid;
 
   grid-template-columns:
-    repeat(3, minmax(0, 1fr));
+    repeat(3, 1fr);
 
-  gap: 16px;
+  gap: 14px;
+
 }
 
 
 .action-card {
 
+  width: 100%;
+
+  min-height: 92px;
+
   border: 0;
 
-  background: #f8fafc;
+  border-radius: 16px;
 
-  border-radius: 19px;
+  padding:
+    12px 13px;
 
-  min-height: 112px;
+  background:
+    rgba(255,255,255,.96);
 
   display: flex;
 
   align-items: center;
 
-  gap: 14px;
-
-  padding: 16px;
+  gap: 12px;
 
   text-align: left;
 
   color: #0a315f;
 
   box-shadow:
-    0 6px 18px rgba(0,0,0,.12);
+    0 5px 16px
+    rgba(0,0,0,.10);
 
   transition:
-    transform .2s,
-    box-shadow .2s;
+    transform .2s ease,
+    box-shadow .2s ease;
+
 }
 
 
 .action-card:hover {
 
   transform:
-    translateY(-3px);
+    translateY(-2px);
 
   box-shadow:
-    0 12px 25px rgba(0,0,0,.2);
+    0 9px 20px
+    rgba(0,0,0,.16);
+
 }
 
 
+/* ICON */
+
 .card-icon {
 
-  width: 62px;
+  width: 52px;
 
-  height: 62px;
+  height: 52px;
 
   flex:
-    0 0 62px;
+    0 0 52px;
 
-  border-radius: 15px;
+  border-radius: 13px;
 
   display: grid;
 
   place-items: center;
 
-  font-size: 31px;
+  font-size: 25px;
 
   font-style: normal;
+
 }
 
 
 .card-icon.green {
 
-  background: #ddf7ed;
+  background: #ddf7ee;
 
-  color: #09a889;
+  color: #0ba789;
+
 }
 
 
 .card-icon.blue {
 
-  background: #e3efff;
+  background: #e5f0ff;
 
-  color: #1472df;
+  color: #1774dd;
+
 }
 
 
@@ -554,53 +711,80 @@ button {
 
   background: #ffe4e7;
 
-  color: #ef233c;
+  color: #ed233c;
+
 }
 
+
+/* CONTENT */
 
 .card-content {
 
   flex: 1;
 
+  min-width: 0;
+
   display: flex;
 
   flex-direction: column;
+
 }
 
 
 .card-content strong {
 
-  font-size: 17px;
-}
+  font-size: 14px;
 
+  line-height: 1.2;
 
-.card-content small {
-
-  color: #60748a;
-
-  font-size: 12px;
-
-  margin-top: 3px;
 }
 
 
 .arabic-blue {
 
-  color: #0870dc;
-
   font-family: Tajawal;
 
-  font-size: 14px;
+  color: #0671dc;
+
+  font-size: 12px;
 
   font-weight: 700;
+
+  margin-top: 2px;
+
 }
 
 
+.card-content small {
+
+  color: #66788d;
+
+  font-size: 10px;
+
+  line-height: 1.25;
+
+  margin-top: 2px;
+
+}
+
+
+.card-content small.arabic {
+
+  font-size: 10px;
+
+}
+
+
+/* ARROW */
+
 .arrow {
 
-  width: 35px;
+  width: 30px;
 
-  height: 35px;
+  height: 30px;
+
+  flex:
+    0 0 30px;
 
   border-radius: 50%;
 
@@ -610,11 +794,14 @@ button {
 
   place-items: center;
 
-  font-size: 25px;
+  font-size: 21px;
+
 }
 
 
-/* ================= FEATURES ================= */
+/* =================================================
+   FEATURES
+================================================= */
 
 .features {
 
@@ -627,11 +814,10 @@ button {
   grid-template-columns:
     repeat(4, 1fr);
 
-  gap: 10px;
+  gap: 8px;
 
-  color: #fff;
+  margin-top: 12px;
 
-  margin-top: 14px;
 }
 
 
@@ -641,13 +827,16 @@ button {
 
   align-items: center;
 
-  gap: 8px;
+  gap: 7px;
 
-  padding: 8px;
+  color: #ffffff;
 
-  font-size: 14px;
+  padding: 5px;
+
+  font-size: 11px;
 
   font-weight: 600;
+
 }
 
 
@@ -656,6 +845,7 @@ button {
   display: flex;
 
   flex-direction: column;
+
 }
 
 
@@ -663,9 +853,12 @@ button {
 
   font-family: Tajawal;
 
-  font-size: 11px;
+  font-size: 8px;
 
   font-weight: 500;
+
+  opacity: .92;
+
 }
 
 
@@ -676,75 +869,91 @@ button {
   z-index: 2;
 
   color:
-    rgba(255,255,255,.75);
+    rgba(255,255,255,.70);
+
+  font-size: 8px;
 
   text-align: center;
 
-  font-size: 10px;
+  margin: 5px 0 0;
 
-  margin: 7px 0 0;
 }
 
 
-/* ================= FLOATING AI ================= */
+/* =================================================
+   GAMA AI FLOATING BUTTON
+================================================= */
 
 .floating-ai {
 
   position: fixed;
 
-  right: 22px;
+  right: 15px;
 
-  bottom: 22px;
+  bottom: 15px;
 
   z-index: 9998;
 
   border: 0;
 
-  border-radius: 50px;
+  border-radius: 40px;
 
   background: #0875e1;
 
-  color: #fff;
+  color: #ffffff;
 
   display: flex;
 
   align-items: center;
 
-  gap: 10px;
+  gap: 8px;
 
   padding:
-    9px 18px 9px 9px;
+    7px 14px 7px 7px;
 
   box-shadow:
-    0 10px 30px rgba(0,0,0,.3);
+    0 9px 24px
+    rgba(0,0,0,.25);
 
-  transition: .2s;
+  transition:
+    .2s ease;
+
 }
 
 
 .floating-ai:hover {
 
   transform:
-    translateY(-3px)
-    scale(1.02);
+    translateY(-2px);
+
 }
 
 
 .robot {
 
-  width: 44px;
+  width: 38px;
 
-  height: 44px;
-
-  border-radius: 50%;
-
-  background: #fff;
+  height: 38px;
 
   display: grid;
 
   place-items: center;
 
-  font-size: 25px;
+  border-radius: 50%;
+
+  background: #ffffff;
+
+}
+
+
+.robot img {
+
+  width: 30px;
+
+  height: 30px;
+
+  object-fit: contain;
+
 }
 
 
@@ -755,22 +964,27 @@ button {
   flex-direction: column;
 
   text-align: left;
+
 }
 
 
 .floating-text strong {
 
-  font-size: 14px;
+  font-size: 12px;
+
 }
 
 
 .floating-text small {
 
-  font-size: 10px;
+  font-size: 8px;
+
 }
 
 
-/* ================= MODAL ================= */
+/* =================================================
+   DEPARTMENT MODAL
+================================================= */
 
 .modal {
 
@@ -781,39 +995,43 @@ button {
   z-index: 10000;
 
   background:
-    rgba(0,24,49,.65);
+    rgba(0,24,49,.62);
 
   display: grid;
 
   place-items: center;
 
-  padding: 20px;
+  padding: 18px;
+
 }
 
 
 .modal[hidden] {
 
   display: none;
+
 }
 
 
 .modal-box {
 
   width:
-    min(680px, 100%);
+    min(620px, 100%);
 
-  max-height: 85vh;
+  max-height: 82vh;
 
-  overflow: auto;
+  overflow-y: auto;
 
-  background: #fff;
+  background: #ffffff;
 
-  border-radius: 20px;
+  border-radius: 18px;
 
-  padding: 20px;
+  padding: 18px;
 
   box-shadow:
-    0 25px 60px rgba(0,0,0,.3);
+    0 20px 50px
+    rgba(0,0,0,.25);
+
 }
 
 
@@ -821,27 +1039,36 @@ button {
 
   display: flex;
 
-  justify-content: space-between;
-
   align-items: center;
 
-  font-size: 22px;
+  justify-content: space-between;
 
-  margin-bottom: 14px;
+  margin-bottom: 12px;
+
+}
+
+
+.modal-header strong {
+
+  font-size: 20px;
+
+  color: #0a315f;
+
 }
 
 
 .modal-header span {
 
   font-family: Tajawal;
+
 }
 
 
 .modal-header button {
 
-  width: 38px;
+  width: 34px;
 
-  height: 38px;
+  height: 34px;
 
   border: 0;
 
@@ -849,7 +1076,8 @@ button {
 
   background: #edf3f8;
 
-  font-size: 25px;
+  font-size: 22px;
+
 }
 
 
@@ -858,23 +1086,26 @@ button {
   width: 100%;
 
   border:
-    1px solid #d3dfeb;
+    1px solid #d4e0eb;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
-  padding: 13px 15px;
-
-  font-size: 14px;
+  padding:
+    11px 13px;
 
   outline: none;
+
+  font-size: 13px;
+
 }
 
 
 .modal-note {
 
-  color: #66788d;
+  color: #68788b;
 
-  font-size: 12px;
+  font-size: 11px;
+
 }
 
 
@@ -884,7 +1115,8 @@ button {
 
   padding: 0;
 
-  margin: 12px 0;
+  margin: 10px 0;
+
 }
 
 
@@ -892,12 +1124,22 @@ button {
 
   display: flex;
 
+  align-items: center;
+
   justify-content: space-between;
 
-  padding: 13px;
+  gap: 12px;
+
+  padding:
+    11px 2px;
 
   border-bottom:
-    1px solid #e7edf3;
+    1px solid #e6edf3;
+
+  color: #16395e;
+
+  font-size: 13px;
+
 }
 
 
@@ -908,19 +1150,22 @@ button {
   text-decoration: none;
 
   font-weight: 700;
+
 }
 
 
-/* ================= RESPONSIVE ================= */
+/* =================================================
+   RESPONSIVE
+================================================= */
 
-@media (max-width: 1200px) {
+@media (max-width: 1250px) {
 
   .header-brand {
-    min-width: 300px;
+    min-width: 290px;
   }
 
   .header-info {
-    gap: 12px;
+    gap: 10px;
   }
 
   .action-grid {
@@ -936,41 +1181,60 @@ button {
 }
 
 
-@media (max-width: 850px) {
+@media (max-width: 900px) {
 
   .topbar {
     flex-wrap: wrap;
+    padding: 8px 12px;
   }
 
   .header-brand {
-    flex: 1;
     min-width: 0;
+    flex: 1;
   }
 
   .header-info {
     order: 3;
     width: 100%;
+    justify-content: center;
   }
 
   .hero {
-    padding-top: 45px;
+    padding-top: 40px;
   }
 
   .hospital-title h1 {
-    font-size: 43px;
+    font-size: 42px;
   }
 
   .arabic-title {
-    font-size: 36px;
+    font-size: 34px;
   }
 
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
 
   .topbar {
-    padding: 8px 12px;
+    min-height: 70px;
+  }
+
+  .header-logo {
+    width: 46px;
+    height: 46px;
+  }
+
+  .brand-ar {
+    font-size: 13px;
+  }
+
+  .brand-name {
+    font-size: 18px;
+  }
+
+  .brand-copy small {
+    font-size: 8px;
   }
 
   .header-info,
@@ -978,13 +1242,31 @@ button {
     display: none;
   }
 
-  .hero {
+  .emergency {
     padding:
-      35px 10px 15px;
+      8px 11px;
+
+    border-radius: 12px;
+  }
+
+  .emergency strong {
+    font-size: 9px;
+  }
+
+  .emergency small {
+    font-size: 11px;
+  }
+
+  .hero {
+    min-height:
+      calc(100vh - 70px);
+
+    padding:
+      32px 9px 12px;
   }
 
   .welcome {
-    font-size: 23px;
+    font-size: 20px;
   }
 
   .hospital-title {
@@ -992,33 +1274,103 @@ button {
   }
 
   .hospital-title h1 {
-    font-size: 35px;
+    font-size: 34px;
   }
 
   .arabic-title {
-    font-size: 29px;
+    font-size: 27px;
   }
 
   .hero-content h2 {
-    font-size: 21px;
+    font-size: 20px;
   }
 
   .hero-content h2 span {
     display: block;
-    margin: 5px 0 0;
+    margin:
+      4px 0 0;
+  }
+
+  .description {
+    font-size: 11px;
+  }
+
+  .description-title strong {
+    font-size: 12px;
+  }
+
+  .description-title span {
+    font-size: 11px;
   }
 
   .action-grid {
     grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .action-card {
+    min-height: 80px;
+    border-radius: 14px;
+    padding: 10px;
+  }
+
+  .card-icon {
+    width: 45px;
+    height: 45px;
+    flex-basis: 45px;
+    font-size: 22px;
+  }
+
+  .card-content strong {
+    font-size: 13px;
+  }
+
+  .card-content small {
+    font-size: 9px;
+  }
+
+  .arrow {
+    width: 27px;
+    height: 27px;
+    flex-basis: 27px;
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .features > div {
+    font-size: 9px;
+  }
+
+  .features small {
+    font-size: 7px;
+  }
+
+  .floating-ai {
+    right: 9px;
+    bottom: 9px;
+  }
+
+}
+
+
+@media (max-width: 400px) {
+
+  .emergency {
+    display: none;
+  }
+
+  .hospital-title h1 {
+    font-size: 30px;
+  }
+
+  .arabic-title {
+    font-size: 24px;
   }
 
   .features {
     grid-template-columns: 1fr;
-  }
-
-  .floating-ai {
-    right: 12px;
-    bottom: 12px;
   }
 
 }
