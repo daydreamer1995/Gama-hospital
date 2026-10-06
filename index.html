@@ -88,22 +88,24 @@
   </div>
 </div>
 
-<!-- Voiceflow AI Brain: the chat bubble appears at the bottom-right corner -->
+<!-- Voiceflow AI Brain: chat widget (bottom-right corner) -->
 <script type="text/javascript">
   (function(d, t) {
     var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
     v.onload = function() {
-      window.voiceflow.chat.load({
-        verify: { projectID: '6ac3574f7faeec7fc045aa74' },
-        url: 'https://general-runtime.voiceflow.com',
-        versionID: 'production',
-        assistant: {
-          persistence: 'localStorage'
-        },
-        launch: {
-          mode: 'chat'
-        }
-      });
+      try {
+        window.voiceflow.chat.load({
+          verify: { projectID: '6ac3574f7faeec7fc045aa74' },
+          url: 'https://general-runtime.voiceflow.com',
+          versionID: 'production',
+          assistant: { persistence: 'localStorage' }
+        });
+      } catch (e) {
+        console.error('Voiceflow load error:', e);
+      }
+    };
+    v.onerror = function() {
+      console.error('Voiceflow script load aagala (internet / URL check pannunga)');
     };
     v.src = 'https://cdn.voiceflow.com/widget-next/bundle.mjs';
     v.type = 'text/javascript';
