@@ -30,9 +30,9 @@
 <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></symbol>
 </defs></svg>
 
-<div class="app" id="app">
-  <header class="topbar">
-    <div class="header-brand">
+<div class="app chat-closed" id="app">
+  <header class="topbar" id="topbar">
+    <div class="logo-btn header-brand" id="logoTrigger" role="button" tabindex="0" aria-expanded="false" aria-controls="chatPanel" aria-label="Open or close the Gama AI assistant" title="Chat with Gama AI">
       <img class="header-brand-icon" src="assets/gama-logo.png" alt="">
       <span class="header-brand-copy">
         <span class="brand-ar ar" lang="ar">مستشفى جاما</span>
@@ -44,67 +44,5 @@
       <div><i><svg class="ic"><use href="#i-clock"/></svg></i><span><b>Emergency · 24/7</b><small>Outpatient Clinics: 8:00 AM–8:00 PM</small><small class="ar" lang="ar">الطوارئ على مدار الساعة · العيادات 8 صباحاً–8 مساءً</small></span></div>
       <div><i><svg class="ic"><use href="#i-pin"/></svg></i><span><b>Dhahran, Saudi Arabia</b><small>Our Location</small><small class="ar" lang="ar">الظهران، المملكة العربية السعودية</small></span></div>
     </div>
-    <a class="wa-pill" id="waChip" href="https://wa.me/966920033175?text=Hello%20GAMA%20Hospital" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">◉</span> WhatsApp</a>
-    <a class="sos" href="tel:+966920033175"><i><svg class="ic"><use href="#i-amb"/></svg></i><span><b>EMERGENCY<em class="ar" lang="ar">طوارئ</em></b><small>920033175</small></span></a>
-  </header>
-
-  <main class="portal">
-    <section class="hero">
-      <div class="hero-text">
-        <p class="w">Welcome to <span class="ar" lang="ar">مرحباً بكم في</span></p>
-        <div class="name"><span class="ar" lang="ar">مستشفى جاما</span><h1>GAMA HOSPITAL</h1></div>
-        <h2>AI Healthcare Assistant <span class="ar" lang="ar">مساعد الرعاية الصحية الذكي</span></h2>
-        <p class="sub"><b>Your 24/7 Digital Health Assistant <span class="ar" lang="ar">مساعدك الصحي الرقمي على مدار الساعة</span></b><span class="desc">Get instant support for appointments, doctors, departments, insurance, location and more.<span class="ar" lang="ar">احصل على دعم فوري للمواعيد والأطباء والأقسام والتأمين والموقع وغير ذلك.</span></span></p>
-        <button class="dept-link" id="deptOpen" type="button" aria-haspopup="dialog">🏥 Browse departments &amp; WhatsApp</button>
-      </div>
-      <div class="actions">
-        <button class="card" type="button" data-chat-prompt="I want to book an appointment"><i><svg class="ic"><use href="#i-cal"/></svg></i><span><b>Book Appointment</b><b class="ar" lang="ar">حجز موعد</b><small>Schedule with your preferred doctor</small><small class="ar" lang="ar">احجز مع طبيبك المفضل</small></span><u>›</u></button>
-        <button class="card" type="button" data-chat-prompt="Help me find a doctor"><i><svg class="ic"><use href="#i-steth"/></svg></i><span><b>Find a Doctor</b><b class="ar" lang="ar">البحث عن طبيب</b><small>Search by speciality</small><small class="ar" lang="ar">ابحث حسب التخصص</small></span><u>›</u></button>
-        <button class="card" type="button" data-chat-prompt="Which departments do you have?"><i><svg class="ic"><use href="#i-bld"/></svg></i><span><b>Departments</b><b class="ar" lang="ar">الأقسام</b><small>Explore our medical services</small><small class="ar" lang="ar">اكتشف خدماتنا الطبية</small></span><u>›</u></button>
-        <button class="card" type="button" data-chat-prompt="Tell me about insurance and billing"><i><svg class="ic"><use href="#i-shield"/></svg></i><span><b>Insurance &amp; Billing</b><b class="ar" lang="ar">التأمين والفواتير</b><small>Get insurance and billing guidance</small><small class="ar" lang="ar">إرشادات التأمين والفواتير</small></span><u>›</u></button>
-        <button class="card" type="button" data-chat-prompt="Where is the hospital located?"><i><svg class="ic"><use href="#i-pin"/></svg></i><span><b>Hospital Location</b><b class="ar" lang="ar">موقع المستشفى</b><small>Directions, visiting hours</small><small class="ar" lang="ar">الاتجاهات وساعات الزيارة</small></span><u>›</u></button>
-        <button class="card emergency" type="button" data-chat-prompt="I need emergency assistance"><i><svg class="ic"><use href="#i-alert"/></svg></i><span><b>Emergency Assistance</b><b class="ar" lang="ar">المساعدة الطارئة</b><small>Immediate help and helpline numbers</small><small class="ar" lang="ar">مساعدة فورية وأرقام الطوارئ</small></span><u>›</u></button>
-      </div>
-      <ul class="strip">
-        <li><i><svg class="ic"><use href="#i-award"/></svg></i><span>World-class Medical Care<small class="ar" lang="ar">رعاية طبية عالمية المستوى</small></span></li>
-        <li><i><svg class="ic"><use href="#i-users"/></svg></i><span>Experienced Specialists<small class="ar" lang="ar">أخصائيون ذوو خبرة</small></span></li>
-        <li><i><svg class="ic"><use href="#i-cpu"/></svg></i><span>Advanced Technology<small class="ar" lang="ar">تقنية متقدمة</small></span></li>
-        <li><i><svg class="ic"><use href="#i-heart"/></svg></i><span>Patient-Centric Approach<small class="ar" lang="ar">رعاية تتمحور حول المريض</small></span></li>
-      </ul>
-      <p class="fine">AI assistant for general information. It cannot diagnose or confirm bookings. Please do not share ID numbers or medical records in the chat. Emergency? Call 920033175.</p>
-    </section>
-  </main>
-
-</div>
-
-
-<div class="modal" id="deptDrawer" hidden role="dialog" aria-modal="true" aria-label="Departments directory">
-  <div class="modal-card">
-    <div class="drawer-head"><strong>Departments <span class="ar" lang="ar">الأقسام</span></strong><button class="x" id="deptClose" type="button" aria-label="Close departments">×</button></div>
-    <input id="deptSearch" type="search" placeholder="Search a department or diagnosis (e.g. diabetes, kidney, pregnancy)" aria-label="Search departments or diagnosis" autocomplete="off">
-    <p class="drawer-note">Helps you reach the right clinic. This is not a medical diagnosis. Tap WhatsApp to chat with the hospital about that department.</p>
-    <p class="dept-warn" id="deptWarn" hidden>This may be an emergency. Please call <a href="tel:+966920033175">920033175</a> now or come to the Emergency Department, open 24/7.</p>
-    <ul class="dept-list" id="deptList"></ul>
-  </div>
-</div>
-
-<!-- Voiceflow AI Brain: the chat bubble appears at the bottom-right corner -->
-<script type="text/javascript">
-  (function(d, t) {
-      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-      v.onload = function() {
-        window.voiceflow.chat.load({
-          verify: { projectID: '6ac3574f7faeec7fc045aa74' },
-          url: 'https://general-runtime.voiceflow.com',
-          voice: {
-            url: 'https://runtime-api.voiceflow.com'
-          }
-        });
-      }
-      v.src = 'https://cdn.voiceflow.com/widget-next/bundle.mjs'; v.type = 'text/javascript'; s.parentNode.insertBefore(v, s);
-  })(document, 'script');
-</script>
-<script src="config.js"></script>
-<script src="script.js" defer></script>
-</body>
-</html>
+    <button class="chat-nav" id="chatNavButton" type="button" aria-controls="chatPanel">Chat with us</button>
+    <a class="sos"
